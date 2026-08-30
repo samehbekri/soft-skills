@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chacal ou girafe ? — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E}
+  *{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:5px;background:#fff;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:7px 11px;border-radius:22px;cursor:pointer;font-size:.82rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}.cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}footer b{color:var(--indigo)}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:380px;overflow:auto;line-height:1.45}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.rules b{color:var(--gold)}
+  .prog{position:sticky;top:54px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}.progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  /* test CNV */
+  .it{background:#fff;border-radius:12px;padding:14px 16px;margin-bottom:11px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:5px solid #d5d9e2}
+  .it.filled{border-left-color:var(--intra)}
+  .it .n{font-weight:bold;color:var(--indigo);font-size:.8rem;font-family:Calibri,Arial,sans-serif}
+  .it .dim{font-size:.68rem;font-weight:bold;padding:2px 8px;border-radius:3px;color:#fff;display:inline-block;margin-left:6px}
+  .it .sit{font-size:.93rem;margin:4px 0 9px}
+  .lik{display:flex;gap:4px;flex-wrap:wrap}
+  .lik label{flex:1;min-width:80px;text-align:center;border:1.5px solid #d5d9e2;border-radius:8px;padding:8px 3px;font-size:.74rem;cursor:pointer;background:#fafbfe;font-family:Calibri,Arial,sans-serif;line-height:1.3}
+  .lik input{display:none}
+  .lik label:has(input:checked){background:var(--intra);color:#fff;border-color:var(--intra)}
+  /* profil radar */
+  .profbox{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);text-align:center}
+  .dims{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+  .dim-card{border-radius:12px;padding:14px 10px;color:#fff;text-align:center}
+  .dim-card .dn{font-size:1.8rem;font-weight:bold;line-height:1}.dim-card .dl{font-size:.74rem;font-family:Calibri,Arial,sans-serif;opacity:.92;margin-top:3px}
+  .d-o{background:var(--intra)}.d-s{background:var(--violet)}.d-b{background:var(--inter)}.d-d{background:var(--gold)}
+  .interp{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.93rem;text-align:left}.interp b{color:var(--gold)}
+  /* utilité */
+  .util{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ucard{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:5px solid var(--indigo)}
+  .ucard h3{margin-top:0}.ucard p{font-size:.86rem;font-family:Calibri,Arial,sans-serif}
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}.testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  /* OSBD steps */
+  .step{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;background:#fff;border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 3px 10px rgba(0,0,0,.08);cursor:pointer}
+  .step .l{border-radius:10px;color:#fff;font-size:2rem;font-weight:bold;text-align:center;padding:10px 0}
+  .step b{font-size:.98rem}.step .ex{font-size:.85rem;color:var(--grey);font-style:italic;font-family:Calibri,Arial,sans-serif}
+  .step .det{display:none;font-size:.85rem;font-family:Calibri,Arial,sans-serif;background:var(--pale);border-radius:8px;padding:9px 11px;margin-top:8px}
+  .step.open .det{display:block}
+  /* jeu tri */
+  .q{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:12px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .q .phrase{font-size:.98rem;margin-bottom:9px;background:var(--pale);border-radius:12px;padding:11px 14px}
+  .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .btns button{flex:1;min-width:140px;font-family:Calibri,Arial,sans-serif;font-size:.8rem;font-weight:bold;padding:10px 6px;border-radius:9px;border:2px solid;cursor:pointer;background:#fff}
+  .ok{border-color:var(--intra);color:var(--intra)}.ko{border-color:var(--inter);color:var(--inter)}
+  .q.done .btns button{pointer-events:none;opacity:.45}.q.done .btns button.pick{opacity:1}
+  .q.good .btns button.pick{background:var(--intra);color:#fff;border-color:var(--intra)}
+  .q.bad .btns button.pick{background:#C0392B;color:#fff;border-color:#C0392B}
+  .fb{display:none;font-size:.84rem;font-family:Calibri,Arial,sans-serif;background:var(--pale);border-radius:8px;padding:9px 11px;margin-top:9px}.q.done .fb{display:block}
+  .score{text-align:center;font-size:1.05rem;margin-top:14px;display:none}
+  /* traducteur */
+  .trad{background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-bottom:14px;border-left:6px solid var(--inter)}
+  .trad.done{border-left-color:var(--intra)}
+  .trad .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .trad .badge{font-size:.68rem;font-weight:bold;color:#fff;padding:3px 10px;border-radius:3px;font-family:Calibri,Arial,sans-serif}
+  .bi{background:var(--intra)}.be{background:var(--inter)}
+  .trad label{font-weight:bold;font-size:.88rem;display:block;margin:9px 0 2px}
+  .trad .sub{font-size:.78rem;color:var(--grey);font-style:italic;font-family:Calibri,Arial,sans-serif;margin-bottom:5px}
+  .trad input,.trad textarea{width:100%;font-family:Calibri,Arial,sans-serif;font-size:.88rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px}
+  .trad textarea{min-height:48px;resize:vertical}.trad .chacal{border-color:var(--inter);background:#FEF7F1}
+  .result{background:var(--intra-l);border:1.5px solid var(--intra);border-radius:10px;padding:12px 14px;margin-top:12px;font-size:.9rem;display:none}.result b{color:var(--intra)}
+  .voc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .vcol{background:#fff;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);overflow:hidden}
+  .vcol h3{color:#fff;padding:9px;text-align:center;font-size:.95rem}.vs h3{background:var(--violet)}.vb h3{background:var(--inter)}
+  .vcol .list{padding:11px 14px;font-size:.83rem;font-family:Calibri,Arial,sans-serif;line-height:1.9}
+  /* rubriques cadrage */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}.mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}.mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}.mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .cok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit .cko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:600px){.rub-start{flex-direction:column;text-align:center}.util,.voc,.dims{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.dims{grid-template-columns:1fr 1fr}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 2 · Chapitre-pont</div>
+  <h1>Chacal ou girafe ?</h1>
+  <p>Choisir la langue du cœur — le processus OSBD</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Mission</button>
+  <button data-s="s1">① Utilité</button>
+  <button data-s="s2">② Mon test CNV</button>
+  <button data-s="s3">③ Mon profil</button>
+  <button data-s="s4">④ L'OSBD</button>
+  <button data-s="s5">⑤ Les deux tris</button>
+  <button data-s="s6">⑥ Traducteur girafe</button>
+  <button data-s="s7">⑦ Vocabulaire</button>
+</nav>
+<main>
+<!-- ⓪ MISSION -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage avant de commencer.</p>
+  <div class="rubrique r-parcours"><div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe le test de compétences CNV</b><span>16 mises en situation (onglet ②), ~10 min. Le test évalue votre maîtrise des quatre étapes de l'OSBD : Observation, Sentiment, Besoin, Demande.</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je découvre mon profil OSBD</b><span>L'application calcule vos quatre scores et trace votre profil (onglet ③), que vous pouvez <b>copier</b> ou <b>imprimer</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon profil et je m'entraîne — le cœur du travail</b><span>Quelle étape maîtrisez-vous ? Laquelle vous échappe ? Puis passez aux onglets ④ à ⑦ pour vous entraîner sur les deux tris, le traducteur girafe et le vocabulaire. Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Collez votre synthèse dans votre <b>portfolio</b> (Carnet de bord ch.10), avec vos 4 messages chacal transformés en girafe.</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu"><div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu de mon analyse</span></div>
+    <div class="rub-body">
+      <p class="rub-intro">Votre analyse doit alimenter les questions 2.1 et 2.2 de la fiche 6. Une bonne analyse :</p>
+      <div class="crit"><span class="cok">✔</span><div><b>Identifie votre étape OSBD la plus faible</b> et l'illustre par un exemple vécu (un message chacal récurrent).</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Distingue les deux mouvements</b> — chacal intérieur (vers soi) et chacal extérieur (vers les autres).</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Produit 4 transformations chacal→girafe</b> — exactement ce que demande la question 2.2.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Débouche sur un engagement concret</b> — un message girafe à envoyer cette semaine, à une vraie personne.</div></div>
+      <div class="crit crit-ko"><span class="cko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier son profil sans analyse ni transformations rédigées.</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure"><div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions pour être à l'aise</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Ce test n'est pas un examen.</b> Il évalue votre familiarité avec le processus CNV — c'est un point de départ pour l'entraînement, pas un verdict.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b> Rien n'est envoyé.</p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Confondre observation et évaluation est normal au début</b> — c'est le piège n°1 de tous les débutants en CNV. Le repérer, c'est déjà progresser.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée totale : ~30 min (test + entraînement + traduction).</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<!-- ① UTILITÉ -->
+<section id="s1">
+  <h2>À quoi sert la CNV ?</h2>
+  <p class="lead">Comprendre l'utilité de cette compétence — et pourquoi elle change la donne dans les relations.</p>
+  <div class="testinfo">
+    <h3>La Communication NonViolente en bref</h3>
+    <p>La CNV est un processus élaboré par le psychologue <b>Marshall B. Rosenberg</b> (1934–2015), élève de Carl Rogers. Son pari : la plupart de nos violences verbales — jugements, reproches, exigences — sont l'expression maladroite de <b>besoins insatisfaits</b>. Apprendre à remonter du jugement au besoin, puis à formuler une demande, transforme les affrontements en dialogues.</p>
+    <p>Le processus repose sur quatre étapes — l'<b>OSBD</b> : Observation, Sentiment, Besoin, Demande — et sur une métaphore devenue célèbre : le <b>chacal</b> (langue du jugement) et la <b>girafe</b> (langue du cœur, l'animal terrestre au plus grand cœur).</p>
+    <div class="src"><b>Source :</b> Rosenberg, M.B. (2003). <i>Nonviolent Communication: A Language of Life</i>. PuddleDancer Press.<br>
+    <b>Application pédagogique :</b> Sameh Bekri & Besma Brahmi, 2026.</div>
+  </div>
+  <div class="util">
+    <div class="ucard" style="border-top-color:var(--intra)"><h3 style="color:var(--intra)">Dans la vie pro</h3><p>Formuler un feedback sans blesser, poser une limite sans agresser, demander sans exiger. La CNV donne à l'assertivité (ch.9) sa langue la plus <b>recevable</b>.</p></div>
+    <div class="ucard" style="border-top-color:var(--violet)"><h3 style="color:var(--violet)">Dans la vie perso</h3><p>Dire ce qui ne va pas sans déclencher la guerre, entendre le besoin derrière le reproche de l'autre, et surtout : <b>s'écouter soi-même</b> (auto-empathie).</p></div>
+    <div class="ucard" style="border-top-color:var(--inter)"><h3 style="color:var(--inter)">Les deux pièges du débutant</h3><p><b>Observation ≠ évaluation</b> : « tu es en retard de 20 min » est un fait, « tu es désinvolte » est un jugement. <b>Sentiment ≠ interprétation</b> : « je me sens triste » est un sentiment, « je me sens trahi » accuse.</p></div>
+    <div class="ucard" style="border-top-color:var(--gold)"><h3 style="color:var(--gold)">Le pont intra → inter</h3><p>La CNV commence par soi : le premier chacal est intérieur (« je suis nul »). Le traduire en girafe, c'est l'<b>auto-empathie</b> en action — le pont entre les chapitres intra et inter de votre Odyssée.</p></div>
+  </div>
+</section>
+
+<!-- ② TEST CNV -->
+<section id="s2">
+  <h2>Mon test de compétences CNV</h2>
+  <p class="lead">16 mises en situation — 4 par étape OSBD. Pour chacune, choisissez la réponse la plus « girafe ».</p>
+  <div class="rules"><b>Cotation :</b> chaque bonne réponse vaut 1 point dans la dimension correspondante (O, S, B ou D). Score maximum : 4/4 par dimension, 16/16 au total.</div>
+  <div class="prog"><span id="cProg">0 / 16 répondus</span><div class="progbar"><div class="progfill" id="cFill"></div></div></div>
+  <div id="cItems"></div>
+  <button class="cta" id="cGo" disabled>Tracer mon profil CNV →</button>
+</section>
+
+<!-- ③ PROFIL -->
+<section id="s3">
+  <h2>Mon profil OSBD</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 16 situations de l'onglet ②.</p>
+  <div id="cRes" style="display:none">
+    <div class="profbox">
+      <svg id="radar" viewBox="0 0 300 300" style="width:100%;max-width:320px;display:block;margin:auto"></svg>
+      <div class="dims" id="dims"></div>
+      <div class="interp" id="cInterp"></div>
+    </div>
+    <div class="recall" style="margin-top:16px"><b>⚠️ Ce profil n'est que la matière première.</b> Passez maintenant aux onglets ④ à ⑦ pour vous entraîner, puis transformez vos 4 messages chacal (onglet ⑥) et transmettez le tout dans votre portfolio.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier mon profil</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer / PDF</button>
+      <button class="cta small" id="showBt">👁️ Voir le texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+  </div>
+</section>
+
+<!-- ④ OSBD -->
+<section id="s4">
+  <h2>Le processus en quatre étapes</h2>
+  <p class="lead">Touchez chaque étape pour découvrir son piège et son exemple.</p>
+  <div class="step"><div class="l" style="background:var(--intra)">O</div><div><b>OBSERVATION — les faits, sans évaluation</b><div class="ex">« Quand je vois / j'entends… »</div><div class="det"><b>Piège :</b> glisser un jugement déguisé en fait. « Tu es toujours en retard » = évaluation. « Tu es arrivé à 9 h 20 pour un rendez-vous à 9 h » = observation.</div></div></div>
+  <div class="step"><div class="l" style="background:var(--violet)">S</div><div><b>SENTIMENT — ce que je ressens</b><div class="ex">« … je me sens… »</div><div class="det"><b>Piège :</b> les pseudo-sentiments qui accusent. « Je me sens trahi / ignoré » dit ce que l'autre m'aurait fait. Les vrais sentiments : triste, inquiet, découragé…</div></div></div>
+  <div class="step"><div class="l" style="background:var(--inter)">B</div><div><b>BESOIN — ce qui est vivant en moi</b><div class="ex">« … parce que j'ai besoin de… »</div><div class="det"><b>Piège :</b> confondre besoin et stratégie. « J'ai besoin que tu répondes » est une stratégie ; le besoin est la fiabilité, la considération.</div></div></div>
+  <div class="step"><div class="l" style="background:var(--gold)">D</div><div><b>DEMANDE — concrète, positive, négociable</b><div class="ex">« … serais-tu d'accord pour… ? »</div><div class="det"><b>Piège :</b> l'exigence maquillée. Une demande accepte le non ; une exigence le punit. Test : « et s'il dit non, qu'est-ce que je fais ? »</div></div></div>
+</section>
+
+<!-- ⑤ TRIS -->
+<section id="s5">
+  <h2>Le jeu des deux tris</h2>
+  <p class="lead">Les deux pièges du débutant. À vous de trancher.</p>
+  <div id="triItems"></div>
+  <p class="score" id="triScore"></p>
+</section>
+
+<!-- ⑥ TRADUCTEUR -->
+<section id="s6">
+  <h2>Mon traducteur girafe</h2>
+  <p class="lead">Vos 4 messages chacal — 2 vers vous-même, 2 vers les autres — traduits étape par étape. Imprimez pour le portfolio (questions 2.1 et 2.2).</p>
+  <div id="trads"></div>
+  <div class="btnrow"><button class="cta small" onclick="window.print()">🖨️ Imprimer mes traductions</button></div>
+</section>
+
+<!-- ⑦ VOCABULAIRE -->
+<section id="s7">
+  <h2>Mon vocabulaire girafe</h2>
+  <p class="lead">La précision est la moitié du processus. Gardez ces listes sous la main.</p>
+  <div class="voc">
+    <div class="vcol vs"><h3>Quelques sentiments (vrais !)</h3><div class="list"><b>Besoins satisfaits :</b> heureux · confiant · serein · soulagé · reconnaissant · enthousiaste · fier · touché · curieux · apaisé<br><br><b>Besoins insatisfaits :</b> triste · inquiet · agacé · découragé · fatigué · seul · déçu · tendu · confus · impatient · gêné · en colère · frustré</div></div>
+    <div class="vcol vb"><h3>Quelques besoins (universels)</h3><div class="list"><b>Physiologiques :</b> repos · sommeil · sécurité<br><br><b>Relationnels :</b> considération · respect · appartenance · écoute · soutien · confiance · reconnaissance · équité<br><br><b>D'autonomie :</b> choix · liberté · espace · authenticité<br><br><b>De sens :</b> apprentissage · contribution · compétence · créativité · clarté · ordre</div></div>
+  </div>
+  <p class="note">Astuce : si votre « sentiment » peut être suivi de « … par toi », ce n'est pas un sentiment — c'est un jugement déguisé.</p>
+</section>
+</main>
+<footer><b>L'Odyssée des Soft Skills</b> — Application pédagogique<br>Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>CNV : d'après Marshall B. Rosenberg (2003).<br>Développement Personnel & Leadership 2 · Mastère</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+document.querySelectorAll('.step').forEach(c=>c.onclick=()=>c.classList.toggle('open'));
+
+/* ===== TEST CNV — 16 items (4 par dimension OSBD) ===== */
+const TEST=[
+// O — Observation vs évaluation (4 items)
+{dim:"O",color:"#147D74",q:"Votre collègue arrive en réunion après l'heure prévue. Quelle formulation est une observation ?",
+ opts:["« Tu es toujours en retard. »","« Tu es arrivé à 9 h 20 pour une réunion prévue à 9 h. »","« Tu n'as aucun respect pour les autres. »","« Tu te fiches complètement de cette réunion. »"],right:1,
+ fb:"L'observation cite un fait vérifiable (9 h 20 vs 9 h). Les autres sont des évaluations ou des jugements."},
+{dim:"O",color:"#147D74",q:"Votre ami n'a pas répondu à votre message depuis trois jours. Quelle formulation est une observation ?",
+ opts:["« Tu m'ignores complètement. »","« Je n'ai pas reçu de réponse à mon message de lundi. »","« Tu es égoïste. »","« Tu ne fais jamais attention aux autres. »"],right:1,
+ fb:"Le fait daté (message de lundi, pas de réponse) est l'observation. Les autres interprètent."},
+{dim:"O",color:"#147D74",q:"En cours, un étudiant regarde son téléphone. Quelle formulation est une observation ?",
+ opts:["« Il ne s'intéresse pas au cours. »","« Il est accro à son téléphone. »","« Il consulte son téléphone depuis dix minutes. »","« Il est irrespectueux. »"],right:2,
+ fb:"« Consulte son téléphone depuis dix minutes » est factuel et vérifiable."},
+{dim:"O",color:"#147D74",q:"Votre binôme a rendu sa partie du travail avec des sections vides. Observation ?",
+ opts:["« Tu as bâclé le travail. »","« Les sections 2 et 3 du document sont vides. »","« Tu ne fais jamais ta part. »","« Tu es un boulet pour l'équipe. »"],right:1,
+ fb:"Des sections vides = fait observable. Le reste juge la personne."},
+// S — Sentiment vs pseudo-sentiment (4 items)
+{dim:"S",color:"#7A5C9E",q:"Après une critique en public, lequel est un vrai sentiment ?",
+ opts:["« Je me sens humilié. »","« Je me sens blessé et gêné. »","« Je me sens attaqué. »","« Je me sens incompris. »"],right:1,
+ fb:"« Blessé et gêné » sont des sentiments. « Humilié/attaqué/incompris » accusent l'autre (il m'a humilié/attaqué)."},
+{dim:"S",color:"#7A5C9E",q:"Votre projet est refusé. Lequel est un vrai sentiment ?",
+ opts:["« Je me sens rejeté. »","« Je me sens trahi par le jury. »","« Je me sens déçu et inquiet. »","« Je me sens manipulé. »"],right:2,
+ fb:"« Déçu et inquiet » parlent de moi. Les pseudo-sentiments (rejeté, trahi, manipulé) accusent l'autre."},
+{dim:"S",color:"#7A5C9E",q:"Votre ami annule un rendez-vous au dernier moment. Vrai sentiment ?",
+ opts:["« Je me sens triste et frustré. »","« Je me sens abandonné. »","« Je me sens trahi. »","« Je me sens pas respecté. »"],right:0,
+ fb:"« Triste et frustré » = vrais sentiments. Les autres sont des interprétations de ce que l'autre m'a fait."},
+{dim:"S",color:"#7A5C9E",q:"Votre chef ne vous cite pas dans la présentation. Vrai sentiment ?",
+ opts:["« Je me sens invisible. »","« Je me sens ignoré. »","« Je me sens déçu et découragé. »","« Je me sens exploité. »"],right:2,
+ fb:"« Déçu et découragé » parlent de votre état intérieur sans accuser."},
+// B — Besoin vs stratégie (4 items)
+{dim:"B",color:"#C96A1F",q:"« J'ai besoin que tu me répondes dans l'heure. » C'est un besoin ou une stratégie ?",
+ opts:["Un besoin.","Une stratégie — le besoin serait la fiabilité ou la réactivité."],right:1,
+ fb:"Le besoin (fiabilité, réactivité) est universel et ne cite personne. « Répondre dans l'heure » est une stratégie pour satisfaire ce besoin."},
+{dim:"B",color:"#C96A1F",q:"Lequel est un besoin universel ?",
+ opts:["« J'ai besoin que tu viennes à ma fête. »","« J'ai besoin d'appartenance. »","« J'ai besoin que tu m'appelles ce soir. »","« J'ai besoin que tu changes. »"],right:1,
+ fb:"L'appartenance est un besoin universel. Les autres citent une personne et une action : ce sont des stratégies."},
+{dim:"B",color:"#C96A1F",q:"« J'ai besoin de respect. » C'est…",
+ opts:["Un besoin — universel, ne cite personne.","Une stratégie — il faudrait dire « j'ai besoin que tu me respectes »."],right:0,
+ fb:"Le respect est un besoin universel. C'est quand on ajoute « que tu me… » qu'il devient une stratégie."},
+{dim:"B",color:"#C96A1F",q:"Derrière « tu ne penses qu'à toi ! », quel besoin se cache probablement ?",
+ opts:["Besoin de domination.","Besoin de considération et d'attention.","Besoin de vengeance.","Besoin de perfection."],right:1,
+ fb:"Derrière le reproche chacal se cache presque toujours un besoin relationnel : ici, la considération."},
+// D — Demande vs exigence (4 items)
+{dim:"D",color:"#9A7B1E",q:"Laquelle est une vraie demande (pas une exigence) ?",
+ opts:["« Il faut que tu fasses la vaisselle. »","« Serais-tu d'accord pour qu'on fixe un tour de vaisselle ? »","« Tu devrais faire plus attention. »","« Tu n'as qu'à t'en occuper. »"],right:1,
+ fb:"La vraie demande est concrète, positive et négociable (« serais-tu d'accord… ? »). Les autres sont des exigences ou des jugements."},
+{dim:"D",color:"#9A7B1E",q:"Votre demande en OSBD est refusée. Que fait la girafe ?",
+ opts:["Elle insiste jusqu'à obtenir gain de cause.","Elle boude pour montrer sa déception.","Elle écoute le non, cherche à comprendre le besoin de l'autre, et négocie.","Elle se résigne en silence."],right:2,
+ fb:"La girafe accepte le non et ouvre la négociation — c'est ce qui distingue une demande d'une exigence."},
+{dim:"D",color:"#9A7B1E",q:"Laquelle est formulée en positif (ce que je veux) plutôt qu'en négatif (ce que je ne veux pas) ?",
+ opts:["« Arrête de crier. »","« Ne me coupe plus la parole. »","« J'aimerais pouvoir finir mes phrases avant les réactions. »","« Ne fais plus ça. »"],right:2,
+ fb:"La girafe demande ce qu'elle veut (finir ses phrases), pas ce qu'elle ne veut pas."},
+{dim:"D",color:"#9A7B1E",q:"Un OSBD complet se termine par…",
+ opts:["… une demande vague (« fais un effort »).","… un conseil non sollicité.","… une action concrète, réalisable, formulée en question.","… une menace voilée."],right:2,
+ fb:"La demande est concrète, réalisable et formulée en question ouverte."}
+];
+const ANS={};
+const wrap=document.getElementById('cItems');
+TEST.forEach((t,i)=>{
+  const d=document.createElement('div');d.className='it';d.id='it'+i;
+  const dimLbl={O:'OBSERVATION',S:'SENTIMENT',B:'BESOIN',D:'DEMANDE'}[t.dim];
+  d.innerHTML='<div class="n">Item '+(i+1)+' / 16 <span class="dim" style="background:'+t.color+'">'+dimLbl+'</span></div><div class="sit">'+t.q+'</div>'+
+   '<div class="lik">'+t.opts.map((o,j)=>'<label><input type="radio" name="t'+i+'" value="'+j+'"><span>'+o+'</span></label>').join('')+'</div>'+
+   '<div class="fb" id="fb'+i+'"></div>';
+  wrap.appendChild(d);
+  d.addEventListener('change',()=>{
+    d.classList.add('filled');
+    const v=+document.querySelector('input[name=t'+i+']:checked').value;
+    ANS[i]=v;
+    d.classList.add('done');
+    d.classList.add(v===t.right?'q good':'q bad');
+    const fb=document.getElementById('fb'+i);
+    fb.style.display='block';
+    fb.textContent=(v===t.right?'✔ Exact — ':'✘ Pas tout à fait — ')+t.fb;
+    d.querySelectorAll('.lik label').forEach((l,j)=>{l.style.pointerEvents='none';if(j===t.right)l.style.outline='2px solid var(--intra)';});
+    cProg();
+  });
+});
+function cProg(){
+  const n=Object.keys(ANS).length;
+  document.getElementById('cProg').textContent=n+' / 16 répondus';
+  document.getElementById('cFill').style.width=(n/16*100)+'%';
+  document.getElementById('cGo').disabled=n<16;
+}
+const DNAMES={O:"Observation",S:"Sentiment",B:"Besoin",D:"Demande"};
+const DCOLORS={O:"#147D74",S:"#7A5C9E",B:"#C96A1F",D:"#9A7B1E"};
+const DCLASSES={O:"d-o",S:"d-s",B:"d-b",D:"d-d"};
+const DTIPS={
+  O:"Vous maîtrisez bien le tri observation/évaluation. Continuez à traquer les « toujours », « jamais » et les étiquettes.",
+  S:"Vous distinguez bien sentiments et pseudo-sentiments. Le test du « … par toi » est acquis.",
+  B:"Vous savez remonter du reproche au besoin. C'est le cœur du processus.",
+  D:"Vous formulez des demandes concrètes et négociables. La girafe accepte le non."
+};
+const DWEAK={
+  O:"Le tri observation/évaluation est votre chantier prioritaire. Entraînez-vous avec l'onglet ⑤ (les deux tris).",
+  S:"La distinction sentiment/pseudo-sentiment vous échappe encore. Gardez le vocabulaire (onglet ⑦) sous la main et faites le test du « … par toi ».",
+  B:"Remonter du reproche au besoin est le geste le plus difficile de la CNV. Relisez les exemples de l'onglet ④ (étape B).",
+  D:"Vos demandes ressemblent encore à des exigences ou restent vagues. Reformulez en « serais-tu d'accord pour… ? » et vérifiez : « et s'il dit non ? »"
+};
+let EXPORT="";
+document.getElementById('cGo').onclick=()=>{
+  const sc={O:0,S:0,B:0,D:0};
+  TEST.forEach((t,i)=>{if(ANS[i]===t.right)sc[t.dim]++;});
+  const total=sc.O+sc.S+sc.B+sc.D;
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('cRes').style.display='block';
+  // radar SVG
+  const S=300,c=S/2,R=120;
+  const keys=['O','S','B','D'];
+  const angles=[270,0,90,180].map(a=>a*Math.PI/180);
+  const pts=keys.map((k,i)=>[c+Math.cos(angles[i])*(sc[k]/4)*R,c+Math.sin(angles[i])*(sc[k]/4)*R]);
+  let svg='';
+  for(let k=1;k<=4;k++){const r=(k/4)*R;svg+=`<polygon points="${angles.map(a=>(c+Math.cos(a)*r)+','+(c+Math.sin(a)*r)).join(' ')}" fill="none" stroke="#dfe3ec" stroke-width="1"/>`;}
+  angles.forEach((a,i)=>{svg+=`<line x1="${c}" y1="${c}" x2="${c+Math.cos(a)*R}" y2="${c+Math.sin(a)*R}" stroke="#b9bec7" stroke-width="1"/>`;
+    svg+=`<text x="${c+Math.cos(a)*(R+18)}" y="${c+Math.sin(a)*(R+18)+4}" font-size="13" font-weight="bold" fill="${DCOLORS[keys[i]]}" text-anchor="middle" font-family="Calibri,sans-serif">${keys[i]}</text>`;});
+  svg+=`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="rgba(154,123,30,.25)" stroke="#9A7B1E" stroke-width="2.5"/>`;
+  pts.forEach((p,i)=>{svg+=`<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="${DCOLORS[keys[i]]}" stroke="#fff" stroke-width="2"/>`;});
+  document.getElementById('radar').innerHTML=svg;
+  // cartes
+  const dims=document.getElementById('dims');dims.innerHTML='';
+  keys.forEach(k=>{dims.innerHTML+='<div class="dim-card '+DCLASSES[k]+'"><div class="dn">'+sc[k]+'/4</div><div class="dl">'+DNAMES[k]+'</div></div>';});
+  const entries=Object.entries(sc).sort((a,b)=>b[1]-a[1]);
+  const best=entries[0][0],worst=entries[entries.length-1][0];
+  document.getElementById('cInterp').innerHTML=
+   '<b>Score total : '+total+'/16.</b> '+
+   (total>=14?'Excellente maîtrise du processus CNV.':total>=10?'Bonne base — quelques pièges subsistent.':total>=6?'Base à consolider — les onglets d\'entraînement vous attendent.':'Le processus est encore nouveau pour vous — c\'est normal, il s\'apprend.')+
+   '<br><br><b>Point fort : '+DNAMES[best]+' ('+sc[best]+'/4).</b> '+DTIPS[best]+
+   '<br><br><b>À travailler : '+DNAMES[worst]+' ('+sc[worst]+'/4).</b> '+DWEAK[worst];
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MON PROFIL CNV - Test de competences OSBD\n"+
+"Date : "+d+"\n"+
+"============================================================\n"+
+"SCORES PAR DIMENSION (sur 4)\n"+
+"  O - Observation : "+sc.O+"/4\n"+
+"  S - Sentiment   : "+sc.S+"/4\n"+
+"  B - Besoin      : "+sc.B+"/4\n"+
+"  D - Demande     : "+sc.D+"/4\n"+
+"  TOTAL           : "+total+"/16\n\n"+
+"POINT FORT  : "+DNAMES[best]+" ("+sc[best]+"/4)\n"+
+"A TRAVAILLER: "+DNAMES[worst]+" ("+sc[worst]+"/4)\n"+
+"  "+DWEAK[worst]+"\n\n"+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 10 - fiche 6)\n"+
+"Rappel : ce profil est la matiere premiere. Ce qui est\n"+
+"attendu : votre ANALYSE + vos 4 transformations chacal→girafe.\n\n"+
+"2.1) Mes 4 messages chacal :\n"+
+"  Intra 1 : .................................................\n"+
+"  Intra 2 : .................................................\n"+
+"  Inter 3 : .................................................\n"+
+"  Inter 4 : .................................................\n\n"+
+"2.2) Mes 4 traductions en girafe (O-S-B-D) :\n"+
+"  Girafe 1 : ................................................\n"+
+"  Girafe 2 : ................................................\n"+
+"  Girafe 3 : ................................................\n"+
+"  Girafe 4 : ................................................\n"+
+"============================================================\n"+
+"Test concu par S. Bekri & B. Brahmi, 2026.\n"+
+"CNV : d'apres Marshall B. Rosenberg (2003).\n"+
+"Developpement Personnel & Leadership 2 - Mastere";
+  document.getElementById('export').textContent=EXPORT;
+  document.querySelector('nav button[data-s=s3]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){const btn=this;const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier mon profil',1900);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';}document.body.removeChild(ta);}};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+document.getElementById('showBt').onclick=function(){const e=document.getElementById('export');const v=e.style.display==='none';e.style.display=v?'block':'none';this.textContent=v?'🙈 Masquer':'👁️ Voir le texte';};
+
+/* ===== TRIS ===== */
+const TRIS=[
+["« Tu es arrivé à 9 h 20 pour un rendez-vous fixé à 9 h. »","obs",true,"Fait daté, vérifiable : observation pure."],
+["« Tu es complètement désinvolte. »","obs",false,"Étiquette sur la personne : évaluation."],
+["« Tu ne fais jamais ta part du travail. »","obs",false,"« Jamais » trahit l'évaluation."],
+["« Sur les cinq réunions du mois, tu en as manqué trois. »","obs",true,"Chiffré, factuel : observation."],
+["« Je me sens découragée. »","sent",true,"Vrai sentiment : parle de moi."],
+["« Je me sens trahie. »","sent",false,"Pseudo-sentiment : accuse l'autre."],
+["« Je me sens ignoré. »","sent",false,"Pseudo-sentiment : décrit ce que l'autre m'aurait fait."],
+["« Je me sens inquiet pour le délai. »","sent",true,"Vrai sentiment relié à une situation."]
+];
+const triWrap=document.getElementById('triItems');let triDone=0,triGood=0;
+TRIS.forEach((t,i)=>{
+  const d=document.createElement('div');d.className='q';
+  const lbls=t[1]==='obs'?['OBSERVATION','ÉVALUATION']:['VRAI SENTIMENT','PSEUDO-SENTIMENT'];
+  d.innerHTML='<div class="phrase">'+(i+1)+'. '+t[0]+'</div><div class="btns"><button class="ok" data-v="1">'+lbls[0]+'</button><button class="ko" data-v="0">'+lbls[1]+'</button></div><div class="fb"></div>';
+  triWrap.appendChild(d);
+  d.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    if(d.classList.contains('done'))return;d.classList.add('done');b.classList.add('pick');
+    const ok=(b.dataset.v==='1')===t[2];d.classList.add(ok?'good':'bad');
+    d.querySelector('.fb').innerHTML=(ok?'✔ Exact — ':'✘ Pas tout à fait — ')+t[3];
+    triDone++;if(ok)triGood++;
+    if(triDone===TRIS.length){const s=document.getElementById('triScore');s.style.display='block';s.innerHTML='<b>'+triGood+' / '+TRIS.length+'</b> — '+(triGood>=6?'les deux tris sont acquis : passez au traducteur (onglet ⑥).':'relisez les corrections — ces tris sont la base de tout le processus.');}
+  });
+});
+
+/* ===== TRADUCTEUR ===== */
+const TM=[["Message 1 — vers moi-même","bi","ex. : « Je suis vraiment nulle en finance. »"],["Message 2 — vers moi-même","bi","ex. : « Je n'y arriverai jamais. »"],["Message 3 — vers les autres","be","ex. : « Tu t'en fiches complètement ! »"],["Message 4 — vers les autres","be","ex. : « Tu ne penses qu'à toi. »"]];
+const trads=document.getElementById('trads');
+TM.forEach((m,i)=>{
+  const d=document.createElement('div');d.className='trad';
+  d.innerHTML='<div class="hd"><b>'+m[0]+'</b><span class="badge '+m[1]+'">'+(m[1]==='bi'?'INTRA':'INTER')+'</span></div>'+
+   '<label>🐺 Mon message chacal</label><div class="sub">'+m[2]+'</div><input class="chacal" id="ch'+i+'">'+
+   '<label>O — Observation</label><div class="sub">Les faits, sans évaluation.</div><textarea id="o'+i+'"></textarea>'+
+   '<label>S — Sentiment</label><div class="sub">« … je me sens… » (pas de pseudo-sentiment !)</div><textarea id="ss'+i+'"></textarea>'+
+   '<label>B — Besoin</label><div class="sub">« … parce que j\'ai besoin de… » (universel)</div><textarea id="bb'+i+'"></textarea>'+
+   '<label>D — Demande</label><div class="sub">« … serais-tu d\'accord pour… ? »</div><textarea id="dd'+i+'"></textarea>'+
+   '<button class="cta small" data-i="'+i+'">🦒 Composer ma girafe</button><div class="result" id="r'+i+'"></div>';
+  trads.appendChild(d);
+});
+document.querySelectorAll('.trad .cta').forEach(b=>b.onclick=()=>{
+  const i=b.dataset.i;const g=id=>document.getElementById(id+i).value.trim();
+  const parts=[g('o'),g('ss'),g('bb'),g('dd')];
+  const r=document.getElementById('r'+i);
+  if(parts.some(p=>!p)){r.style.display='block';r.innerHTML='<b>Il manque une étape :</b> la girafe ne saute jamais une marche.';return;}
+  document.querySelectorAll('.trad')[i].classList.add('done');
+  r.style.display='block';r.innerHTML='<b>🦒 Ma girafe :</b><br>'+parts[0]+', '+parts[1]+', parce que '+parts[2]+'. '+parts[3];
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon affirmation — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}
+  header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:6px;background:#fff;padding:11px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:8px 13px;border-radius:22px;cursor:pointer;font-size:.86rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}
+  .cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}
+  .rules b{color:var(--gold)}
+  .prog{position:sticky;top:58px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}
+  .progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  .vf{display:grid;grid-template-columns:1fr 92px 92px;gap:7px;align-items:center;background:#fff;border-radius:10px;padding:10px 13px;margin-bottom:7px;box-shadow:0 2px 7px rgba(0,0,0,.07);border-left:5px solid #d5d9e2}
+  .vf.filled{border-left-color:var(--intra)}
+  .vf .q{font-size:.89rem}
+  .vf .q i{color:var(--grey);font-size:.76rem;font-family:Calibri,Arial,sans-serif;font-style:normal}
+  .vf button{font-family:Calibri,Arial,sans-serif;font-size:.8rem;font-weight:bold;padding:8px 4px;border-radius:8px;border:1.5px solid #d5d9e2;background:#fafbfe;cursor:pointer;color:var(--grey)}
+  .vf button.on{background:var(--intra);color:#fff;border-color:var(--intra)}
+  .bars{display:flex;align-items:flex-end;justify-content:space-around;height:200px;border-bottom:2px solid var(--ink);padding:0 8px}
+  .bar{width:20%;border-radius:6px 6px 0 0;transition:height .8s;position:relative;min-height:2px}
+  .bar span{position:absolute;top:-24px;left:0;right:0;text-align:center;font-weight:bold;font-family:Calibri,Arial,sans-serif;font-size:.9rem}
+  .blbl{display:flex;justify-content:space-around;padding:6px 8px 0;font-family:Calibri,Arial,sans-serif;font-size:.72rem;font-weight:bold;text-align:center}
+  .blbl div{width:20%}
+  .interp{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.93rem}
+  .interp b{color:var(--gold)}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}
+  .recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:340px;overflow:auto;line-height:1.45}
+  .desc{background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-bottom:12px;border-left:6px solid var(--indigo)}
+  .desc label{font-weight:bold;font-size:.92rem;display:block;margin-bottom:3px}
+  .desc .sub{font-size:.8rem;color:var(--grey);font-style:italic;font-family:Calibri,Arial,sans-serif;margin-bottom:7px}
+  .desc textarea{width:100%;min-height:54px;font-family:Calibri,Arial,sans-serif;font-size:.88rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px;resize:vertical}
+  /* rubriques cadrage */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px;color:var(--ink)}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}
+  .mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}
+  .mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}
+  .mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .ok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(20,125,116,.3)}
+  .crit .ko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(201,106,31,.3)}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:520px){.rub-start{flex-direction:column;text-align:center}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 2 · La Rencontre de l'Autre</div>
+  <h1>Mon affirmation</h1>
+  <p>S'affirmer sans agresser, sans fuir, sans manipuler</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Ma mission</button>
+  <button data-s="s1">① Le test (60 items)</button>
+  <button data-s="s2">② Mon histogramme</button>
+  <button data-s="s3">③ Mon générateur DESC</button>
+</nav>
+<main>
+<!-- ⓪ MISSION -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage avant de commencer.</p>
+  <div class="rubrique r-parcours">
+    <div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe le test d'assertivité</b><span>La fiche outil du cours (onglet ①) : 60 affirmations « plutôt vrai / plutôt faux », environ 15 minutes. Répondez spontanément.</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je récupère mon histogramme</b><span>L'application calcule vos scores dans les quatre profils (Passif, Agressif, Manipulateur, Assertif) et trace votre histogramme (onglet ②), que vous pouvez <b>copier</b> ou <b>imprimer</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon résultat — le cœur du travail</b><span>Êtes-vous d'accord ? Cela correspond-il à l'image que vous avez de vous ? En êtes-vous satisfait ? Quelles pistes pour développer votre assertivité ? Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Collez ou agrafez votre synthèse dans votre <b>portfolio de compétences</b> (Carnet de bord du chapitre 9), avec votre analyse rédigée et vos pistes de développement.</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu">
+    <div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu de mon analyse</span></div>
+    <div class="rub-body">
+      <p class="rub-intro">Votre analyse doit répondre aux questions 1.1 à 1.3 de la fiche 6. Une bonne analyse se reconnaît à quatre signes :</p>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle confronte le résultat à votre vécu.</b> « Le test me place en passif dominant. Est-ce que je me reconnais ? Dans quelles situations ? »</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle argumente par des exemples de votre vie.</b> Des situations datées et racontées, pas des généralités.</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle distingue les quatre profils.</b> On n'est jamais 100 % d'un profil : quelle est votre répartition ? Votre « refuge réflexe » en situation de stress ?</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle débouche sur des pistes concrètes</b> — un non à poser cette semaine, un DESC à préparer par écrit (onglet ③).</div></div>
+      <div class="crit crit-ko"><span class="ko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier ses scores et écrire « je suis d'accord ». Sans analyse ni exemples, le travail n'est pas fait.</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure">
+    <div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions pour être à l'aise</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucun score n'est bon ou mauvais.</b> Cet autodiagnostic est « à valeur indicative » — il vous décrit tel que vous vous voyez « ici et maintenant ».</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b> Rien n'est envoyé ni enregistré ailleurs.</p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Un résultat qui vous surprend est une bonne nouvelle</b> : notez cette surprise, elle fera une excellente matière d'analyse.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée estimée : 15 minutes pour le test, plus le temps de votre analyse.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<!-- ① TEST -->
+<section id="s1">
+  <h2>Le test d'assertivité — 60 items</h2>
+  <p class="lead">Fiche outil du cours. Répondez « Plutôt vrai » ou « Plutôt faux » le plus spontanément possible. Si une question vous laisse perplexe, laissez-la sans réponse.</p>
+  <div class="rules"><b>Cotation :</b> seules les réponses « plutôt vrai » comptent. Le total par profil (Passivité, Agressivité, Manipulation, Assertivité) indique la fréquence d'utilisation de chacun de ces quatre rôles (sur 15).</div>
+  <div class="prog"><span id="aProg">0 / 60 répondus</span><div class="progbar"><div class="progfill" id="aFill"></div></div></div>
+  <div id="aItems"></div>
+  <button class="cta" id="aGo" disabled>Tracer mon histogramme →</button>
+</section>
+
+<!-- ② RÉSULTAT -->
+<section id="s2">
+  <h2>Mon histogramme</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 60 affirmations de l'onglet ①.</p>
+  <div id="aRes" style="display:none">
+    <div style="background:#fff;border-radius:12px;padding:20px;box-shadow:0 3px 10px rgba(0,0,0,.08)">
+      <div class="bars" id="bars"></div>
+      <div class="blbl"><div style="color:#8A8F98">PASSIF</div><div style="color:var(--inter)">AGRESSIF</div><div style="color:var(--violet)">MANIPULATEUR</div><div style="color:var(--intra)">ASSERTIF</div></div>
+    </div>
+    <div class="interp" id="aInterp"></div>
+    <div class="recall" style="margin-top:16px"><b>⚠️ Ces scores ne sont que la matière première.</b> Ce qui vous est demandé, c'est de les <b>analyser</b> — les confronter à votre vécu, argumenter par des exemples — puis de <b>transmettre le tout dans votre portfolio</b>.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier mon résultat</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer / PDF</button>
+      <button class="cta small" id="showBt">👁️ Voir le texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+    <p class="note">Collez ce texte dans votre Carnet de bord (chapitre 9, questions 1.1 à 1.3) ou imprimez-le. Vos réponses restent sur votre appareil.</p>
+  </div>
+</section>
+
+<!-- ③ DESC -->
+<section id="s3">
+  <h2>Mon générateur DESC</h2>
+  <p class="lead">Préparez par écrit votre prochaine conversation difficile — l'improvisation ramène toujours au réflexe.</p>
+  <div class="desc"><label>La situation à jouer</label><div class="sub">Avec qui ? À quel sujet ?</div><textarea></textarea></div>
+  <div class="desc" style="border-left-color:var(--intra)"><label>D — Décrire les faits</label><div class="sub">Sans jugement, sans « toujours/jamais » : des faits datés et observables.</div><textarea></textarea></div>
+  <div class="desc" style="border-left-color:var(--violet)"><label>E — Exprimer mon ressenti</label><div class="sub">En « je », un sentiment (pas une accusation déguisée).</div><textarea></textarea></div>
+  <div class="desc" style="border-left-color:var(--inter)"><label>S — Spécifier ma demande</label><div class="sub">Concrète, réalisable, éventuellement avec une alternative.</div><textarea></textarea></div>
+  <div class="desc" style="border-left-color:var(--gold)"><label>C — Conséquences positives</label><div class="sub">Pour les deux : qu'est-ce que chacun y gagne ?</div><textarea></textarea></div>
+  <button class="cta small" onclick="window.print()">Imprimer ma partition DESC</button>
+</section>
+</main>
+<footer>Développement Personnel &amp; Leadership 2 — Pas à pas vers le développement de mon potentiel Soft Skills · S.BEKRI / B.BRAHMI</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+const ITEMS=[
+"J'ai souvent du mal à refuser et à dire non",
+"Je suis sûr(e) de mes droits, je les défends sans empiéter sur ceux des autres",
+"Je suis prudent(e), je ne me livre pas si je ne connais pas bien mon vis-à-vis",
+"Je décide et je tranche facilement",
+"Quand c'est possible, j'agis par personne interposée plutôt que directement, c'est plus efficace",
+"Je suis direct(e) ! Je dis aux gens ce que je pense et je ne crains pas de les critiquer",
+"Je n'ose pas dire mon opinion devant un groupe ou dans une réunion",
+"Je donne mon avis sans états d'âme, même si cela va à l'encontre de l'opinion générale",
+"Dans les débats, j'observe et j'attends de voir comment ça tourne pour définir ma stratégie",
+"On me reproche parfois d'avoir l'esprit de contradiction",
+"J'ai du mal à écouter les autres",
+"Je m'arrange pour être au courant de tout (même des petits potins), cela me rend bien service",
+"J'ai la réputation d'être assez habile avec les gens",
+"Je fais confiance aux gens qui m'entourent",
+"Je n'ose pas demander d'aide, j'ai peur que l'on me juge incapable ou incompétent",
+"J'ai du mal à me décider quand je dois faire quelque chose d'inhabituel",
+"Je suis un(e) faux (fausse) calme : quand je m'énerve je fais parfois rire les autres",
+"Je suis à l'aise devant les gens, en groupe comme en face à face",
+"Je joue souvent la comédie pour arriver à mes fins",
+"Je coupe souvent la parole aux autres sans m'en rendre compte à temps",
+"J'aime avoir le dernier mot et imposer mon point de vue",
+"Je sais qui il faut voir et quand il faut le/la voir, cela m'a beaucoup servi",
+"Je règle les désaccords en trouvant un compromis qui convienne à chacun",
+"Je préfère agir franchement sans cacher mes intentions",
+"Je remets souvent à plus tard ce que je dois faire",
+"Je dis souvent : « Ça m'est égal ! Comme tu veux ! »",
+"Je me présente comme je suis, sans complexe",
+"Il en faut beaucoup pour m'intimider",
+"Je fais peur aux autres pour m'imposer",
+"Je me fais rarement avoir mais, si cela arrive, je sais prendre ma revanche",
+"J'exagère les faits, je caricature les situations pour obtenir ce que je veux",
+"Je suis débrouillard(e), je sais tirer parti du système",
+"Je suis à la fois bien avec moi-même, bien avec les autres",
+"Je sais exprimer mon désaccord sans excès, de façon à me faire entendre",
+"J'ai le souci de ne pas importuner les autres",
+"J'ai du mal à prendre parti et à choisir",
+"Je n'aime pas être seul(e) à exprimer un avis dans un groupe",
+"Je n'ai pas peur de parler en public",
+"La vie m'a appris à savoir me défendre et lutter",
+"J'aime les défis, les risques, même excessifs",
+"Je suis souvent assez habile pour éviter les conflits",
+"Je « joue cartes sur table » pour mettre les gens en confiance",
+"J'ai de bonnes capacités d'écoute et d'attention",
+"Quand j'ai décidé une chose, je la mène jusqu'au bout malgré les imprévus",
+"J'exprime sans réticence ce que je ressens",
+"J'arrive à amener les gens à adhérer à mes idées, je suis persuasif(ve)",
+"Compliments, sourires, flatteries permettent d'obtenir ce que l'on veut",
+"J'ai du mal à maîtriser mon temps de parole",
+"Je sais manier l'ironie mordante",
+"Je suis serviable et facile à vivre, je me fais même parfois exploiter",
+"J'aime mieux observer que participer",
+"Je n'aime pas être au premier rang, je préfère les seconds rôles",
+"J'ai pris l'habitude de ne pas me comparer aux autres",
+"Je trouve maladroit de dévoiler trop vite mes intentions",
+"Je choque parfois les gens par mes propos",
+"Si je n'avais pas appris à me défendre, j'aurais été dévoré(e)",
+"On obtient plus facilement ce que l'on veut en cachant ses objectifs plutôt qu'en révélant ses intentions",
+"Je sais détendre mon entourage par un humour sans arrière-pensée",
+"On ne peut prétendre régler un problème sans en chercher les causes profondes",
+"Je n'aime pas me faire mal voir"
+];
+const GRID={
+  P:[1,7,15,16,17,25,26,35,36,37,50,51,52,59,60],
+  A:[4,6,10,11,20,21,28,29,30,39,40,48,49,55,56],
+  M:[3,5,9,12,13,19,22,31,32,41,42,46,47,54,57],
+  S:[2,8,14,18,23,24,27,33,34,38,43,44,45,53,58]
+};
+const ANS={};
+const wrap=document.getElementById('aItems');
+ITEMS.forEach((txt,i)=>{
+  const n=i+1;const d=document.createElement('div');d.className='vf';d.id='vf'+n;
+  d.innerHTML='<div class="q"><i>'+n+'.</i> '+txt+'</div><button data-v="V">Plutôt vrai</button><button data-v="F">Plutôt faux</button>';
+  wrap.appendChild(d);
+  d.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    ANS[n]=b.dataset.v;
+    d.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+    d.classList.add('filled');aProg();
+  });
+});
+function aProg(){
+  const n=Object.keys(ANS).length;
+  document.getElementById('aProg').textContent=n+' / 60 répondus';
+  document.getElementById('aFill').style.width=(n/60*100)+'%';
+  document.getElementById('aGo').disabled=n<55; // tolérer quelques non-réponses
+}
+let SCORES=null,EXPORT="";
+const NAMES={P:"Passivité",A:"Agressivité",M:"Manipulation",S:"Assertivité"};
+const COLORS={P:"#8A8F98",A:"#C96A1F",M:"#7A5C9E",S:"#147D74"};
+const DESCS={
+  P:"ATTITUDE PASSIVE (fuite, évitement) : elle permet de gagner du temps mais les problèmes sont différés, pas résolus. Trop de passivité (plus de 5) est synonyme de soumission.",
+  A:"ATTITUDE AGRESSIVE (attaque) : elle libère les tensions et donne un sentiment de puissance, mais provoque un blocage ou une agressivité en retour, et hypothèque les relations futures.",
+  M:"ATTITUDE MANIPULATRICE (détour) : elle permet d'arriver à ses fins sans heurts visibles, mais le risque est la perte de crédibilité et de confiance quand l'autre s'en aperçoit.",
+  S:"ATTITUDE ASSERTIVE (affirmation) : elle apporte du crédit à celui qui pose le problème de manière simple et directe. N'ayant pas les inconvénients des autres comportements, c'est une qualité à développer."
+};
+document.getElementById('aGo').onclick=()=>{
+  const sc={P:0,A:0,M:0,S:0};
+  for(const k in GRID) GRID[k].forEach(n=>{if(ANS[n]==='V')sc[k]++;});
+  SCORES=sc;
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('aRes').style.display='block';
+  const bars=document.getElementById('bars');bars.innerHTML='';
+  ['P','A','M','S'].forEach(k=>{
+    const b=document.createElement('div');b.className='bar';b.style.background=COLORS[k];b.style.height='0';
+    b.innerHTML='<span style="color:'+COLORS[k]+'">'+sc[k]+'/15</span>';
+    bars.appendChild(b);
+    setTimeout(()=>{b.style.height=(sc[k]/15*100)+'%';},80);
+  });
+  const entries=Object.entries(sc).sort((a,b)=>b[1]-a[1]);
+  const dom=entries[0][0];
+  document.getElementById('aInterp').innerHTML=
+    '<b>Votre profil dominant : '+NAMES[dom]+' ('+entries[0][1]+'/15).</b><br>'+DESCS[dom]+
+    '<br><br><b>Répartition complète :</b> '+entries.map(e=>NAMES[e[0]]+' '+e[1]+'/15').join(' · ');
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MON PROFIL D'ASSERTIVITE - resultat du test (fiche outil)\n"+
+"Date de passation : "+d+"\n"+
+"============================================================\n"+
+"SCORES\n"+
+"  Passivite      : "+sc.P+" / 15\n"+
+"  Agressivite    : "+sc.A+" / 15\n"+
+"  Manipulation   : "+sc.M+" / 15\n"+
+"  Assertivite    : "+sc.S+" / 15\n\n"+
+"PROFIL DOMINANT  : "+NAMES[dom]+" ("+entries[0][1]+"/15)\n"+
+DESCS[dom]+"\n\n"+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 9 - fiche 6)\n"+
+"Rappel : ces scores sont la matiere premiere, pas la\n"+
+"conclusion. Ce qui est attendu, c'est votre ANALYSE.\n\n"+
+"1.1) Quel resultat avez-vous trouve ? (histogramme ci-dessus)\n"+
+"     ..................................................................\n\n"+
+"1.2) En etes-vous d'accord ? Est-ce que cela correspond a\n"+
+"     l'image que vous avez de vous ? En etes-vous satisfait ?\n"+
+"     Pourquoi ?\n"+
+"     ..................................................................\n"+
+"     ..................................................................\n\n"+
+"1.3) Quelles pistes de developpement de votre assertivite\n"+
+"     (affirmation de Soi) comptez-vous entreprendre ?\n"+
+"     ..................................................................\n"+
+"     ..................................................................\n"+
+"============================================================\n"+
+"Test : « Etes-vous assertif ? » - grille autodiagnostic des roles.\n"+
+"Developpement Personnel & Leadership 2 - S.BEKRI / B.BRAHMI";
+  document.getElementById('export').textContent=EXPORT;
+  document.querySelector('nav button[data-s=s2]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){
+  const btn=this;
+  const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier mon résultat',1900);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();
+  function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';}document.body.removeChild(ta);}
+};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+document.getElementById('showBt').onclick=function(){const e=document.getElementById('export');const v=e.style.display==='none';e.style.display=v?'block':'none';this.textContent=v?'🙈 Masquer':'👁️ Voir le texte';};
+</script>
+</body>
+</html>

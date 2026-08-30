@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mes capacités — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}
+  header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:8px;background:#fff;padding:11px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:9px 17px;border-radius:22px;cursor:pointer;font-size:.93rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:860px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .tag{display:inline-block;font-size:.68rem;font-weight:bold;color:#fff;padding:2px 9px;border-radius:3px;background:var(--inter)}
+  .src{border-radius:10px;color:#fff;padding:14px 16px;margin-bottom:8px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.12);transition:transform .15s;background:var(--inter)}
+  .src:nth-child(2){background:#B85E1A}.src:nth-child(3){background:#5F9EA0}.src:nth-child(4){background:var(--intra)}
+  .src:hover{transform:translateX(6px)}
+  .src b{display:block;font-size:1.02rem}
+  .src small{opacity:.88;font-family:Calibri,Arial,sans-serif}
+  .src .detail{display:none;background:rgba(255,255,255,.16);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:.85rem;font-family:Calibri,Arial,sans-serif}
+  .src.open .detail{display:block}
+  .q{background:#fff;border-radius:12px;padding:18px;margin-bottom:14px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:6px solid var(--inter)}
+  .q p{margin:.5em 0 .8em}
+  .likert{display:flex;gap:6px;flex-wrap:wrap}
+  .likert label{flex:1;min-width:90px;text-align:center;border:1.5px solid #d5d9e2;border-radius:8px;padding:8px 4px;font-size:.78rem;cursor:pointer;background:#fafbfe;font-family:Calibri,Arial,sans-serif}
+  .likert input{display:none}
+  .likert label:has(input:checked){background:var(--inter);color:#fff;border-color:var(--inter)}
+  .cta{display:block;margin:22px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:13px 30px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}
+  .cta.small{font-size:.85rem;padding:9px 20px;margin:10px auto}
+  .track{background:#e6e8f0;border-radius:10px;height:20px;overflow:hidden;margin:6px 0 14px}
+  .fill{height:100%;width:0;border-radius:10px;transition:width 1s ease;background:var(--inter)}
+  .verdict{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:16px 18px;margin-top:12px}
+  .verdict h3{color:var(--gold);margin-bottom:.4em}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px}
+  .scalewrap{background:#fff;border-radius:12px;padding:22px;box-shadow:0 3px 10px rgba(0,0,0,.08);text-align:center}
+  .scalenum{font-size:4rem;font-weight:bold;color:var(--inter);line-height:1;margin:8px 0}
+  input[type=range]{width:90%;max-width:480px;accent-color:var(--inter)}
+  .scalelab{display:flex;justify-content:space-between;max-width:480px;margin:4px auto 0;font-size:.75rem;color:var(--grey);font-family:Calibri,Arial,sans-serif}
+  .scaletxt{margin-top:14px;font-size:.95rem;min-height:48px}
+  /* escalier */
+  .stairwrap{background:#fff;border-radius:12px;padding:20px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .stairwrap input[type=text]{width:100%;font-family:Calibri,Arial,sans-serif;font-size:.9rem;padding:9px 11px;border:1.5px solid #d5d9e2;border-radius:8px;margin-bottom:12px}
+  .stairs{margin-top:14px}
+  .step{color:#fff;border-radius:8px;padding:11px 14px;margin-bottom:7px;font-family:Calibri,Arial,sans-serif;font-size:.88rem;display:flex;gap:10px;align-items:center}
+  .step b{white-space:nowrap}
+  .step input{flex:1;border:none;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:.85rem}
+  .st4{background:var(--inter);margin-left:36%}
+  .st3{background:#D68A4A;margin-left:24%}
+  .st2{background:#5F9EA0;margin-left:12%}
+  .st1{background:var(--intra)}
+  @media(max-width:560px){.st4,.st3,.st2{margin-left:0}}
+
+  /* ===== RUBRIQUES DE CADRAGE ===== */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}
+  .rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px;color:var(--ink)}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}
+  .mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}
+  .mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}
+  .mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .ok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(20,125,116,.3)}
+  .crit .ko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(201,106,31,.3)}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:520px){.rub-start{flex-direction:column;text-align:center}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 1 · Le Voyage intérieur</div>
+  <h1>Mes capacités</h1>
+  <p>La confiance en soi : « suis-je capable ? »</p>
+</header>
+
+<nav>
+  <button class="on" data-s="s0">🎯 Ma mission</button>
+  <button data-s="s1">① Les 4 sources</button>
+  <button data-s="s2">② Le test officiel</button>
+  <button data-s="s3">③ Mon résultat</button>
+  <button data-s="s4">④ Mon escalier</button>
+</nav>
+
+<main>
+<!-- ⓪ MISSION -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage avant de commencer : il vous dit ce qui est attendu de vous, et surtout ce qui ne l'est pas.</p>
+
+  <!-- RUBRIQUE 1 · LE PARCOURS -->
+  <div class="rubrique r-parcours">
+    <div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body">
+      <div class="mission">
+        <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe le test de confiance en soi</b>
+          <span>La fiche outil du cours (onglet ②) : 20 affirmations, environ 10 minutes. Répondez spontanément — aucune réponse n'est juste ou fausse.</span></div></div>
+        <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je récupère mon résultat</b>
+          <span>L'application calcule votre pourcentage de confiance et génère une synthèse (onglet ③), que vous pouvez <b>copier</b> ou <b>imprimer</b>.</span></div></div>
+        <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon résultat — le cœur du travail</b>
+          <span>Un pourcentage n'est pas une conclusion : c'est un point de départ. Êtes-vous d'accord avec ce résultat ? Si non, à combien évaluez-vous votre confiance de 1 à 10 ? Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+        <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b>
+          <span>Collez ou agrafez votre synthèse dans votre <b>portfolio de compétences</b> (Carnet de bord du chapitre 3), avec votre analyse rédigée et votre escalier (onglet ④).</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RUBRIQUE 2 · CE QUI EST ATTENDU -->
+  <div class="rubrique r-attendu">
+    <div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu de mon analyse</span></div>
+    <div class="rub-body">
+      <p class="rub-intro">Votre analyse doit répondre aux trois questions de la fiche 5 (volet Confiance). Une bonne analyse se reconnaît à quatre signes :</p>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle confronte le résultat à votre vécu.</b> « Le test me situe à 62 %. Est-ce que je me reconnais là-dedans ? Dans quelles situations précisément ? »</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle distingue les domaines.</b> La confiance est contextuelle : on peut être solide à l'écrit et paralysé à l'oral. Où la vôtre flanche-t-elle exactement ?</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle argumente par des exemples de votre vie.</b> Des situations datées et racontées, pas des généralités.</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle débouche sur un escalier concret.</b> Une marche 1 « ridiculement facile » à gravir cette semaine vaut mieux que dix bonnes intentions.</div></div>
+      <div class="crit crit-ko"><span class="ko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier son pourcentage et écrire « je suis d'accord ». Sans analyse ni exemples, le travail n'est pas fait.</div></div>
+    </div>
+  </div>
+
+  <!-- RUBRIQUE 3 · À SAVOIR -->
+  <div class="rubrique r-rassure">
+    <div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions pour être à l'aise</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucun score n'est bon ou mauvais</b>, et rien ici n'est noté sur la valeur du résultat. La confiance en soi <i>évolue dans le temps</i> — c'est même sa définition.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b> Rien n'est envoyé ni enregistré ailleurs. Vous seul décidez de ce que vous transmettez.</p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Un résultat qui vous surprend est une bonne nouvelle</b> : notez cette surprise, elle fera une excellente matière d'analyse.</p></div>
+    </div>
+  </div>
+
+  <!-- DÉMARRAGE -->
+  <div class="rub-start">
+    <div>
+      <b>Prêt(e) ?</b>
+      <span>Durée estimée : 10 minutes pour le test, plus le temps de votre analyse rédigée.</span>
+    </div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button>
+  </div>
+</section>
+<section id="s1">
+  <h2>Les quatre sources de la confiance (Bandura)</h2>
+  <p class="lead">Le sentiment d'efficacité personnelle s'alimente à quatre sources — touchez chacune pour l'explorer. Ensemble, elles forment votre programme d'entraînement.</p>
+  <div class="src open"><b>1 · L'expérience de maîtrise</b><small>la source reine</small>
+    <div class="detail">Chaque réussite, même petite, est un dépôt sur le compte de la confiance. D'où la stratégie de l'escalier (onglet ⑤) : organiser des réussites franchissables plutôt qu'attendre l'exploit.</div></div>
+  <div class="src"><b>2 · L'apprentissage vicariant</b><small>« si elle y arrive, pourquoi pas moi ? »</small>
+    <div class="detail">Voir réussir quelqu'un qui me ressemble nourrit ma propre croyance. Choisissez des modèles accessibles (un pair, un aîné proche) plutôt que des idoles inatteignables qui écrasent.</div></div>
+  <div class="src"><b>3 · La persuasion sociale</b><small>les encouragements crédibles</small>
+    <div class="detail">Les mots d'un mentor, d'un pair, d'un témoin d'apprentissage — à condition qu'ils soient crédibles et précis (« ta partie sur X était solide ») plutôt que flatteurs et vagues.</div></div>
+  <div class="src"><b>4 · Les états physiologiques et émotionnels</b><small>relire son trac</small>
+    <div class="detail">Cœur qui bat, mains fraîches : signal de panique… ou d'énergie mobilisée ? La même sensation, relue autrement, change la performance. « Je ne panique pas, je suis mobilisé(e). »</div></div>
+</section>
+
+<section id="s2">
+  <h2>Le test de confiance en soi</h2>
+  <p class="lead">Fiche outil du cours — 20 affirmations. Pour chacune, indiquez la fréquence à laquelle elle est vraie pour vous.</p>
+  <div class="rules">
+    <b>Cotation :</b> Toujours = 5 · Souvent = 4 · Parfois = 2 · Jamais = 0. Le total de vos points vous donne directement le <b>pourcentage</b> de votre degré de confiance en vous (sur 100). Répondez spontanément et sincèrement.
+  </div>
+  <div class="prog"><span id="cProg">0 / 20 répondus</span><div class="progbar"><div class="progfill" id="cFill"></div></div></div>
+  <div id="cItems"></div>
+  <button class="cta" id="cGo" disabled>Calculer mon pourcentage →</button>
+</section>
+
+<section id="s3">
+  <h2>Mon résultat</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 20 affirmations de l'onglet ②.</p>
+  <div id="cRes" style="display:none">
+    <div class="resbox">
+      <div class="resnum" id="cScore">–</div>
+      <div style="font-family:Calibri,Arial,sans-serif;font-size:.85rem;color:var(--grey)">% de confiance en vous (score sur 100)</div>
+      <div class="resgauge"><div class="rescur" id="cCur" style="left:0"></div></div>
+      <div class="resleg"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+      <div class="verdict" id="cInterp" style="text-align:left"></div>
+    </div>
+
+    <div class="recall" style="margin-top:16px">
+      <b>⚠️ Ce pourcentage n'est que la matière première.</b>
+      La question de coaching de votre fiche est : <b>êtes-vous en accord avec ce résultat ?</b> Si non, à combien évaluez-vous votre confiance sur une échelle de 1 à 10 ? Réglez le curseur ci-dessous, puis analysez l'écart.
+    </div>
+    <div class="scalewrap">
+      <div class="scalenum" id="sval">5</div>
+      <input type="range" id="scale" min="1" max="10" value="5">
+      <div class="scalelab"><span>1 · très faible</span><span>10 · très solide</span></div>
+      <p class="scaletxt" id="stxt"></p>
+    </div>
+
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier mon résultat</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer / PDF</button>
+      <button class="cta small" id="showBt">👁️ Voir le texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+    <p class="note">Collez ce texte dans votre Carnet de bord (chapitre 3) ou imprimez-le. Vos réponses restent sur votre appareil : rien n'est envoyé.</p>
+  </div>
+</section>
+
+<section id="s4">
+  <h2>Le constructeur d'escalier</h2>
+  <p class="lead">Transformez un objectif intimidant en marches franchissables — l'expérience de maîtrise, organisée. La marche 1 doit être <i>ridiculement facile</i> : c'est fait exprès.</p>
+  <div class="stairwrap">
+    <label style="font-family:Calibri,Arial,sans-serif;font-size:.85rem;font-weight:bold;color:var(--indigo)">Mon objectif intimidant :</label>
+    <input type="text" id="obj" placeholder="ex. : réussir mon entretien en anglais / présenter devant 100 personnes…">
+    <div class="stairs">
+      <div class="step st4"><b>Marche 4 — le défi réel :</b><input placeholder="la situation cible elle-même"></div>
+      <div class="step st3"><b>Marche 3 — en situation, accompagné(e) :</b><input placeholder="ex. : simulation filmée et débriefée"></div>
+      <div class="step st2"><b>Marche 2 — devant un proche bienveillant :</b><input placeholder="ex. : m'exercer devant un ami"></div>
+      <div class="step st1"><b>Marche 1 — ridiculement facile, seul(e) :</b><input placeholder="ex. : 3 minutes par jour, en marchant"></div>
+    </div>
+    <button class="cta small" onclick="window.print()">Imprimer / enregistrer mon escalier</button>
+  </div>
+  <p class="note">Datez chaque marche gravie. Cet escalier alimente directement votre Plan d'action SMART (colonne Confiance) — et votre témoin d'apprentissage en est la source de persuasion sociale.</p>
+</section>
+</main>
+<footer>Développement Personnel &amp; Leadership 2 — Pas à pas vers le développement de mon potentiel Soft Skills · S.BEKRI / B.BRAHMI</footer>
+
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+document.querySelectorAll('.src').forEach(c=>c.onclick=()=>c.classList.toggle('open'));
+
+/* ===== TEST DE CONFIANCE EN SOI — fiche outil (20 items) ===== */
+const ITEMS=[
+ "Je me permets de me tromper sans m'accuser.",
+ "Je me permets de me tromper sans avoir peur d'être critiqué(e) par les autres.",
+ "J'avoue aux autres mes peurs, faiblesses ou limites sans avoir peur d'être jugé(e).",
+ "Je peux faire une critique constructive à quelqu'un sans avoir peur d'être rejeté(e).",
+ "Je peux réessayer plus d'une fois même si je considère que la première fois a été un échec.",
+ "Je peux accepter qu'un de mes proches ne soit pas d'accord avec moi sans me remettre en cause.",
+ "Je peux parler de mes projets et objectifs sans avoir peur d'être jugé(e).",
+ "Je peux révéler une de mes peurs ou faiblesses à un proche sans avoir peur d'être mal jugé(e).",
+ "Je peux parler en public facilement.",
+ "Lorsque je ne comprends pas, je peux poser une question devant plusieurs personnes sans avoir peur d'être jugé(e) ignorant(e) ou lent(e).",
+ "J'évite de me comparer quand je rencontre mieux que moi.",
+ "Je me fais au moins 5 compliments par jour.",
+ "Je peux me sentir bien même si je n'arrive pas à être performant(e) à mon goût.",
+ "Je peux me révéler ou faire une demande même si je suis presque assuré(e) que l'autre ne sera pas d'accord.",
+ "Même si quelqu'un me dit non, je sais que cette personne m'apprécie autant.",
+ "Je préfère être vrai(e) plutôt que de dire ce que je crois que l'autre veut entendre.",
+ "Quelqu'un de cher peut me dire une vérité que je n'aime pas sans que j'en aie peur.",
+ "J'ose de nouvelles expériences en acceptant d'avance, et sans peur, de ne peut-être pas réussir.",
+ "Je prends des décisions sans l'accord ou l'approbation de quelqu'un d'autre.",
+ "Je demande pour obtenir."
+];
+const LIK=[["Toujours",5],["Souvent",4],["Parfois",2],["Jamais",0]];
+const cItems=document.getElementById('cItems');
+ITEMS.forEach((txt,i)=>{
+  const d=document.createElement('div');d.className='it';
+  d.innerHTML='<div class="n">Affirmation '+(i+1)+' / 20</div><div class="sit">'+txt+'</div>'+
+   '<div class="lik">'+LIK.map(o=>'<label><input type="radio" name="c'+i+'" value="'+o[1]+'"><span>'+o[0]+' · '+o[1]+'</span></label>').join('')+'</div>';
+  cItems.appendChild(d);
+  d.addEventListener('change',()=>{d.classList.add('filled');cProg();});
+});
+function cAnswered(){return ITEMS.filter((_,i)=>document.querySelector('input[name=c'+i+']:checked')).length;}
+function cProg(){
+  const n=cAnswered();
+  document.getElementById('cProg').textContent=n+' / 20 répondus';
+  document.getElementById('cFill').style.width=(n/20*100)+'%';
+  document.getElementById('cGo').disabled=n<20;
+}
+let PCT=null,SELF=null,EXPORT="";
+function interp(p){
+  if(p>=85)return["très élevé","Votre confiance en vous est très élevée : vous vous autorisez l'erreur, la demande et l'exposition sans crainte majeure du jugement. Veillez à ce qu'elle reste lucide — forces ET limites — et mettez-la au service des autres."];
+  if(p>=65)return["élevé","Votre confiance en vous est élevée : elle est solide dans la plupart des situations. Repérez les rares items où vous avez répondu « parfois » ou « jamais » : ils désignent vos zones de progression fines."];
+  if(p>=45)return["moyen","Votre confiance est sélective : elle tient dans certains domaines et flanche dans d'autres. Les affirmations où vous avez mis 0 ou 2 dessinent la carte précise de ce qui reste à travailler."];
+  if(p>=25)return["faible","Votre confiance en vous est fragile aujourd'hui : la peur du jugement et de l'échec semble souvent prendre le dessus. C'est exactement ce qui se reconstruit — par le bas, avec un escalier de micro-réussites (onglet ④)."];
+  return["très faible","Votre confiance en vous est très basse en ce moment : l'évitement a probablement pris beaucoup de place. Rien n'est figé : la confiance vient de l'action, une marche ridiculement facile à la fois. Parlez-en aussi à une personne de confiance."];
+}
+document.getElementById('cGo').onclick=()=>{
+  let s=0;ITEMS.forEach((_,i)=>{s+=+document.querySelector('input[name=c'+i+']:checked').value;});
+  PCT=s;                                   // total sur 100 = pourcentage
+  document.getElementById('cScore').textContent=s+' %';
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('cRes').style.display='block';
+  setTimeout(()=>{document.getElementById('cCur').style.left='calc('+s+'% - 2px)';},60);
+  const it=interp(s);
+  document.getElementById('cInterp').innerHTML='<h3 style="margin-top:14px">Lecture</h3><p><b>Degré de confiance '+it[0]+'.</b> '+it[1]+'</p>';
+  buildExport();
+  document.querySelector('nav button[data-s=s3]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+
+/* échelle 1-10 (question de coaching) */
+const sc=document.getElementById('scale'),sval=document.getElementById('sval'),stxt=document.getElementById('stxt');
+function upd(){
+  const v=+sc.value;sval.textContent=v;SELF=v;
+  stxt.textContent=v<=3?"Zone fragile : commencez par des micro-défis garantis réussissables — la confiance se reconstruit par preuves, pas par volonté.":
+   v<=6?"Zone médiane : votre confiance est sélective — identifiez les domaines où elle flanche et appliquez-y l'exposition graduée.":
+   v<=8?"Zone solide : appuyez-vous dessus pour viser un cran plus haut — c'est en zone d'étirement que la confiance grandit.":
+   "Zone très solide : vérifiez juste qu'elle reste lucide (forces ET limites), et mettez-la au service du collectif.";
+  if(PCT!==null)buildExport();
+}
+sc.oninput=upd;upd();
+
+/* export carnet de bord */
+function buildExport(){
+  const d=new Date().toLocaleDateString('fr-FR');
+  const it=interp(PCT);
+  const ecart=(SELF!==null)?(SELF*10-PCT):null;
+  EXPORT=
+"MA CONFIANCE EN SOI - resultat du test (fiche outil)\n"+
+"Date de passation : "+d+"\n"+
+"============================================================\n"+
+"RESULTAT\n"+
+"  Degre de confiance : "+PCT+" %   (niveau "+it[0]+")\n"+
+"  Bareme : <25 tres faible | 25-45 faible | 45-65 moyen |\n"+
+"           65-85 eleve | >85 tres eleve\n\n"+
+(SELF!==null?
+"QUESTION DE COACHING (fiche)\n"+
+"  Etes-vous en accord avec ce resultat ? Si non, votre\n"+
+"  auto-evaluation sur une echelle de 1 a 10 : "+SELF+"/10\n"+
+"  (soit "+(SELF*10)+" % ressenti"+(ecart!==null?", ecart de "+(ecart>0?"+":"")+ecart+" points avec le test":"")+")\n\n":"")+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 3 - fiche 5)\n"+
+"Rappel : ce pourcentage est la matiere premiere, pas la\n"+
+"conclusion. Ce qui est attendu, c'est votre ANALYSE.\n\n"+
+"1) Etes-vous en accord avec le resultat du test ? Cela\n"+
+"   correspond-il a l'image que vous avez de vous ? Dans quelles\n"+
+"   situations concretes votre confiance tient-elle - ou flanche-t-elle ?\n"+
+"   ..................................................................\n"+
+"   ..................................................................\n\n"+
+"2) Qu'est-ce que ce resultat vous apprend ? Argumentez par des\n"+
+"   exemples dates de votre vie.\n"+
+"   ..................................................................\n"+
+"   ..................................................................\n\n"+
+"3) Quelles pistes pour developper votre confiance ?\n"+
+"   Mon escalier (onglet 4) - marche 1 (ridiculement facile) :\n"+
+"   ..................................................................\n"+
+"   marche 2 : ........................................................\n"+
+"   marche 3 : ........................................................\n"+
+"   marche 4 (le defi reel) : .........................................\n"+
+"============================================================\n"+
+"Test de confiance en soi - fiche outil du cours.\n"+
+"Developpement Personnel & Leadership 2 - S.BEKRI / B.BRAHMI";
+  document.getElementById('export').textContent=EXPORT;
+}
+document.getElementById('copyBt').onclick=function(){
+  const btn=this;
+  const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier mon résultat',1900);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();
+  function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';btn.textContent='Sélectionnez le texte ci-dessus';}document.body.removeChild(ta);}
+};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+document.getElementById('showBt').onclick=function(){
+  const e=document.getElementById('export');const v=e.style.display==='none';
+  e.style.display=v?'block':'none';this.textContent=v?'🙈 Masquer le texte':'👁️ Voir le texte';
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon discours — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E}
+  *{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:5px;background:#fff;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:7px 11px;border-radius:22px;cursor:pointer;font-size:.78rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}.cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}footer b{color:var(--indigo)}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:400px;overflow:auto;line-height:1.45}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.rules b{color:var(--gold)}
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}.testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  .util{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ucard{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:5px solid var(--indigo)}
+  .ucard h3{margin-top:0}.ucard p{font-size:.86rem;font-family:Calibri,Arial,sans-serif}
+  /* test PRCS */
+  .vf{display:grid;grid-template-columns:1fr 80px 80px;gap:6px;align-items:center;background:#fff;border-radius:10px;padding:11px 14px;margin-bottom:7px;box-shadow:0 2px 7px rgba(0,0,0,.06);border-left:4px solid #d5d9e2}
+  .vf.filled{border-left-color:var(--intra)}
+  .vf .q{font-size:.88rem}.vf .q i{color:var(--grey);font-size:.72rem;font-family:Calibri,Arial,sans-serif;font-style:normal}
+  .vf button{font-family:Calibri,Arial,sans-serif;font-size:.78rem;font-weight:bold;padding:8px;border-radius:8px;border:1.5px solid #d5d9e2;background:#fafbfe;cursor:pointer;color:var(--grey)}
+  .vf button.on{background:var(--intra);color:#fff;border-color:var(--intra)}
+  /* résultat */
+  .resbox{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);text-align:center;margin-bottom:16px}
+  .resnum{font-size:3.2rem;font-weight:bold;line-height:1;color:var(--intra)}
+  .resgauge{position:relative;height:28px;background:linear-gradient(90deg,var(--intra) 0%,#7DBE6E 25%,#F1C40F 50%,#E67E22 75%,#C0392B 100%);border-radius:14px;margin:16px 0 4px}
+  .rescur{position:absolute;top:-5px;width:4px;height:38px;background:var(--ink);border-radius:2px;transition:left .8s}
+  .resleg{display:flex;justify-content:space-between;font-size:.64rem;color:var(--grey);font-family:Calibri,Arial,sans-serif}
+  .interp{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.9rem;text-align:left}.interp b{color:var(--gold)}
+  /* AIDA */
+  .ab{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:11px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:6px solid var(--indigo)}
+  .ab label{font-weight:bold;font-size:.92rem;display:block;margin-bottom:2px}
+  .ab .sub{font-size:.8rem;color:var(--grey);font-style:italic;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .ab textarea{width:100%;min-height:52px;font-family:Calibri,Arial,sans-serif;font-size:.88rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px;resize:vertical}
+  .hooks{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+  .hooks button{font-family:Calibri,Arial,sans-serif;font-size:.76rem;padding:7px 12px;border-radius:17px;border:1.5px solid var(--indigo);background:#fff;color:var(--indigo);cursor:pointer}
+  .hooks button:hover{background:var(--indigo);color:#fff}
+  .out{background:var(--pale);border-radius:12px;padding:16px 18px;font-size:1rem;margin-top:12px;display:none}
+  /* studio */
+  .st{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:11px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .st label{font-weight:bold;font-size:.92rem;display:block;margin-bottom:2px}
+  .st .sub{font-size:.8rem;color:var(--grey);font-style:italic;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .st textarea{width:100%;min-height:52px;font-family:Calibri,Arial,sans-serif;font-size:.88rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px;resize:vertical}
+  /* chrono */
+  .chr{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);text-align:center}
+  .chrnum{font-size:4rem;font-weight:bold;color:var(--indigo);line-height:1;font-family:'Courier New',monospace}
+  .chrmsg{font-family:Calibri,Arial,sans-serif;font-size:.92rem;min-height:40px;margin-top:10px}
+  .chk{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-top:14px;font-family:Calibri,Arial,sans-serif;font-size:.88rem}
+  .chk div{padding:7px 0;border-bottom:1px dotted #dde0e8}
+  /* rubriques */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}.mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}.mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}.mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .cok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit .cko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:600px){.rub-start{flex-direction:column;text-align:center}.util{grid-template-columns:1fr}.vf{grid-template-columns:1fr 70px 70px}}
+  @media print{nav,.cta,.btnrow,header p,.rub-start,.chr,.hooks{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 3 · Le Rayonnement</div>
+  <h1>Mon discours</h1>
+  <p>Prendre la parole en public — transformer le trac en énergie</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Mission</button>
+  <button data-s="s1">① Utilité</button>
+  <button data-s="s2">② Test PRCS (12)</button>
+  <button data-s="s3">③ Mon profil</button>
+  <button data-s="s4">④ Mon AIDA</button>
+  <button data-s="s5">⑤ Studio vidéo</button>
+  <button data-s="s6">⑥ Répétition</button>
+</nav>
+<main>
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage.</p>
+  <div class="rubrique r-parcours"><div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je mesure ma confiance d'orateur</b><span>Le test PRCS (onglet ②) : 12 affirmations vrai/faux, ~3 minutes. Un score élevé = forte appréhension.</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je construis mon intervention</b><span>Le constructeur AIDA (onglet ④), le studio vidéo (onglet ⑤) et la répétition chronométrée (onglet ⑥).</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon profil et ma progression — le cœur du travail</b><span>Quelles peurs dominent ? Comment les transformer en énergie ? Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Copiez votre profil PRCS + votre AIDA dans votre <b>portfolio</b> (Carnet de bord ch.14).</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu"><div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu</span></div>
+    <div class="rub-body">
+      <div class="crit"><span class="cok">✔</span><div><b>Analyser votre score PRCS</b> — quelles affirmations vous concernent le plus ? Avec quels exemples vécus ?</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Construire un AIDA complet</b> — accroche testée, intérêt, désir, action.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Vous filmer au moins une fois</b> — la vidéo révèle ce que le miroir ne montre pas.</div></div>
+      <div class="crit crit-ko"><span class="cko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier son score sans analyse, ou un AIDA non testé à voix haute.</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure"><div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">LE TRAC EST NORMAL</span><p><b>La peur de parler en public touche plus de 70 % des gens.</b> Les meilleurs orateurs ont du trac — ils ont appris à le canaliser, pas à le supprimer.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b></p></div>
+      <div class="ras-item"><span class="ras-tag">PROGRESSIF</span><p><b>L'aisance orale se construit par la répétition.</b> Trois passages filmés valent mieux que dix lectures silencieuses.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée : 3 min pour le test + le temps de préparation.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<section id="s1">
+  <h2>À quoi sert cet outil ?</h2>
+  <div class="testinfo">
+    <h3>Le PRCS — Personal Report of Confidence as a Speaker</h3>
+    <p>Le PRCS est l'un des instruments les plus utilisés pour mesurer l'<b>appréhension de la prise de parole en public</b>. La version courte (12 items, vrai/faux) a été validée en français par <b>Heeren, Ceschi, Valentiner, Dethier & Philippot (2013)</b> auprès de 611 volontaires francophones.</p>
+    <p>L'instrument présente une structure unidimensionnelle, une fiabilité élevée (alpha de Cronbach = 0.86) et des corrélations significatives avec l'échelle d'anxiété sociale de Liebowitz (r = 0.52) et l'inventaire d'anxiété de Spielberger (r = 0.52).</p>
+    <p>Un score élevé indique une <b>forte appréhension</b> ; un score bas indique une <b>bonne confiance</b> d'orateur. Le test permet de cibler précisément les peurs à travailler.</p>
+    <div class="src"><b>Source :</b> Heeren, A., Ceschi, G., Valentiner, D.P., Dethier, V. & Philippot, P. (2013). « Assessing public speaking fear with the short form of the PRCS ». <i>Neuropsychiatric Disease and Treatment</i>, 9, 609–618.<br>Version originale : Paul (1966), forme courte : Hook et al. (2008).<br><b>Application :</b> Sameh Bekri & Besma Brahmi, 2026.</div>
+  </div>
+  <div class="util">
+    <div class="ucard" style="border-top-color:var(--inter)"><h3 style="color:var(--inter)">😰 Ce que mesure le test</h3><p>L'appréhension spécifique à la prise de parole : peur du jugement, peur de l'oubli, perte de contrôle, évitement des situations orales. C'est plus ciblé que l'anxiété sociale générale.</p></div>
+    <div class="ucard" style="border-top-color:var(--intra)"><h3 style="color:var(--intra)">💡 Le trac n'est pas l'ennemi</h3><p>Le trac est de l'<b>énergie mal dirigée</b>. Canalisé, il devient vivacité, présence, intensité. Les orateurs qui n'ont « aucun trac » sont souvent… plats. L'objectif n'est pas zéro stress, c'est le bon dosage.</p></div>
+    <div class="ucard" style="border-top-color:var(--violet)"><h3 style="color:var(--violet)">🧠 Pourquoi ça bloque</h3><p>Le cerveau traite la prise de parole comme un <b>danger social</b> : l'amygdale s'active, le cortisol monte, la mémoire se fige. Connaître le mécanisme, c'est déjà le désamorcer — les « six secondes » du chapitre IE s'appliquent ici.</p></div>
+    <div class="ucard" style="border-top-color:var(--gold)"><h3 style="color:var(--gold)">📈 Ça se travaille</h3><p>La recherche montre que <b>l'exposition graduée</b> est le levier le plus efficace : commencer par un petit groupe bienveillant, augmenter progressivement. Chaque passage réussi recâble le cerveau.</p></div>
+  </div>
+</section>
+
+<section id="s2">
+  <h2>Test PRCS — Confiance d'orateur (12 items)</h2>
+  <p class="lead">Pour chaque affirmation, indiquez si elle est « vraie » ou « fausse » pour vous. Répondez spontanément.</p>
+  <div class="rules"><b>Cotation :</b> chaque réponse « vraie » à un item d'appréhension ajoute 1 point. Score de 0 (très confiant) à 12 (très appréhensif).</div>
+  <div id="prcsWrap"></div>
+  <button class="cta" id="prcsGo" disabled>Voir mon profil →</button>
+</section>
+
+<section id="s3">
+  <h2>Mon profil d'orateur</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 12 items de l'onglet ②.</p>
+  <div id="cRes" style="display:none">
+    <div class="resbox">
+      <div class="resnum" id="prcsScore">–</div>
+      <div style="font-family:Calibri,sans-serif;font-size:.82rem;color:var(--grey)">score d'appréhension (sur 12)<br>0 = très confiant · 12 = très appréhensif</div>
+      <div class="resgauge"><div class="rescur" id="prcsCur"></div></div>
+      <div class="resleg"><span>0 confiant</span><span>3</span><span>6</span><span>9</span><span>12 appréhensif</span></div>
+    </div>
+    <div class="interp" id="prcsInterp"></div>
+    <div class="recall" style="margin-top:16px"><b>⚠️ Ce score n'est que la matière première.</b> Analysez les items cochés « vrai » : ce sont vos peurs spécifiques. Puis passez aux onglets ④ à ⑥ pour préparer et répéter.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer</button>
+      <button class="cta small" id="showBt">👁️ Texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+  </div>
+</section>
+
+<section id="s4">
+  <h2>Mon constructeur AIDA</h2>
+  <p class="lead">Quatre étapes, quatre phrases. Commencez par piocher une accroche.</p>
+  <div class="ab"><label>A · ATTENTION — mon accroche</label><div class="sub">Les 30 premières secondes décident de tout.</div>
+    <div class="hooks"><button data-h="Combien d'entre vous ont déjà… ?">❓ Question</button><button data-h="[Chiffre frappant] : c'est le nombre de…">📊 Chiffre choc</button><button data-h="Il y a deux ans, je…">📖 Histoire</button><button data-h="Imaginez un instant que…">💭 Projection</button><button data-h="[3 secondes de silence, regard sur la salle]">🤫 Silence</button></div>
+    <textarea id="a0"></textarea></div>
+  <div class="ab" style="border-left-color:#D68A4A"><label>I · INTÉRÊT — en quoi cela les concerne</label><div class="sub">Passez de « mon sujet » à « votre problème ».</div><textarea id="a1"></textarea></div>
+  <div class="ab" style="border-left-color:var(--violet)"><label>D · DÉSIR — mes preuves et bénéfices</label><div class="sub">Résultats, démonstration, projection concrète.</div><textarea id="a2"></textarea></div>
+  <div class="ab" style="border-left-color:var(--intra)"><label>A · ACTION — ce que je demande</label><div class="sub">Une demande précise. Ex. : « Testez la grille un mois. »</div><textarea id="a3"></textarea></div>
+  <button class="cta" id="aidaGo">Composer mon message →</button>
+  <div class="out" id="aidaOut"></div>
+</section>
+
+<section id="s5">
+  <h2>Le studio de ma vidéo</h2>
+  <p class="lead">Préparez votre chef-d'œuvre avant de filmer.</p>
+  <div class="st"><label>🎯 Mes objectifs</label><div class="sub">Qu'est-ce que je veux que le spectateur comprenne, ressente, retienne ?</div><textarea></textarea></div>
+  <div class="st"><label>💬 Mes 3 arguments</label><div class="sub">Trois maximum — au-delà, on ne retient rien.</div><textarea></textarea></div>
+  <div class="st"><label>🧵 Mon fil conducteur</label><div class="sub">Le chemin de la première à la dernière phrase.</div><textarea></textarea></div>
+  <button class="cta small" onclick="window.print()">🖨️ Imprimer mon studio</button>
+</section>
+
+<section id="s6">
+  <h2>Ma répétition</h2>
+  <p class="lead">Choisissez une durée, lancez, et parlez debout à voix haute.</p>
+  <div class="chr">
+    <div class="chrnum" id="cnum">3:00</div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+      <button class="cta small" data-d="60" style="margin:0">1 min</button>
+      <button class="cta small" data-d="180" style="margin:0">3 min</button>
+      <button class="cta small" data-d="300" style="margin:0">5 min</button>
+    </div>
+    <p class="chrmsg" id="cmsg">Debout, pieds ancrés, respiration basse. Prêt(e) ?</p>
+  </div>
+  <div class="chk">
+    <h3>La check-list de l'orateur</h3>
+    <div>👀 <b>Regard</b> — je balaie la salle, je m'ancre 3 secondes par visage.</div>
+    <div>🤫 <b>Silence</b> — je m'autorise une pause après chaque idée forte.</div>
+    <div>🎚️ <b>Rythme</b> — je ralentis : ce qui me semble lent est normal pour le public.</div>
+    <div>🧍 <b>Posture</b> — pieds ancrés, gestes ouverts au-dessus de la taille.</div>
+    <div>🫁 <b>Respiration</b> — basse et lente, surtout avant de commencer.</div>
+    <div>📝 <b>Support</b> — un plan de mots-clés, jamais un texte lu.</div>
+    <div style="border:none">🎥 <b>Enregistrement</b> — je me filme : trois passages suffisent.</div>
+  </div>
+</section>
+</main>
+<footer><b>L'Odyssée des Soft Skills</b> — Application pédagogique<br>Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>PRCS : Heeren et al. (2013), d'après Paul (1966) & Hook et al. (2008).</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+
+/* ===== TEST PRCS — 12 items (inspiré de la version française validée) ===== */
+const PRCS=[
+["J'ai constamment peur d'oublier ce que je voulais dire.",true],
+["Je me sens plutôt à l'aise quand je parle devant un groupe.",false],
+["Quand je sais que je dois prendre la parole, j'y pense avec inquiétude longtemps à l'avance.",true],
+["J'évite les situations où je pourrais être amené(e) à parler en public.",true],
+["Mes pensées deviennent confuses et embrouillées quand je parle devant un groupe.",true],
+["J'ai confiance en ma capacité à m'exprimer clairement devant un auditoire.",false],
+["Mon corps est tendu et raide quand je prends la parole en public.",true],
+["J'ai l'impression que le public me juge négativement quand je parle.",true],
+["J'ai du plaisir à exprimer mes idées devant un groupe.",false],
+["Je perds le fil de mes idées à cause du trac.",true],
+["Même si je suis nerveux(se) avant de parler, j'oublie vite mes peurs une fois lancé(e).",false],
+["Le simple fait de penser à parler en public me rend anxieux(se).",true]
+];
+// Items « vrais » pour les items d'appréhension (true), « faux » pour les items de confiance (false)
+// Score = nb d'items où la réponse correspond à l'appréhension
+const ANS={};
+const wrap=document.getElementById('prcsWrap');
+PRCS.forEach((it,i)=>{
+  const d=document.createElement('div');d.className='vf';d.id='vf'+i;
+  d.innerHTML='<div class="q"><i>'+(i+1)+'.</i> '+it[0]+'</div><button data-v="V">VRAI</button><button data-v="F">FAUX</button>';
+  wrap.appendChild(d);
+  d.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    ANS[i]=b.dataset.v;
+    d.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+    d.classList.add('filled');
+    document.getElementById('prcsGo').disabled=Object.keys(ANS).length<12;
+  });
+});
+let EXPORT="";
+document.getElementById('prcsGo').onclick=()=>{
+  let score=0;const details=[];
+  PRCS.forEach((it,i)=>{
+    const apprehensive=(ANS[i]==='V'&&it[1]===true)||(ANS[i]==='F'&&it[1]===false);
+    if(apprehensive){score++;details.push({n:i+1,txt:it[0]});}
+  });
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('cRes').style.display='block';
+  document.getElementById('prcsScore').textContent=score;
+  document.getElementById('prcsScore').style.color=score<=3?'var(--intra)':score<=6?'var(--gold)':score<=9?'var(--inter)':'#C0392B';
+  setTimeout(()=>{document.getElementById('prcsCur').style.left='calc('+(score/12*100)+'% - 2px)';},60);
+  const lvl=score<=3?"confiant":score<=6?"modérément appréhensif":score<=9?"appréhensif":"très appréhensif";
+  const txt=score<=3?"Vous êtes à l'aise avec la prise de parole en public. Le trac existe peut-être, mais il ne vous empêche pas de vous exprimer. Votre chantier : passer de « je me débrouille » à « je captive » — le constructeur AIDA (onglet ④) et la répétition filmée (onglet ⑥) vous y aideront.":
+   score<=6?"Vous avez une appréhension modérée : le trac vous gêne dans certaines situations mais ne vous paralyse pas. Identifiez les items cochés « vrai » — ce sont vos peurs spécifiques à travailler. L'exposition graduée (petits groupes d'abord) et la préparation AIDA sont vos meilleurs alliés.":
+   score<=9?"L'appréhension est significative : elle vous pousse probablement à éviter les prises de parole ou à les subir dans l'inconfort. Les items cochés désignent précisément vos blocages. Commencez par une répétition seul(e) devant votre téléphone (onglet ⑥), puis devant un ami bienveillant. Chaque passage réussi recâble le cerveau.":
+   "L'appréhension est très forte : la prise de parole est vécue comme une menace. Sachez que c'est très fréquent et que cela se travaille. L'exposition graduée est le levier prouvé le plus efficace. Commencez tout petit : lire un texte debout chez vous, chronométré (onglet ⑥). Puis un mot en réunion. La confiance vient de l'action, pas avant elle.";
+  document.getElementById('prcsInterp').innerHTML='<b>Score : '+score+'/12 — '+lvl+'.</b><br>'+txt+
+   (details.length?'<br><br><b>Vos peurs spécifiques (items cochés) :</b><br>'+details.map(d=>'• Item '+d.n+' : '+d.txt).join('<br>'):'');
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MA CONFIANCE D'ORATEUR - Test PRCS\n"+
+"Date : "+d+"\n"+
+"============================================================\n"+
+"SCORE D'APPREHENSION : "+score+" / 12  ("+lvl+")\n"+
+"  Bareme : 0-3 confiant | 4-6 modere | 7-9 apprehensif | 10-12 tres apprehensif\n\n"+
+"MES PEURS SPECIFIQUES (items coches) :\n"+
+(details.length?details.map(d=>"  Item "+d.n+" : "+d.txt).join("\n"):"  Aucune peur dominante")+"\n\n"+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 14 - fiche 11)\n"+
+"1) Ce score correspond-il a votre vecu ? Exemples ?\n"+
+"   ..................................................................\n"+
+"2) Quelles peurs specifiques reconnaissez-vous ?\n"+
+"   ..................................................................\n"+
+"3) Plan d'action : votre premier defi oral cette semaine ?\n"+
+"   ..................................................................\n"+
+"============================================================\n"+
+"PRCS : Heeren et al. (2013), d'apres Paul (1966).\n"+
+"Application : S. Bekri & B. Brahmi, 2026.";
+  document.getElementById('export').textContent=EXPORT;
+  document.querySelector('nav button[data-s=s3]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){const btn=this;const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier',1900);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';}document.body.removeChild(ta);}};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+document.getElementById('showBt').onclick=function(){const e=document.getElementById('export');const v=e.style.display==='none';e.style.display=v?'block':'none';this.textContent=v?'🙈 Masquer':'👁️ Texte';};
+
+/* ===== AIDA ===== */
+document.querySelectorAll('.hooks button').forEach(b=>b.onclick=()=>{document.getElementById('a0').value=b.dataset.h;document.getElementById('a0').focus();});
+document.getElementById('aidaGo').onclick=()=>{
+  const p=[0,1,2,3].map(i=>document.getElementById('a'+i).value.trim());const out=document.getElementById('aidaOut');
+  if(p.some(x=>!x)){out.style.display='block';out.innerHTML='<b>Il manque un bloc.</b>';return;}
+  out.style.display='block';out.innerHTML='<b>🎤 Mon message AIDA :</b><br><br>'+p.join(' ');
+};
+
+/* ===== CHRONO ===== */
+let dur=180,iv=null;
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{
+  dur=+b.dataset.d;clearInterval(iv);
+  document.getElementById('cnum').textContent=Math.floor(dur/60)+':'+(dur%60<10?'0':'')+dur%60;
+  document.getElementById('cmsg').textContent='Debout, pieds ancrés, respiration basse. Prêt(e) ?';
+  const go=document.createElement('button');go.className='cta';go.style.marginTop='10px';go.textContent='▶ Lancer';
+  const old=document.querySelector('.chr .cta');if(old)old.replaceWith(go);else document.querySelector('.chr').appendChild(go);
+  go.onclick=()=>{go.disabled=true;let n=dur;const num=document.getElementById('cnum'),msg=document.getElementById('cmsg');
+    msg.textContent='Parlez !';
+    iv=setInterval(()=>{n--;
+      num.textContent=Math.floor(n/60)+':'+(n%60<10?'0':'')+n%60;
+      if(n===Math.floor(dur/2))msg.textContent='Mi-parcours.';
+      if(n===30)msg.textContent='30 secondes — concluez.';
+      if(n<=0){clearInterval(iv);num.textContent='✓';msg.textContent='Terminé ! Rééécoutez-vous, corrigez un détail, recommencez.';go.disabled=false;go.textContent='▶ Recommencer';}
+    },1000);
+  };
+});
+</script>
+</body>
+</html>

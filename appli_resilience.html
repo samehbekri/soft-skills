@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon réservoir — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}
+  header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:6px;background:#fff;padding:11px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:8px 13px;border-radius:22px;cursor:pointer;font-size:.86rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}
+  h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}
+  .cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}
+  footer b{color:var(--indigo)}
+  /* test */
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}
+  .testinfo .meta{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0;font-family:Calibri,Arial,sans-serif;font-size:.82rem}
+  .testinfo .meta div{background:var(--pale);padding:6px 12px;border-radius:8px;text-align:center}
+  .testinfo .meta b{display:block;color:var(--indigo);font-size:.95rem}
+  .testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}
+  .rules b{color:var(--gold)}
+  .prog{position:sticky;top:58px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}
+  .progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  .it{background:#fff;border-radius:12px;padding:14px 16px;margin-bottom:11px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:5px solid #d5d9e2}
+  .it.filled{border-left-color:var(--intra)}
+  .it .n{font-weight:bold;color:var(--indigo);font-size:.8rem;font-family:Calibri,Arial,sans-serif}
+  .it .sit{font-size:.93rem;margin:3px 0 9px}
+  .lik{display:flex;gap:4px;flex-wrap:wrap}
+  .lik label{flex:1;min-width:62px;text-align:center;border:1.5px solid #d5d9e2;border-radius:8px;padding:9px 3px;font-size:.72rem;cursor:pointer;background:#fafbfe;font-family:Calibri,Arial,sans-serif;line-height:1.3}
+  .lik input{display:none}
+  .lik label:has(input:checked){background:var(--intra);color:#fff;border-color:var(--intra)}
+  /* résultat */
+  .resbox{background:#fff;border-radius:14px;padding:24px;box-shadow:0 4px 14px rgba(0,0,0,.08);text-align:center}
+  .resnum{font-size:3.6rem;font-weight:bold;color:var(--intra);line-height:1}
+  .ressub{font-family:Calibri,Arial,sans-serif;font-size:.85rem;color:var(--grey);margin-top:4px}
+  .resgauge{position:relative;height:32px;background:linear-gradient(90deg,#C0392B 0%,#E67E22 25%,#F1C40F 45%,#7DBE6E 65%,#147D74 100%);border-radius:16px;margin:18px 0 4px}
+  .rescur{position:absolute;top:-6px;width:5px;height:44px;background:var(--ink);border-radius:3px;transition:left .8s}
+  .resleg{display:flex;justify-content:space-between;font-size:.68rem;color:var(--grey);font-family:Calibri,Arial,sans-serif}
+  .interp{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.93rem;text-align:left}
+  .interp b{color:var(--gold)}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}
+  .recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:380px;overflow:auto;line-height:1.45}
+  /* forces */
+  .forces{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:14px}
+  .force{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:5px solid var(--intra)}
+  .force b{font-size:.92rem;color:var(--intra);display:block;margin-bottom:4px}
+  .force span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:#555}
+  /* rubriques cadrage */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px;color:var(--ink)}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}
+  .mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}
+  .mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}
+  .mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .ok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(20,125,116,.3)}
+  .crit .ko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(201,106,31,.3)}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:520px){.rub-start{flex-direction:column;text-align:center}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 1 · Le Voyage intérieur</div>
+  <h1>Mon réservoir</h1>
+  <p>La résilience : rebondir, s'adapter, avancer</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Ma mission</button>
+  <button data-s="s1">① Le test CD-RISC</button>
+  <button data-s="s2">② Mon résultat</button>
+  <button data-s="s3">③ Les 5 facteurs</button>
+  <button data-s="s4">④ Scanner de stress</button>
+  <button data-s="s5">⑤ Mon réservoir</button>
+  <button data-s="s6">⑥ Forces de caractère</button>
+</nav>
+<main>
+<!-- ⓪ MISSION -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage avant de commencer.</p>
+  <div class="rubrique r-parcours">
+    <div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe le test de résilience CD-RISC</b><span>L'échelle de Connor-Davidson (onglet ①) : 21 items, environ 10 minutes. Répondez spontanément — il n'y a pas de bonne ou de mauvaise réponse.</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je récupère mon score</b><span>L'application calcule votre score global sur 84 avec interprétation et jauge (onglet ②), que vous pouvez <b>copier</b> ou <b>imprimer</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon résultat — le cœur du travail</b><span>Un score n'est pas une conclusion : c'est un point de départ. Quels items avez-vous cotés bas ? Correspondent-ils à une réalité vécue ? Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Collez ou agrafez votre synthèse dans votre <b>portfolio de compétences</b> (Carnet de bord du chapitre 6), avec votre analyse rédigée et votre plan de résilience.</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu">
+    <div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu de mon analyse</span></div>
+    <div class="rub-body">
+      <p class="rub-intro">Votre analyse doit alimenter votre Carnet de bord. Une bonne analyse se reconnaît à quatre signes :</p>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle confronte le score à votre vécu.</b> « Le test me situe à 52/84. Est-ce que je me reconnais là-dedans ? Dans quelles situations ma résilience a-t-elle été mise à l'épreuve ? »</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle identifie les items faibles.</b> Les items cotés 0 ou 1 dessinent vos zones de fragilité : nommez-les et illustrez-les.</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle s'appuie sur vos forces.</b> Les items cotés 3 ou 4 sont vos ressources : comment les mobiliser face aux zones faibles ?</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle débouche sur un plan de résilience.</b> Actions concrètes, datées : « cette semaine, je demande de l'aide sur X » (item 16) plutôt que « être plus résilient ».</div></div>
+      <div class="crit crit-ko"><span class="ko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier son score et écrire « je suis assez résilient ». Sans analyse ni exemples, le travail n'est pas fait.</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure">
+    <div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions pour être à l'aise</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucun score n'est bon ou mauvais.</b> La résilience n'est pas un trait figé : elle se construit, se renforce et fluctue selon les périodes de vie.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b> Rien n'est envoyé ni enregistré ailleurs.</p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Un score bas sur un item est une piste, pas un défaut.</b> Identifier précisément ce qui manque, c'est déjà commencer à le construire.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée estimée : 10 minutes pour le test, plus le temps de votre analyse.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<!-- ① TEST CD-RISC -->
+<section id="s1">
+  <h2>L'échelle de résilience CD-RISC</h2>
+
+  <div class="testinfo">
+    <h3>Cadrage de l'instrument</h3>
+    <div class="meta">
+      <div><b>CD-RISC</b>Connor-Davidson<br>Resilience Scale</div>
+      <div><b>21 items</b>version française<br>validée</div>
+      <div><b>Likert 0–4</b>5 niveaux<br>de réponse</div>
+      <div><b>Score / 84</b>score élevé =<br>plus grande résilience</div>
+    </div>
+    <p>La <b>Connor-Davidson Resilience Scale (CD-RISC)</b> est un autoquestionnaire mesurant la capacité d'une personne à <b>faire face au stress</b>, à <b>s'adapter aux changements</b> et à <b>rebondir après des difficultés</b>.</p>
+    <p>La version originale identifie cinq facteurs : compétence personnelle, confiance en ses instincts, acceptation positive du changement, contrôle et influences spirituelles. La CD-RISC a été validée dans divers contextes cliniques (anxiété, PTSD, soins primaires) avec une bonne fiabilité (alpha de Cronbach ~0.92).</p>
+    <p>La présente version à 21 items est validée en français. Elle est utilisée pour évaluer la résilience individuelle dans la recherche et la pratique clinique.</p>
+    <div class="src">
+      <b>Source :</b> Connor, K.M. & Davidson, J.R.T. (2003). « Development of a new resilience scale: The Connor-Davidson Resilience Scale (CD-RISC) ». <i>Depression and Anxiety</i>, 18(2), 76–82.<br>
+      <b>Formulaire :</b> adapté d'après Evallia (evallia.fr) — évaluations médicales.<br>
+      <b>Application pédagogique :</b> Sameh Bekri & Besma Brahmi, 2026.
+    </div>
+  </div>
+
+  <p class="lead">Pour chaque affirmation, indiquez à quel point elle est vraie pour vous.</p>
+  <div class="rules"><b>Cotation :</b> 0 = Pas du tout vrai · 1 = Rarement vrai · 2 = Parfois vrai · 3 = Souvent vrai · 4 = Presque toujours vrai. Le score total (sur 84) indique votre niveau de résilience.</div>
+  <div class="prog"><span id="rProg">0 / 21 répondus</span><div class="progbar"><div class="progfill" id="rFill"></div></div></div>
+  <div id="rItems"></div>
+  <button class="cta" id="rGo" disabled>Calculer mon score →</button>
+</section>
+
+<!-- ② RÉSULTAT -->
+<section id="s2">
+  <h2>Mon résultat</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 21 items de l'onglet ①.</p>
+  <div id="rRes" style="display:none">
+    <div class="resbox">
+      <div class="resnum" id="rScore">–</div>
+      <div class="ressub">score sur 84 — échelle CD-RISC (Connor & Davidson, 2003)</div>
+      <div class="resgauge"><div class="rescur" id="rCur" style="left:0"></div></div>
+      <div class="resleg"><span>0</span><span>21</span><span>42</span><span>63</span><span>84</span></div>
+      <div class="interp" id="rInterp"></div>
+    </div>
+
+    <h3>Mes items les plus fragiles</h3>
+    <div id="weakItems" style="font-family:Calibri,Arial,sans-serif;font-size:.88rem;margin-bottom:14px"></div>
+
+    <h3>Mes points d'appui</h3>
+    <div id="strongItems" style="font-family:Calibri,Arial,sans-serif;font-size:.88rem;margin-bottom:14px"></div>
+
+    <div class="recall"><b>⚠️ Ce score n'est que la matière première.</b> Ce qui vous est demandé, c'est de l'<b>analyser</b> — confronter les items faibles à votre vécu, mobiliser vos forces — puis de <b>transmettre le tout dans votre portfolio</b>.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier mon résultat</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer / PDF</button>
+      <button class="cta small" id="showBt">👁️ Voir le texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+    <p class="note">Collez ce texte dans votre Carnet de bord (chapitre 6) ou imprimez-le. Vos réponses restent sur votre appareil.</p>
+  </div>
+</section>
+
+<!-- ③ FORCES -->
+<section id="s3">
+  <h2>Les cinq facteurs de la résilience</h2>
+  <p class="lead">Les cinq dimensions identifiées par Connor & Davidson. Touchez chaque carte pour explorer — et reliez-les à vos items forts et faibles.</p>
+  <div class="forces">
+    <div class="force"><b>1 · Compétence personnelle</b><span>Ténacité, exigence élevée envers soi, sentiment de contrôle personnel. Items liés : 4, 7, 8, 12, 13, 14, 17.</span></div>
+    <div class="force" style="border-left-color:var(--inter)"><b>2 · Confiance en ses instincts</b><span>Tolérance aux affects négatifs, capacité à rester calme sous pression. Items liés : 5, 6, 15, 19.</span></div>
+    <div class="force" style="border-left-color:var(--violet)"><b>3 · Acceptation positive du changement</b><span>Flexibilité, adaptation, capacité à tirer des leçons. Items liés : 1, 2, 3, 10, 18.</span></div>
+    <div class="force" style="border-left-color:var(--indigo)"><b>4 · Contrôle</b><span>Maîtrise de l'environnement, orientation vers les objectifs. Items liés : 9, 11, 20.</span></div>
+    <div class="force" style="border-left-color:var(--gold)"><b>5 · Ressources sociales</b><span>Capacité à mobiliser le soutien d'autrui, demander de l'aide. Items liés : 16, 21.</span></div>
+  </div>
+  <p class="note">Les regroupements par facteur sont indicatifs (d'après la structure factorielle originale à 5 facteurs). Dans la version à 21 items, l'interprétation se fait principalement sur le score global.</p>
+</section>
+
+<!-- ④ SCANNER DE STRESS -->
+<section id="s4">
+  <h2>Mon scanner de stress</h2>
+  <p class="lead">L'exercice 3 de votre fiche, en version guidée : compteur, marqueurs, impact.</p>
+  <div style="background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-bottom:14px">
+    <h3 style="margin-top:0">Compteur de stress — en ce moment, je suis plutôt…</h3>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0">
+      <label style="flex:1;min-width:130px;text-align:center;border:1.5px solid #d5d9e2;border-radius:9px;padding:10px 6px;font-size:.85rem;cursor:pointer;background:#fafbfe;font-family:Calibri,Arial,sans-serif"><input type="radio" name="cnt" value="1" style="display:none"><span>Très peu stressé(e)</span></label>
+      <label style="flex:1;min-width:130px;text-align:center;border:1.5px solid #d5d9e2;border-radius:9px;padding:10px 6px;font-size:.85rem;cursor:pointer;background:#fafbfe;font-family:Calibri,Arial,sans-serif"><input type="radio" name="cnt" value="2" style="display:none"><span>Modérément stressé(e)</span></label>
+      <label style="flex:1;min-width:130px;text-align:center;border:1.5px solid #d5d9e2;border-radius:9px;padding:10px 6px;font-size:.85rem;cursor:pointer;background:#fafbfe;font-family:Calibri,Arial,sans-serif"><input type="radio" name="cnt" value="3" style="display:none"><span>Très stressé(e)</span></label>
+    </div>
+  </div>
+  <div style="background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-bottom:14px">
+    <h3 style="margin-top:0">Marqueurs — comment s'exprime mon « mauvais stress » ?</h3>
+    <p style="font-size:.85rem;margin:6px 0 2px"><b>Physiquement :</b></p>
+    <div class="mkr" data-g="p" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px"></div>
+    <p style="font-size:.85rem;margin:6px 0 2px"><b>Émotionnellement :</b></p>
+    <div class="mkr" data-g="e" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px"></div>
+    <p style="font-size:.85rem;margin:6px 0 2px"><b>Comportementalement :</b></p>
+    <div class="mkr" data-g="c" style="display:flex;flex-wrap:wrap;gap:7px"></div>
+  </div>
+  <button class="cta" id="stressGo">Analyser mon profil de stress →</button>
+  <div class="interp" id="stressV" style="display:none"></div>
+  <p class="note">Recopiez vos marqueurs cochés dans la question 3 du Carnet de bord.</p>
+</section>
+
+<!-- ⑤ MON RÉSERVOIR -->
+<section id="s5">
+  <h2>Mon réservoir numérique</h2>
+  <p class="lead">L'exercice 4 de votre fiche : ajoutez vos sources (ce qui vous aide) et vos fuites (ce qui vide le réservoir). La jauge s'ajuste en direct. Touchez une pastille pour la retirer.</p>
+  <div style="background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08)">
+    <div style="display:grid;grid-template-columns:1fr 190px;gap:18px;align-items:start" id="resvgrid">
+      <div>
+        <h3 style="color:var(--intra);margin-top:0">Mes sources</h3>
+        <div style="display:flex;gap:8px;margin:6px 0 10px"><input id="inS" placeholder="ex. : sommeil, sport, amis…" style="flex:1;font-family:Calibri,sans-serif;font-size:.88rem;padding:9px 11px;border:1.5px solid #d5d9e2;border-radius:8px"><button id="btS" style="font-family:Calibri,sans-serif;font-weight:bold;border:none;border-radius:8px;padding:0 16px;color:#fff;cursor:pointer;background:var(--intra)">+ Ajouter</button></div>
+        <div id="chS" style="display:flex;flex-wrap:wrap;gap:6px;min-height:34px"></div>
+        <h3 style="color:var(--inter)">Mes fuites</h3>
+        <div style="display:flex;gap:8px;margin:6px 0 10px"><input id="inF" placeholder="ex. : téléphone tard le soir…" style="flex:1;font-family:Calibri,sans-serif;font-size:.88rem;padding:9px 11px;border:1.5px solid #d5d9e2;border-radius:8px"><button id="btF" style="font-family:Calibri,sans-serif;font-weight:bold;border:none;border-radius:8px;padding:0 16px;color:#fff;cursor:pointer;background:var(--inter)">+ Ajouter</button></div>
+        <div id="chF" style="display:flex;flex-wrap:wrap;gap:6px;min-height:34px"></div>
+      </div>
+      <div>
+        <div style="border:3px solid var(--indigo);border-radius:0 0 26px 26px;height:280px;position:relative;overflow:hidden;background:#eef1f7">
+          <div style="position:absolute;top:8px;left:0;right:0;text-align:center;font-family:Calibri,sans-serif;font-size:.78rem;color:var(--indigo);font-weight:bold">MON RÉSERVOIR</div>
+          <div id="water" style="position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(180deg,#1e9e93,#147D74);transition:height .8s"></div>
+          <div id="pct" style="position:absolute;bottom:10px;left:0;right:0;text-align:center;color:#fff;font-weight:bold;font-size:1.3rem;text-shadow:0 1px 3px rgba(0,0,0,.3)">50 %</div>
+        </div>
+      </div>
+    </div>
+    <div class="interp" id="resV" style="margin-top:14px">Ajoutez vos sources et vos fuites — la jauge et le diagnostic s'actualiseront.</div>
+    <button class="cta small" onclick="window.print()">Imprimer mon réservoir</button>
+  </div>
+</section>
+
+<!-- ⑥ FORCES DE CARACTÈRE -->
+<section id="s6">
+  <h2>L'atelier des forces de caractère</h2>
+  <p class="lead">L'exercice 5 de votre fiche : envoyez le message à cinq proches, puis compilez leurs réponses.</p>
+  <div style="background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-bottom:14px">
+    <h3 style="margin-top:0">Étape 1 — Le message à envoyer (copiez-collez)</h3>
+    <div id="msgTxt" style="background:var(--pale);border-radius:10px;padding:13px 15px;font-family:Calibri,sans-serif;font-size:.86rem;white-space:pre-line;margin:8px 0">Bonjour ! Dans le cadre de mon cours de développement personnel, j'ai un exercice qui compte sur toi 😊
+Peux-tu m'envoyer par écrit :
+1. La liste des qualités ou des « forces » que tu perçois chez moi ;
+2. Un moment où tu m'as vu(e) être « au top de moi-même » ;
+3. Ce que tu penses que je pourrais accomplir dans les prochaines années en m'appuyant sur ces forces.
+Réponds spontanément, sans filtre — merci infiniment !</div>
+    <button class="cta small" id="copyMsg">📋 Copier le message</button>
+  </div>
+  <div style="background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08)">
+    <h3 style="margin-top:0">Étape 2 — Le collecteur : notez les forces citées par chaque proche</h3>
+    <p style="font-size:.85rem;color:var(--grey);font-family:Calibri,sans-serif;margin-bottom:8px">Une ligne par proche — séparez les forces par des virgules.</p>
+    <div class="frow" style="display:flex;gap:8px;margin-bottom:8px"><input class="fi" placeholder="Proche 1 : forces citées…" style="flex:1;font-family:Calibri,sans-serif;font-size:.86rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px"></div>
+    <div class="frow" style="display:flex;gap:8px;margin-bottom:8px"><input class="fi" placeholder="Proche 2 : forces citées…" style="flex:1;font-family:Calibri,sans-serif;font-size:.86rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px"></div>
+    <div class="frow" style="display:flex;gap:8px;margin-bottom:8px"><input class="fi" placeholder="Proche 3 : forces citées…" style="flex:1;font-family:Calibri,sans-serif;font-size:.86rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px"></div>
+    <div class="frow" style="display:flex;gap:8px;margin-bottom:8px"><input class="fi" placeholder="Proche 4 : forces citées…" style="flex:1;font-family:Calibri,sans-serif;font-size:.86rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px"></div>
+    <div class="frow" style="display:flex;gap:8px;margin-bottom:8px"><input class="fi" placeholder="Proche 5 : forces citées…" style="flex:1;font-family:Calibri,sans-serif;font-size:.86rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px"></div>
+    <button class="cta" id="tallyGo">Dégager mes forces dominantes →</button>
+    <div id="tally" style="margin-top:10px"></div>
+    <div class="interp" id="tallyV" style="display:none"></div>
+  </div>
+  <p class="note">Reportez le classement dans la question 5 du Carnet de bord (« forces dominantes, de la plus élevée à la moins élevée »).</p>
+</section>
+</main>
+<footer>
+  <b>L'Odyssée des Soft Skills</b> — Application pédagogique<br>
+  Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>
+  Instrument : CD-RISC — Connor & Davidson (2003), version française 21 items.<br>
+  Développement Personnel & Leadership 2 · Mastère
+</footer>
+
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+
+const ITEMS=[
+"Je suis capable de m'adapter quand des changements importants se produisent",
+"Je peux tirer des leçons des expériences négatives",
+"Je peux gérer les situations stressantes lorsqu'elles surviennent",
+"J'ai confiance en mes capacités à résoudre des problèmes",
+"Je peux garder mon calme face aux difficultés",
+"Je me sens capable d'affronter les événements imprévus",
+"Je peux compter sur mes compétences pour surmonter les obstacles",
+"Je me sens capable de prendre des décisions sous pression",
+"J'arrive à maintenir espoir et optimisme malgré l'adversité",
+"J'accepte que certaines choses ne peuvent pas être changées",
+"Je parviens à me remettre rapidement des revers",
+"J'utilise mes ressources personnelles pour continuer à avancer",
+"Je suis capable de faire face aux exigences de la vie quotidienne",
+"Je fais preuve de ténacité quand une tâche est difficile",
+"Je me sens maître de mon environnement dans une certaine mesure",
+"Je sais quand demander de l'aide et je le fais si nécessaire",
+"Je reste concentré sur mes objectifs malgré les distractions",
+"Je peux adapter mes plans lorsque les circonstances changent",
+"Je récupère mon équilibre émotionnel après une expérience difficile",
+"Je crois en ma capacité à surmonter de nouvelles épreuves",
+"Je sais utiliser le soutien social pour faire face aux difficultés"
+];
+const LIK=[["0 · Pas du tout vrai",0],["1 · Rarement vrai",1],["2 · Parfois vrai",2],["3 · Souvent vrai",3],["4 · Presque toujours vrai",4]];
+const wrap=document.getElementById('rItems');
+ITEMS.forEach((txt,i)=>{
+  const d=document.createElement('div');d.className='it';
+  d.innerHTML='<div class="n">Item '+(i+1)+' / 21</div><div class="sit">'+txt+'</div>'+
+   '<div class="lik">'+LIK.map(o=>'<label><input type="radio" name="r'+i+'" value="'+o[1]+'"><span>'+o[0]+'</span></label>').join('')+'</div>';
+  wrap.appendChild(d);
+  d.addEventListener('change',()=>{d.classList.add('filled');rProg();});
+});
+function rAnswered(){return ITEMS.filter((_,i)=>document.querySelector('input[name=r'+i+']:checked')).length;}
+function rProg(){
+  const n=rAnswered();
+  document.getElementById('rProg').textContent=n+' / 21 répondus';
+  document.getElementById('rFill').style.width=(n/21*100)+'%';
+  document.getElementById('rGo').disabled=n<21;
+}
+let EXPORT="";
+function interp(s){
+  if(s>=67)return["élevée","Votre résilience est élevée : vous disposez de ressources solides pour faire face au stress et rebondir après les difficultés. Entretenez ces capacités — et identifiez vos 2-3 items les plus bas pour affiner encore."];
+  if(s>=50)return["modérée à bonne","Votre résilience est dans la zone modérée à bonne : une base solide avec des marges de progression. Les items cotés 0 ou 1 désignent précisément vos leviers de développement."];
+  if(s>=34)return["modérée","Votre résilience est modérée : certaines ressources sont en place, d'autres restent à construire. Concentrez-vous sur les items les plus bas — un petit progrès sur chacun fera une grande différence cumulée."];
+  return["à renforcer","Votre résilience est actuellement basse : les ressources pour faire face au stress semblent limitées dans plusieurs domaines. C'est exactement ce qui se construit — commencez par un seul item, le plus actionnable, cette semaine. Et n'hésitez pas à mobiliser le facteur 5 : demander de l'aide est une force, pas une faiblesse."];
+}
+document.getElementById('rGo').onclick=()=>{
+  const vals=ITEMS.map((_,i)=>+document.querySelector('input[name=r'+i+']:checked').value);
+  const total=vals.reduce((a,b)=>a+b,0);
+  document.getElementById('rScore').textContent=total;
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('rRes').style.display='block';
+  const pct=(total/84)*100;
+  setTimeout(()=>{document.getElementById('rCur').style.left='calc('+pct+'% - 2px)';},60);
+  const it=interp(total);
+  document.getElementById('rInterp').innerHTML='<b>Résilience '+it[0]+' ('+total+'/84).</b> '+it[1];
+
+  // items faibles et forts
+  const indexed=vals.map((v,i)=>({n:i+1,v,txt:ITEMS[i]}));
+  const weak=indexed.filter(x=>x.v<=1).sort((a,b)=>a.v-b.v);
+  const strong=indexed.filter(x=>x.v>=3).sort((a,b)=>b.v-a.v);
+  document.getElementById('weakItems').innerHTML=weak.length
+    ? weak.map(x=>'<div style="padding:6px 0;border-bottom:1px dotted #dde0e8"><b style="color:var(--inter)">Item '+x.n+' ('+x.v+'/4)</b> — '+x.txt+'</div>').join('')
+    : '<p style="color:var(--intra)">Aucun item coté 0 ou 1 — belle robustesse sur l\'ensemble !</p>';
+  document.getElementById('strongItems').innerHTML=strong.length
+    ? strong.slice(0,5).map(x=>'<div style="padding:6px 0;border-bottom:1px dotted #dde0e8"><b style="color:var(--intra)">Item '+x.n+' ('+x.v+'/4)</b> — '+x.txt+'</div>').join('')
+    : '<p style="color:var(--grey)">Aucun item coté 3 ou 4.</p>';
+
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MA RESILIENCE - Echelle CD-RISC (Connor & Davidson, 2003)\n"+
+"Version francaise 21 items | Date : "+d+"\n"+
+"============================================================\n"+
+"SCORE TOTAL : "+total+" / 84   (resilience "+it[0]+")\n\n"+
+"DETAIL PAR ITEM\n"+
+vals.map((v,i)=>"  "+(i+1<10?" ":"")+(i+1)+". ["+v+"/4] "+ITEMS[i]).join("\n")+"\n\n"+
+"MES ITEMS FRAGILES (0-1)\n"+
+(weak.length?weak.map(x=>"  Item "+x.n+" ("+x.v+") : "+x.txt).join("\n"):"  Aucun")+"\n\n"+
+"MES POINTS D'APPUI (3-4)\n"+
+(strong.length?strong.slice(0,7).map(x=>"  Item "+x.n+" ("+x.v+") : "+x.txt).join("\n"):"  Aucun")+"\n\n"+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 6 - resilience)\n"+
+"Rappel : ce score est la matiere premiere, pas la\n"+
+"conclusion. Ce qui est attendu, c'est votre ANALYSE.\n\n"+
+"1) Ce resultat correspond-il a votre vecu ? Dans quelles\n"+
+"   situations votre resilience a-t-elle ete mise a l'epreuve ?\n"+
+"   ..................................................................\n\n"+
+"2) Quels items faibles reconnaissez-vous ? Illustrez par\n"+
+"   des exemples dates.\n"+
+"   ..................................................................\n\n"+
+"3) Comment mobiliser vos points d'appui face aux fragilites ?\n"+
+"   Mon plan de resilience :\n"+
+"   ..................................................................\n"+
+"   ..................................................................\n"+
+"============================================================\n"+
+"Instrument : CD-RISC, Connor & Davidson (2003), version\n"+
+"francaise 21 items. Application : S. Bekri & B. Brahmi, 2026.\n"+
+"Developpement Personnel & Leadership 2 - Mastere";
+  document.getElementById('export').textContent=EXPORT;
+  document.querySelector('nav button[data-s=s2]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){
+  const btn=this;const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier mon résultat',1900);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();
+  function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';}document.body.removeChild(ta);}
+};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+document.getElementById('showBt').onclick=function(){const e=document.getElementById('export');const v=e.style.display==='none';e.style.display=v?'block':'none';this.textContent=v?'🙈 Masquer':'👁️ Voir le texte';};
+
+/* ===== SCANNER DE STRESS ===== */
+const MKR={p:["tensions / douleurs","sommeil perturbé","fatigue persistante","maux de tête / ventre","appétit déréglé"],
+ e:["irritabilité","anxiété / ruminations","hypersensibilité","découragement","sentiment de débordement"],
+ c:["procrastination","isolement","grignotage / excès","surconnexion aux écrans","impatience avec les proches"]};
+document.querySelectorAll('.mkr').forEach(div=>{
+  MKR[div.dataset.g].forEach(m=>{
+    const l=document.createElement('label');
+    l.style.cssText='font-family:Calibri,sans-serif;font-size:.82rem;border:1.5px solid #d5d9e2;border-radius:17px;padding:7px 13px;cursor:pointer;background:#fff';
+    l.innerHTML='<input type="checkbox" style="display:none"><span>'+m+'</span>';
+    l.onclick=()=>{const i=l.querySelector('input');i.checked=!i.checked;l.style.background=i.checked?'var(--inter)':'#fff';l.style.color=i.checked?'#fff':'var(--ink)';l.style.borderColor=i.checked?'var(--inter)':'#d5d9e2';};
+    div.appendChild(l);
+  });
+});
+document.querySelectorAll('[name=cnt]').forEach(r=>{r.closest('label').onclick=()=>{setTimeout(()=>{document.querySelectorAll('[name=cnt]').forEach(x=>{x.closest('label').style.background=x.checked?'var(--indigo)':'#fafbfe';x.closest('label').style.color=x.checked?'#fff':'var(--ink)';x.closest('label').style.borderColor=x.checked?'var(--indigo)':'#d5d9e2';});},10);}});
+document.getElementById('stressGo').onclick=()=>{
+  const cnt=document.querySelector('input[name=cnt]:checked');
+  const g={p:0,e:0,c:0};
+  document.querySelectorAll('.mkr').forEach(div=>{g[div.dataset.g]=div.querySelectorAll('input:checked').length;});
+  const tot=g.p+g.e+g.c;
+  const dom=Object.entries(g).sort((a,b)=>b[1]-a[1])[0][0];
+  const names={p:'physique',e:'émotionnel',c:'comportemental'};
+  let v='<b>Compteur : '+(cnt?['','très peu stressé(e)','modérément stressé(e)','très stressé(e)'][+cnt.value]:'non renseigné')+'.</b> ';
+  v+=tot===0?"Aucun marqueur coché : soit un réservoir bien plein… soit un scanner à refaire en toute sincérité.":
+   'Vous avez coché <b>'+tot+' marqueur(s)</b>, avec une dominante <b>'+names[dom]+'e</b>. '+
+   (dom==='p'?"Le corps parle en premier chez vous : sommeil et récupération sont vos leviers prioritaires.":
+    dom==='e'?"Le stress passe d'abord par vos émotions : les outils du chapitre IE (nommer, six secondes) et le rituel du lâcher-prise sont vos alliés.":
+    "Le stress se voit dans vos comportements : ce sont souvent des fuites du réservoir — l'onglet ⑤ vous attend.");
+  const el=document.getElementById('stressV');el.innerHTML=v;el.style.display='block';
+};
+
+/* ===== RÉSERVOIR ===== */
+let SR=[],FR=[];
+function updTank(){
+  const pct=Math.max(5,Math.min(95,50+SR.length*8-FR.length*8));
+  document.getElementById('water').style.height=pct+'%';
+  document.getElementById('pct').textContent=pct+' %';
+  const v=document.getElementById('resV');
+  if(!SR.length&&!FR.length){v.textContent='Ajoutez vos sources et vos fuites — la jauge s\'actualise.';return;}
+  v.innerHTML='<b>'+SR.length+' source(s), '+FR.length+' fuite(s).</b> '+
+   (SR.length>FR.length+1?"Beau réservoir : vos sources dominent — sanctuarisez-les.":
+    FR.length>SR.length+1?"Les fuites l'emportent : commencez par en colmater UNE.":
+    "Équilibre fragile : une fuite colmatée + une source renforcée suffisent à faire basculer la jauge.");
+}
+function addChip(list,arr,cls,txt){
+  if(!txt.trim())return;arr.push(txt.trim());
+  const c=document.createElement('span');c.style.cssText='font-family:Calibri,sans-serif;font-size:.8rem;color:#fff;border-radius:15px;padding:6px 11px;cursor:pointer;background:'+(cls==='s'?'var(--intra)':'var(--inter)');
+  c.textContent=txt.trim();
+  c.onclick=()=>{arr.splice(arr.indexOf(c.textContent),1);c.remove();updTank();};
+  list.appendChild(c);updTank();
+}
+document.getElementById('btS').onclick=()=>{const i=document.getElementById('inS');addChip(document.getElementById('chS'),SR,'s',i.value);i.value='';};
+document.getElementById('btF').onclick=()=>{const i=document.getElementById('inF');addChip(document.getElementById('chF'),FR,'f',i.value);i.value='';};
+document.getElementById('inS').onkeydown=e=>{if(e.key==='Enter')document.getElementById('btS').click();};
+document.getElementById('inF').onkeydown=e=>{if(e.key==='Enter')document.getElementById('btF').click();};
+
+/* ===== FORCES DE CARACTÈRE ===== */
+document.getElementById('copyMsg').onclick=function(){
+  const btn=this;
+  navigator.clipboard.writeText(document.getElementById('msgTxt').textContent.trim()).then(()=>{
+    btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier le message',1800);
+  }).catch(()=>{});
+};
+document.getElementById('tallyGo').onclick=()=>{
+  const counts={};
+  document.querySelectorAll('.fi').forEach(inp=>{
+    inp.value.split(/[,;]/).map(s=>s.trim().toLowerCase()).filter(Boolean).forEach(f=>{
+      counts[f]=(counts[f]||0)+1;
+    });
+  });
+  const entries=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  const tally=document.getElementById('tally');tally.innerHTML='';
+  if(!entries.length){document.getElementById('tallyV').style.display='block';document.getElementById('tallyV').textContent='Saisissez d\'abord les forces citées par vos proches.';return;}
+  entries.slice(0,8).forEach(([f,n])=>{
+    const r=document.createElement('div');r.style.cssText='display:grid;grid-template-columns:170px 1fr 30px;gap:8px;align-items:center;font-size:.82rem;font-family:Calibri,sans-serif;margin-bottom:6px';
+    r.innerHTML='<div>'+f.charAt(0).toUpperCase()+f.slice(1)+'</div><div style="background:#edeff5;border-radius:6px;height:13px;overflow:hidden"><div style="height:100%;background:var(--intra);border-radius:6px;width:0;transition:width .7s"></div></div><b>×'+n+'</b>';
+    tally.appendChild(r);
+    setTimeout(()=>{r.querySelector('div div').style.width=(n/5*100)+'%';},80);
+  });
+  const top=entries[0];
+  const v=document.getElementById('tallyV');v.style.display='block';
+  v.innerHTML='<b>Force dominante : « '+top[0]+' »'+(top[1]>1?' — citée par '+top[1]+' proches':'')+'.</b> '+
+   (top[1]>=3?"Quand plusieurs regards indépendants convergent, ce n'est plus une impression : c'est une donnée. Appuyez votre plan de résilience dessus.":
+   "Les avis sont dispersés : relisez les réponses complètes — le « moment au top » raconté par chacun révèle souvent la force commune.");
+};
+</script>
+</body>
+</html>

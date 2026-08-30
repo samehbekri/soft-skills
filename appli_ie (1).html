@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon intelligence émotionnelle — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E;--blue:#3B7DD8}
+  *{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:5px;background:#fff;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:7px 11px;border-radius:22px;cursor:pointer;font-size:.82rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}.cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}footer b{color:var(--indigo)}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:400px;overflow:auto;line-height:1.45}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.rules b{color:var(--gold)}
+  .prog{position:sticky;top:54px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}.progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  .it{background:#fff;border-radius:10px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid #d5d9e2}
+  .it.filled{border-left-color:var(--intra)}.it .n{font-weight:bold;color:var(--indigo);font-size:.74rem;font-family:Calibri,Arial,sans-serif}
+  .it .dim{font-size:.62rem;font-weight:bold;padding:2px 8px;border-radius:3px;color:#fff;display:inline-block;margin-left:6px}
+  .it .sit{font-size:.9rem;margin:3px 0 7px}
+  .lik{display:flex;gap:3px;flex-wrap:wrap}
+  .lik label{flex:1;min-width:62px;text-align:center;border:1.5px solid #d5d9e2;border-radius:7px;padding:7px 2px;font-size:.68rem;cursor:pointer;background:#fafbfe;font-family:Calibri,Arial,sans-serif;line-height:1.2}
+  .lik input{display:none}
+  .lik label:has(input:checked){background:var(--intra);color:#fff;border-color:var(--intra)}
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}.testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  .util{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ucard{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:5px solid var(--indigo)}
+  .ucard h3{margin-top:0}.ucard p{font-size:.86rem;font-family:Calibri,Arial,sans-serif}
+  /* résultat */
+  .resbox{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:14px}
+  .resnum{font-size:2.6rem;font-weight:bold;line-height:1;text-align:center}
+  .resgauge{position:relative;height:26px;border-radius:13px;margin:12px 0 4px}
+  .rescur{position:absolute;top:-4px;width:4px;height:34px;background:var(--ink);border-radius:2px;transition:left .8s}
+  .resleg{display:flex;justify-content:space-between;font-size:.64rem;color:var(--grey);font-family:Calibri,Arial,sans-serif}
+  .interp{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.9rem;text-align:left}.interp b{color:var(--gold)}
+  /* édifice Goleman */
+  .tag{font-size:.62rem;font-weight:bold;padding:3px 8px;border-radius:3px;color:#fff;font-family:Calibri,Arial,sans-serif}
+  .tag.intra{background:var(--intra)}.tag.inter{background:var(--inter)}
+  .edifice{max-width:520px;margin:auto}
+  .brick{color:#fff;border-radius:10px;padding:13px 16px;margin:0 auto 7px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.13);transition:transform .15s}
+  .brick:hover{transform:scale(1.02)}.brick b{display:block;font-size:.98rem}.brick small{opacity:.88;font-family:Calibri,Arial,sans-serif;font-style:italic}
+  .brick .detail{display:none;background:rgba(255,255,255,.16);border-radius:8px;padding:10px 12px;margin-top:9px;font-size:.85rem;font-family:Calibri,Arial,sans-serif}.brick.open .detail{display:block}
+  .b-inter{background:var(--inter);width:100%}.b-inter:first-child{width:50%}.b-inter:nth-child(2){width:65%}
+  .b-intra{background:var(--intra)}.b-intra:nth-child(3){width:80%}.b-intra:nth-child(4){width:90%}.b-intra:nth-child(5){width:100%}
+  .legend{text-align:center;font-size:.78rem;color:var(--grey);font-style:italic;margin-top:10px}
+  /* six secondes */
+  .sixwrap{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);text-align:center}
+  .sixnum{font-size:5rem;font-weight:bold;color:var(--indigo);line-height:1}
+  .sixstep{font-family:Calibri,Arial,sans-serif;font-size:.95rem;min-height:44px;margin-top:10px}
+  /* rubriques cadrage */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}.mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}.mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}.mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .cok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit .cko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:600px){.rub-start{flex-direction:column;text-align:center}.util{grid-template-columns:1fr}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 2 · La Rencontre de l'Autre</div>
+  <h1>Mon intelligence émotionnelle</h1>
+  <p>Gérer mes émotions et celles des autres — le double baromètre</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Mission</button>
+  <button data-s="s1">① Utilité</button>
+  <button data-s="s2">② L'édifice</button>
+  <button data-s="s3">③ Le test PEC (20)</button>
+  <button data-s="s4">④ Mon profil</button>
+  <button data-s="s5">⑤ Les six secondes</button>
+</nav>
+<main>
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage.</p>
+  <div class="rubrique r-parcours"><div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe le test d'intelligence émotionnelle PEC</b><span>20 items (onglet ③), ~10 minutes. Deux scores : QE intrapersonnel (gérer MES émotions) et QE interpersonnel (gérer celles des AUTRES).</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je découvre mon double baromètre</b><span>L'application calcule vos deux scores et trace votre profil (onglet ④), que vous pouvez <b>copier</b> ou <b>imprimer</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon profil — le cœur du travail</b><span>Quel baromètre domine ? Lequel est à développer ? Illustrez par des exemples. Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Collez votre synthèse dans votre <b>portfolio</b> (Carnet de bord ch.12), avec votre plan de développement.</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu"><div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu</span></div>
+    <div class="rub-body">
+      <div class="crit"><span class="cok">✔</span><div><b>Confronter les deux scores à votre vécu</b> — exemples de régulation réussie ou ratée.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Relier au modèle de Goleman</b> (onglet ②) : quel étage de l'édifice est votre point faible ?</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Déboucher sur des pistes concrètes</b> — par ex. pratiquer les « six secondes » (onglet ⑤) cette semaine.</div></div>
+      <div class="crit crit-ko"><span class="cko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier ses scores sans analyse ni exemples.</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure"><div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucun score n'est bon ou mauvais.</b> L'IE se développe tout au long de la vie.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b></p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Un écart intra/inter est une information précieuse</b> — il pointe exactement l'étage de l'édifice à travailler.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée : ~15 min pour le test + l'analyse.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<section id="s1">
+  <h2>À quoi sert l'intelligence émotionnelle ?</h2>
+  <div class="testinfo">
+    <h3>Le PEC — Profile of Emotional Competence</h3>
+    <p>Ce test mesure vos <b>compétences émotionnelles</b> selon le modèle de Brasseur et al. (2013) : identifier, comprendre, exprimer, réguler et utiliser les émotions — les vôtres (intrapersonnel) et celles des autres (interpersonnel).</p>
+    <p>Il est complémentaire du modèle de <b>Goleman</b> (1995) qui structure l'IE en cinq domaines (conscience de soi, autorégulation, motivation, empathie, aptitudes sociales) — présentés dans l'onglet ②.</p>
+    <div class="src"><b>Source :</b> S. Brasseur et al. (2013). « The profile of emotional competence (PEC) ». <i>Plos One</i>, 8(5): e62635. Adapté de <i>Cerveau & Psycho</i> N°89, juin 2017.<br><b>Application :</b> Sameh Bekri & Besma Brahmi, 2026.</div>
+  </div>
+  <div class="util">
+    <div class="ucard" style="border-top-color:var(--intra)"><h3 style="color:var(--intra)">🪞 IE Intrapersonnelle</h3><p>Identifier, comprendre, exprimer et réguler <b>vos propres</b> émotions. Fondation de l'édifice : sans elle, tout le reste vacille.</p></div>
+    <div class="ucard" style="border-top-color:var(--inter)"><h3 style="color:var(--inter)">🤝 IE Interpersonnelle</h3><p>Identifier, comprendre et gérer les émotions <b>des autres</b>. Ce qui fait la différence en leadership, en coaching, en médiation.</p></div>
+    <div class="ucard" style="border-top-color:var(--violet)"><h3 style="color:var(--violet)">📈 Ça se développe</h3><p>Contrairement au QI, l'IE <b>progresse avec l'âge et l'entraînement</b>. Les « six secondes » (onglet ⑤) sont un exercice quotidien simple et prouvé.</p></div>
+    <div class="ucard" style="border-top-color:var(--gold)"><h3 style="color:var(--gold)">🔗 Le pont avec l'empathie</h3><p>L'empathie (ch.11) est <b>une brique</b> de l'IE — la brique 4. Ce test couvre l'ensemble de l'édifice, y compris les étages que l'empathie seule ne touche pas.</p></div>
+  </div>
+</section>
+
+<section id="s2">
+  <h2>L'édifice de Goleman — les 5 domaines</h2>
+  <p class="lead">L'édifice se lit de bas en haut : les fondations <span class="tag intra">INTRA</span> portent les étages <span class="tag inter">INTER</span>. Touchez chaque brique.</p>
+  <div class="edifice">
+    <div class="brick b-inter"><b>5 · Aptitudes sociales</b><small>🤝 gérer les relations</small><div class="detail">Coopérer, influencer positivement, désamorcer les conflits, animer un collectif. Le sommet — il mobilise tous les étages inférieurs.</div></div>
+    <div class="brick b-inter"><b>4 · Empathie</b><small>🤝 percevoir les émotions d'autrui</small><div class="detail">Comprendre et ressentir le vécu de l'autre sans s'y noyer. Reprenez vos résultats QE–QS du chapitre 11.</div></div>
+    <div class="brick b-intra"><b>3 · Motivation</b><small>🪞 mobiliser ses émotions vers ses objectifs</small><div class="detail">Transformer l'énergie émotionnelle en carburant : persévérer, différer la gratification, garder le cap.</div></div>
+    <div class="brick b-intra"><b>2 · Autorégulation</b><small>🪞 canaliser plutôt que subir</small><div class="detail">Mettre une pause entre le stimulus et la réponse — les « six secondes » (onglet ⑤). Réguler n'est pas refouler.</div></div>
+    <div class="brick b-intra"><b>1 · Conscience de soi</b><small>🪞 la fondation de tout l'édifice</small><div class="detail">Identifier et nommer ses émotions au moment où elles surviennent (agacement ≠ frustration ≠ colère).</div></div>
+  </div>
+  <p class="legend">D'après Daniel Goleman, L'Intelligence émotionnelle (1995) — concept formalisé par Salovey & Mayer (1990).</p>
+</section>
+
+<section id="s3">
+  <h2>Le test PEC — 20 items</h2>
+  <p class="lead">Répondez spontanément et sincèrement. Pas de bonnes ou de mauvaises réponses.</p>
+  <div class="rules"><b>Cotation :</b> 10 items mesurent l'IE intrapersonnelle, 10 l'IE interpersonnelle. Score max par dimension : 50.</div>
+  <div class="prog"><span id="ieProg">0 / 20</span><div class="progbar"><div class="progfill" id="ieFill"></div></div></div>
+  <div id="ieWrap"></div>
+  <button class="cta" id="ieGo" disabled>Calculer mon double baromètre →</button>
+</section>
+
+<section id="s4">
+  <h2>Mon double baromètre émotionnel</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 20 items de l'onglet ③.</p>
+  <div id="cRes" style="display:none">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="resbox"><div class="resnum" style="color:var(--intra)" id="intraScore">–</div><div style="font-family:Calibri,sans-serif;font-size:.82rem;color:var(--grey)"><span class="tag intra">INTRA</span> QE intrapersonnel (sur 50)</div>
+        <div class="resgauge" style="background:linear-gradient(90deg,#edeff5,var(--intra))"><div class="rescur" id="intraCur"></div></div>
+        <div class="resleg"><span>10</span><span>27</span><span>40</span><span>50</span></div></div>
+      <div class="resbox"><div class="resnum" style="color:var(--inter)" id="interScore">–</div><div style="font-family:Calibri,sans-serif;font-size:.82rem;color:var(--grey)"><span class="tag inter">INTER</span> QE interpersonnel (sur 50)</div>
+        <div class="resgauge" style="background:linear-gradient(90deg,#edeff5,var(--inter))"><div class="rescur" id="interCur"></div></div>
+        <div class="resleg"><span>10</span><span>30</span><span>40</span><span>50</span></div></div>
+    </div>
+    <div class="interp" id="cInterp"></div>
+    <div class="recall" style="margin-top:16px"><b>⚠️ Ces scores sont la matière première.</b> Analysez-les, reliez-les à l'édifice de Goleman, et transmettez le tout dans votre portfolio.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer</button>
+      <button class="cta small" id="showBt">👁️ Texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+  </div>
+</section>
+
+<section id="s5">
+  <h2>L'entraînement des six secondes</h2>
+  <p class="lead">Face à un « détournement amygdalien » (Goleman), six secondes suffisent au cortex préfrontal pour reprendre les commandes.</p>
+  <div class="sixwrap">
+    <div class="sixnum" id="count">6</div>
+    <p class="sixstep" id="step">Pensez à une situation récente qui vous a fait « monter en pression »… puis lancez.</p>
+    <button class="cta" id="six" style="margin-top:10px">Lancer les 6 secondes</button>
+  </div>
+  <p class="note">En vrai : inspirez sur les 3 premières secondes, expirez sur les 3 suivantes, en nommant intérieurement l'émotion. Puis choisissez votre réponse.</p>
+</section>
+</main>
+<footer><b>L'Odyssée des Soft Skills</b> — Application pédagogique<br>Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>PEC : Brasseur et al. (2013). Modèle : Goleman (1995), Salovey & Mayer (1990).</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+document.querySelectorAll('.brick').forEach(c=>c.onclick=()=>c.classList.toggle('open'));
+
+/* ===== TEST PEC — 20 items ===== */
+const ITEMS=[
+["Je ne comprends pas toujours pourquoi je réagis comme je le fais.",[5,4,3,2,1],"intra"],
+["Quand je me sens bien, j'arrive facilement à savoir si c'est parce que je suis content(e), fier(e) de moi ou détendu(e).",[1,2,3,4,5],"intra"],
+["J'arrive facilement à trouver les mots pour décrire ce que je ressens.",[1,2,3,4,5],"intra"],
+["Je ne me base jamais sur mes émotions pour orienter ma vie.",[5,4,3,2,1],"intra"],
+["Quand je me sens mal, je fais facilement le lien avec une situation qui m'a touché(e).",[1,2,3,4,5],"intra"],
+["Je peux facilement obtenir ce que je désire des autres.",[1,2,3,4,5],"inter"],
+["La plupart du temps, il m'est facile de comprendre pourquoi les gens ressentent ce qu'ils ressentent.",[1,2,3,4,5],"inter"],
+["Quand quelque chose me touche, je sais immédiatement ce que je ressens.",[1,2,3,4,5],"intra"],
+["Quand je vois quelqu'un de stressé ou anxieux, il m'est facile de le calmer.",[1,2,3,4,5],"inter"],
+["J'ai du mal à comprendre les réactions de mes proches.",[5,4,3,2,1],"inter"],
+["Les gens viennent facilement me parler de leurs problèmes personnels.",[1,2,3,4,5],"inter"],
+["Mes émotions me donnent des indices précieux sur les changements à effectuer dans ma vie.",[1,2,3,4,5],"intra"],
+["Il m'est difficile d'expliquer aux autres ce que je ressens.",[5,4,3,2,1],"intra"],
+["Si quelqu'un venait me voir en pleurs, je ne saurais pas quoi faire.",[5,4,3,2,1],"inter"],
+["Je trouve difficile d'écouter les gens qui se plaignent.",[5,4,3,2,1],"inter"],
+["J'arrive facilement à savoir ce que les autres éprouvent.",[1,2,3,4,5],"inter"],
+["Si je le voulais, il me serait facile de pousser quelqu'un à se sentir mal.",[1,2,3,4,5],"inter"],
+["Je trouve difficile de gérer mes émotions.",[5,4,3,2,1],"intra"],
+["Quand je suis en colère, je peux facilement me calmer.",[1,2,3,4,5],"intra"],
+["Il m'arrive souvent de ne pas savoir dans quel état émotionnel se trouvent les personnes qui m'entourent.",[5,4,3,2,1],"inter"]
+];
+const LIK=["Pas du tout d'accord","Pas trop d'accord","Ni d'accord ni pas d'accord","Plutôt d'accord","Tout à fait d'accord"];
+const ANS={};
+const wrap=document.getElementById('ieWrap');
+ITEMS.forEach((it,i)=>{
+  const d=document.createElement('div');d.className='it';
+  const dimLbl=it[2]==='intra'?'INTRA':'INTER';const dimCol=it[2]==='intra'?'var(--intra)':'var(--inter)';
+  d.innerHTML='<div class="n">'+(i+1)+' / 20 <span class="dim" style="background:'+dimCol+'">'+dimLbl+'</span></div><div class="sit">'+it[0]+'</div>'+
+   '<div class="lik">'+LIK.map((l,j)=>'<label><input type="radio" name="ie'+i+'" value="'+it[1][j]+'"><span>'+l+'</span></label>').join('')+'</div>';
+  wrap.appendChild(d);
+  d.addEventListener('change',()=>{d.classList.add('filled');ANS[i]=+document.querySelector('input[name=ie'+i+']:checked').value;upd();});
+});
+function upd(){const n=Object.keys(ANS).length;document.getElementById('ieProg').textContent=n+' / 20';document.getElementById('ieFill').style.width=(n/20*100)+'%';document.getElementById('ieGo').disabled=n<20;}
+
+let EXPORT="";
+document.getElementById('ieGo').onclick=()=>{
+  let intra=0,inter=0;
+  ITEMS.forEach((it,i)=>{if(it[2]==='intra')intra+=ANS[i];else inter+=ANS[i];});
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('cRes').style.display='block';
+  document.getElementById('intraScore').textContent=intra;
+  document.getElementById('interScore').textContent=inter;
+  setTimeout(()=>{
+    document.getElementById('intraCur').style.left='calc('+((intra-10)/40*100)+'% - 2px)';
+    document.getElementById('interCur').style.left='calc('+((inter-10)/40*100)+'% - 2px)';
+  },60);
+  const iIntra=intra>40?["élevée","Vous gérez bien vos émotions. Vous parvenez à identifier précisément ce que vous ressentez, vous savez d'où proviennent vos émotions et arrivez à les exprimer de manière socialement acceptable. Vous êtes probablement perçu comme quelqu'un de franc, de liant et d'accommodant."]:
+   intra>=27?["moyenne","Vous êtes dans la moyenne : soit un niveau correct dans toutes les compétences émotionnelles intrapersonnelles, soit très doué pour certaines mais plutôt faible sur d'autres. Identifiez laquelle."]
+   :["à développer","Gérer vos émotions n'est pas encore votre fort. Vous éprouvez des difficultés à identifier précisément ce que vous ressentez et à savoir pourquoi certaines situations vous mettent dans tel ou tel état. Vous peinez à exprimer ce que vous ressentez — soit vous les refoulez, soit vous les extériorisez par des actes."];
+  const iInter=inter>40?["élevée","Les émotions des autres n'ont presque aucun secret pour vous. Vous les identifiez rapidement, décelant leurs causes profondes. Vous offrez une oreille attentive et savez consoler ou apaiser. Les gens n'hésitent pas à se tourner vers vous en cas de problème."]:
+   inter>=30?["moyenne","Vous êtes dans la moyenne : soit un niveau correct dans toutes les compétences interpersonnelles, soit très doué pour certaines mais plutôt faible sur d'autres."]
+   :["à développer","Vous peinez à identifier les émotions des autres lorsqu'elles ne sont pas exprimées de façon manifeste. Cela vous empêche parfois de vous ajuster à leur humeur et à leurs besoins. Vous n'aimez pas trop que les gens se tournent vers vous lorsqu'ils sont en détresse."];
+  document.getElementById('cInterp').innerHTML=
+   '<b>QE Intrapersonnel = '+intra+'/50 — '+iIntra[0]+'.</b><br>'+iIntra[1]+
+   '<br><br><b>QE Interpersonnel = '+inter+'/50 — '+iInter[0]+'.</b><br>'+iInter[1]+
+   '<br><br><b>Lecture croisée :</b> '+(intra>inter+5?"Votre baromètre intra domine : vous vous connaissez bien émotionnellement, mais les signaux des autres vous échappent davantage. L'étage Empathie de l'édifice de Goleman est votre chantier prioritaire.":
+   inter>intra+5?"Votre baromètre inter domine : vous captez les émotions des autres, mais les vôtres sont moins claires pour vous. La fondation Conscience de soi mérite votre attention.":
+   "Vos deux baromètres sont proches : vous naviguez entre les deux registres. Identifiez l'étage de Goleman le plus faible pour affiner.");
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MON INTELLIGENCE EMOTIONNELLE - Test PEC\n"+
+"Date : "+d+"\n"+
+"============================================================\n"+
+"QE INTRAPERSONNEL : "+intra+" / 50  ("+iIntra[0]+")\n"+
+"  Bareme : <27 a developper | 27-40 moyen | >40 eleve\n"+
+"  "+iIntra[1].substring(0,120)+"...\n\n"+
+"QE INTERPERSONNEL : "+inter+" / 50  ("+iInter[0]+")\n"+
+"  Bareme : <30 a developper | 30-40 moyen | >40 eleve\n"+
+"  "+iInter[1].substring(0,120)+"...\n\n"+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 12 - fiche 7)\n"+
+"1) Ces scores correspondent-ils a votre vecu ? Exemples ?\n"+
+"   ..................................................................\n"+
+"2) Quel etage de l'edifice de Goleman est votre point faible ?\n"+
+"   ..................................................................\n"+
+"3) Pistes de developpement (ex. : six secondes) ?\n"+
+"   ..................................................................\n"+
+"============================================================\n"+
+"PEC : Brasseur et al. (2013). Cerveau & Psycho N89, 2017.\n"+
+"Application : S. Bekri & B. Brahmi, 2026.";
+  document.getElementById('export').textContent=EXPORT;
+  document.querySelector('nav button[data-s=s4]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){const btn=this;const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier',1900);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';}document.body.removeChild(ta);}};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+document.getElementById('showBt').onclick=function(){const e=document.getElementById('export');const v=e.style.display==='none';e.style.display=v?'block':'none';this.textContent=v?'🙈 Masquer':'👁️ Texte';};
+
+/* ===== SIX SECONDES ===== */
+const STEPS=["3… Inspirez profondément par le nez…","2… Nommez intérieurement : « je sens de la… »","1… Expirez lentement par la bouche…","✓ Maintenant, choisissez votre réponse."];
+document.getElementById('six').onclick=function(){
+  this.disabled=true;let n=6;const cnt=document.getElementById('count'),stp=document.getElementById('step');
+  cnt.textContent=n;stp.textContent='Inspirez…';
+  const iv=setInterval(()=>{n--;cnt.textContent=n;
+    if(n===4)stp.textContent=STEPS[0];if(n===2)stp.textContent=STEPS[1];if(n===1)stp.textContent=STEPS[2];
+    if(n<=0){clearInterval(iv);cnt.textContent='✓';stp.textContent=STEPS[3];this.disabled=false;this.textContent='▶ Recommencer';}
+  },1000);
+};
+</script>
+</body>
+</html>

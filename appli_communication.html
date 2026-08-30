@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mes quatre oreilles — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E;--blue:#3B7DD8;--rose:#C0392B}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}
+  header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:6px;background:#fff;padding:11px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:8px 13px;border-radius:22px;cursor:pointer;font-size:.86rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}
+  h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}
+  .cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}
+  footer b{color:var(--indigo)}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}
+  .rules b{color:var(--gold)}
+  .prog{position:sticky;top:58px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}
+  .progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}
+  .recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:380px;overflow:auto;line-height:1.45}
+  /* situation */
+  .sit{background:#fff;border-radius:14px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);margin-bottom:14px;border-left:6px solid #d5d9e2}
+  .sit.filled{border-left-color:var(--intra)}
+  .sit .snum{font-weight:bold;color:var(--indigo);font-size:.78rem;font-family:Calibri,Arial,sans-serif}
+  .sit .stxt{font-size:.95rem;margin:5px 0 12px;background:var(--pale);border-radius:10px;padding:12px 14px;font-style:italic}
+  .sit .opt{display:block;width:100%;text-align:left;font-family:Calibri,Arial,sans-serif;font-size:.86rem;border:1.5px solid #d5d9e2;border-radius:9px;padding:10px 13px;margin-bottom:6px;cursor:pointer;background:#fafbfe;transition:all .15s}
+  .sit .opt:hover{border-color:var(--indigo);transform:translateX(3px)}
+  .sit .opt.on{background:var(--intra);color:#fff;border-color:var(--intra)}
+  .sit .opt b{margin-right:6px}
+  /* oreilles */
+  .ears{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .ear{border-radius:14px;padding:16px;color:#fff;text-align:center;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  .ear .en{font-size:2rem;font-weight:bold;line-height:1}.ear .el{font-size:.78rem;font-family:Calibri,Arial,sans-serif;opacity:.92;margin-top:4px}
+  .ear .et{font-size:.82rem;font-family:Calibri,Arial,sans-serif;margin-top:8px;text-align:left;opacity:.95}
+  .e1{background:var(--blue)}.e2{background:var(--violet)}.e3{background:var(--inter)}.e4{background:var(--rose)}
+  .interp{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.93rem;text-align:left}
+  .interp b{color:var(--gold)}
+  /* utilité */
+  .util{display:grid;gap:12px}
+  .ucard{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:5px solid var(--indigo)}
+  .ucard h3{margin-top:0}
+  .ucard p{font-size:.88rem;font-family:Calibri,Arial,sans-serif}
+  /* testinfo */
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}
+  .testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  /* rubriques cadrage */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px;color:var(--ink)}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}
+  .mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}
+  .mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}
+  .mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .ok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(20,125,116,.3)}
+  .crit .ko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(201,106,31,.3)}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:520px){.rub-start{flex-direction:column;text-align:center}.ears{grid-template-columns:1fr}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 2 · La Rencontre de l'Autre</div>
+  <h1>Mes quatre oreilles</h1>
+  <p>Entendre ce que l'autre dit vraiment — les différentes facettes d'un message</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Ma mission</button>
+  <button data-s="s1">① À quoi sert cet outil ?</button>
+  <button data-s="s2">② Le test (12 situations)</button>
+  <button data-s="s3">③ Mon profil d'écoute</button>
+</nav>
+<main>
+<!-- ⓪ MISSION -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage avant de commencer.</p>
+  <div class="rubrique r-parcours">
+    <div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe le test des quatre oreilles</b><span>La fiche outil du cours (onglet ②) : 12 situations de communication, une seule réponse à choisir par situation, environ 8 minutes.</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je découvre mon profil d'écoute</b><span>L'application décode votre oreille privilégiée parmi les quatre (factuelle, révélation de soi, appel, relationnelle) et trace votre profil (onglet ③), que vous pouvez <b>copier</b> ou <b>imprimer</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon résultat — le cœur du travail</b><span>Quelle oreille dominez-vous ? Quelle oreille sous-utilisez-vous ? Cela correspond-il à votre vécu ? Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Collez ou agrafez votre synthèse dans votre <b>portfolio de compétences</b> (Carnet de bord du chapitre 7), avec votre analyse et vos pistes de développement.</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu">
+    <div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu de mon analyse</span></div>
+    <div class="rub-body">
+      <p class="rub-intro">Une bonne analyse se reconnaît à quatre signes :</p>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle identifie votre oreille dominante</b> et explique en quoi cela se vérifie dans votre quotidien (une situation concrète).</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle repère votre oreille la moins développée</b> — et les malentendus que cela peut provoquer.</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle relie les quatre oreilles au carré de la communication</b> de Schulz von Thun : contenu factuel, révélation de soi, appel et relation.</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle débouche sur des pistes concrètes</b> — par exemple : « cette semaine, dans chaque conversation difficile, je me demande ce que j'entends avec mon oreille relationnelle… et ce que je manque avec mon oreille factuelle. »</div></div>
+      <div class="crit crit-ko"><span class="ko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier ses scores et écrire « je suis plutôt factuel ». Sans exemples ni pistes, le travail n'est pas fait.</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure">
+    <div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions pour être à l'aise</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucune oreille n'est bonne ou mauvaise.</b> Chacune a sa force et son piège. L'objectif est de <i>connaître</i> votre profil, pas de le corriger.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b> Rien n'est envoyé ni enregistré ailleurs.</p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Un résultat qui vous surprend est une bonne nouvelle</b> : c'est souvent l'oreille invisible qui explique vos malentendus récurrents.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée : 8 minutes pour le test (chronomètre intégré), plus votre analyse.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<!-- ① UTILITÉ -->
+<section id="s1">
+  <h2>À quoi sert cet outil ?</h2>
+  <p class="lead">Avant de passer le test, comprenez ce qu'il mesure — et pourquoi c'est utile.</p>
+  <div class="testinfo">
+    <h3>Le modèle des quatre facettes d'un message</h3>
+    <p>Tout message humain comporte <b>quatre facettes simultanées</b>, selon le modèle du psychologue allemand Friedemann Schulz von Thun (1981) :</p>
+    <p>① <b>Le contenu factuel</b> — l'information objective. ② <b>La révélation de soi</b> — ce que l'émetteur dit de lui-même. ③ <b>L'appel</b> — ce que l'émetteur veut obtenir. ④ <b>La relation</b> — ce que l'émetteur pense du récepteur.</p>
+    <p>Problème : nous n'<i>entendons</i> pas les quatre facettes avec la même acuité. Chacun développe une « oreille » privilégiée — et c'est souvent l'oreille la plus développée qui explique nos malentendus récurrents.</p>
+    <div class="src">
+      <b>Source :</b> d'après Andreas Patrzek, adapté du modèle de Schulz von Thun (1981), <i>Miteinander reden</i>.<br>
+      Annexe pour JCCenters.org — Copyright © AJDC Paris 2005.<br>
+      <b>Application pédagogique :</b> Sameh Bekri & Besma Brahmi, 2026.
+    </div>
+  </div>
+  <div class="util">
+    <div class="ucard" style="border-top-color:var(--blue)"><h3 style="color:var(--blue)">🔵 Oreille I — Factuelle</h3><p>Vous vous concentrez sur le <b>contenu objectif</b> du message. Force : vous restez sur les faits. Piège : vous passez à côté des signaux émotionnels et relationnels.</p></div>
+    <div class="ucard" style="border-top-color:var(--violet)"><h3 style="color:var(--violet)">🟣 Oreille II — Révélation de soi</h3><p>Vous entendez ce que l'autre <b>dit de lui-même</b> à travers son message. Force : empathie fine. Piège : vous psychologisez tout, même quand l'autre veut simplement une information.</p></div>
+    <div class="ucard" style="border-top-color:var(--inter)"><h3 style="color:var(--inter)">🟠 Oreille III — Appel</h3><p>Vous captez immédiatement <b>ce qu'on attend de vous</b>. Force : réactivité, serviabilité. Piège : vous agissez avant de réfléchir, ou vous vous défendez contre des demandes que personne n'a formulées.</p></div>
+    <div class="ucard" style="border-top-color:var(--rose)"><h3 style="color:var(--rose)">🔴 Oreille IV — Relationnelle</h3><p>Vous captez <b>ce que l'autre pense de vous</b>. Force : intuition fine pour les liens. Piège : vous prenez tout personnellement, ce qui nourrit le doute de soi.</p></div>
+  </div>
+  <p class="note">Un communicateur complet n'a pas « une bonne oreille » : il sait activer les quatre — et surtout repérer laquelle il oublie.</p>
+</section>
+
+<!-- ② TEST -->
+<section id="s2">
+  <h2>Le test — 12 situations</h2>
+  <p class="lead">Pour chaque situation, lisez le contexte puis choisissez la réponse qui vous semble la plus pertinente. Vous disposez de ~40 secondes par situation.</p>
+  <div class="rules"><b>Consigne :</b> une seule réponse par situation. Ne cherchez pas la « bonne » réponse — il n'y en a pas. Choisissez celle qui correspond le mieux à ce que vous penseriez ou feriez réellement.</div>
+  <div class="prog"><span id="cProg">0 / 12 répondus</span><div class="progbar"><div class="progfill" id="cFill"></div></div></div>
+  <div id="cItems"></div>
+  <button class="cta" id="cGo" disabled>Découvrir mon profil d'écoute →</button>
+</section>
+
+<!-- ③ RÉSULTAT -->
+<section id="s3">
+  <h2>Mon profil d'écoute</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 12 situations de l'onglet ②.</p>
+  <div id="cRes" style="display:none">
+    <div class="ears" id="ears"></div>
+    <div class="interp" id="cInterp"></div>
+    <div class="recall" style="margin-top:16px"><b>⚠️ Ce profil n'est que la matière première.</b> Ce qui vous est demandé, c'est de l'<b>analyser</b> — confronter votre oreille dominante à votre vécu, identifier vos malentendus récurrents — puis de <b>transmettre le tout dans votre portfolio</b>.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier mon résultat</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer / PDF</button>
+      <button class="cta small" id="showBt">👁️ Voir le texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+    <p class="note">Collez ce texte dans votre Carnet de bord (chapitre 7) ou imprimez-le.</p>
+  </div>
+</section>
+</main>
+<footer>
+  <b>L'Odyssée des Soft Skills</b> — Application pédagogique<br>
+  Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>
+  Instrument : d'après Andreas Patrzek, adapté de Schulz von Thun (1981).<br>
+  Développement Personnel & Leadership 2 · Mastère
+</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+const SIT=[
+["Un collègue vient vous voir, vous regarde rapidement et dit : « C'est encore un de ces jours affreusement chauds aujourd'hui, hmmmh »",
+ ["Qu'il se réjouit du beau temps.","Qu'il aimerait boire quelque chose.","Qu'à cause de toute cette chaleur, il ne sait pas quoi faire.","Que vous avez l'air de souffrir de la chaleur."]],
+["Vous posez une question à l'agent de renseignement sur le quai. Il grommelle, d'une manière à peine audible : « quai 4 ».",
+ ["Vous posez la deuxième question et faites très attention parce que l'agent marmonne un peu.","Vous avez pitié de lui, parce qu'il a dû avoir une très dure journée et vous posez la deuxième question poliment.","Vous sentez qu'il n'a pas envie qu'on lui parle davantage et vous décidez d'éclaircir la deuxième question plus tard.","Vous pensez, indigné, « Comment il me parle » et posez la deuxième question un peu plus fort."]],
+["Vous avez cuisiné une nouvelle recette. Votre vis-à-vis vous demande : « Ah, tu as cuisiné quelque chose de nouveau ? »",
+ ["« Oui, tu ne connais pas encore cette soupe. »","« Je sais que tu n'aimes pas goûter quelque chose de nouveau, mais cela te plaira sûrement. »","« Eh bien, goûte tout d'abord pour voir comment tu la trouves. »","« Oui, je me suis dit : fais plus souvent quelque chose de nouveau. »"]],
+["Lors d'une réunion, votre chef dit : « Mais, ce sont les chiffres de l'année dernière, ils ne sont plus actuels. »",
+ ["Vous demandez les chiffres actuels et, avec ces derniers, vous continuez la discussion.","Vous pensez que c'est votre chef qui n'est pas bien préparé.","Vous croyez que votre chef souhaite que vous soyez mieux préparé la prochaine fois.","Vous pensez : Il n'y a qu'à moi que cela arrive."]],
+["En passant près du bureau d'un collègue en train de téléphoner, vous l'entendez dire que vous avez commis une erreur.",
+ ["Vous décidez de faire mieux la prochaine fois.","Vous êtes fâché après votre collègue parce qu'il est un éternel querelleur.","Vous êtes effrayé parce que ces derniers temps vous faites souvent des erreurs.","Vous vous asseyez et réfléchissez où vous aviez pu faire une erreur."]],
+["En déjeunant, vous lisez le journal. Votre vis-à-vis vous pose la question : « Dis-moi ce qu'il y a de si intéressant à lire ? »",
+ ["« Il y a ici un commentaire intéressant concernant notre développement économique. »","« Oui, je me suis dit : fais plus souvent quelque chose de nouveau. »","« O.K., j'ai presque fini. »","« Enfin, j'ai tout de même le droit de lire mon journal tranquillement. »"]],
+["Vous essayez un vêtement et la personne qui vous accompagne dit : « Mais, cela ne te va pas du tout. »",
+ ["Vous demandez à la vendeuse si elle a encore autre chose.","Vous pensez que la personne pourrait avoir un peu plus de retenue.","Vous supposez que la personne aimerait terminer le lèche-vitrines.","Vous êtes déçu, parce qu'il est toujours difficile de trouver quelque chose pour vous."]],
+["Vous deviez arroser les fleurs d'amis en vacances mais avez oublié les 7 derniers jours. Au retour, ils disent : « Regarde-moi ces fleurs, elles sont à moitié séchées. »",
+ ["Vous comprenez l'énervement des amis, car ils sont très attachés à leurs fleurs.","Vous réagissez un peu en rogne parce qu'ils auraient pu d'abord vous saluer poliment.","Vous vous doutez que les amis croient que vous n'êtes même pas capable d'arroser des fleurs.","Vous proposez qu'ensemble, vous alliez voir les fleurs pour sauver ce qui peut l'être."]],
+["Vous mangez une soupe que vous avez cuisinée. Votre vis-à-vis dit : « Dis-donc, il y a quelque chose de vert dans la soupe. »",
+ ["« Exact. »","« C'est de la ciboulette et la ciboulette est bonne pour la santé. »","« Ne sois pas aussi fine bouche. »","« Si cela ne te plaît pas, tu peux aller manger au restaurant. »"]],
+["Un ancien collègue ami que vous n'avez pas vu depuis longtemps vous demande si vous avez grossi.",
+ ["Vous lui demandez d'où il tire cette conclusion.","Vous avez un peu honte et vous promettez de vérifier.","Vous croyez qu'il veut vous faire comprendre que vous devriez maigrir.","Vous le prenez pour un rustre."]],
+["Dans une librairie, un vendeur fait la réflexion : « Ce n'est pas là sa place » après que vous avez reposé un livre.",
+ ["Vous lui indiquez que c'est là qu'il était posé.","Vous lui demandez où vous devez le placer.","Vous vous excusez et vous êtes agacé que cela vous soit arrivé.","Vous trouvez ce vendeur très impoli."]],
+["Votre voisin de bureau fait la remarque : « Comment au juste maîtriser ce flot de destinations modifiées ? »",
+ ["« Vous avez entièrement raison, beaucoup de choses se sont passées. »","« Oui, je vois, la tête vous tourne. »","« Nous pouvons réfléchir ensemble à des possibilités de solutions. »","« À vrai dire, je m'en arrange assez bien. »"]]
+];
+// Grille officielle : pour chaque situation (0-11), quelle lettre (a=0,b=1,c=2,d=3) correspond à quelle oreille
+const GRID={
+  I:[3,1,0,3,0,0,0,0,0,3,1,0],   // d,b,a,d,a,a,a,a,a,d,b,a
+  II:[2,0,3,2,1,3,3,2,1,2,2,3],  // c,a,d,c,b,d,d,c,b,c,c,d
+  III:[1,3,1,1,3,1,1,3,3,0,0,2], // b,d,b,b,d,b,b,d,d,a,a,c
+  IV:[0,2,2,0,2,2,2,1,2,1,3,1]   // a,c,c,a,c,c,c,b,c,b,d,b
+};
+const NAMES={I:"Factuelle",II:"Révélation de soi",III:"Appel",IV:"Relationnelle"};
+const COLORS={I:"#3B7DD8",II:"#7A5C9E",III:"#C96A1F",IV:"#C0392B"};
+const EMOJIS={I:"🔵",II:"🟣",III:"🟠",IV:"🔴"};
+const DESCS={
+  I:"Vous vous concentrez sur le contenu spécifique des conversations. Vous risquez de ne pas entendre les informations plutôt personnelles qui vibrent en même temps. Le contenu spécifique peut prendre le dessus sur les aspects entre les personnes.",
+  II:"Vous entendez distinctement comment vos interlocuteurs se voient eux-mêmes à travers leurs déclarations. Vous remarquez toujours comment les autres se présentent. Il est possible que vous mettiez l'accent sur l'aspect communicatif entre humains et que vous y soumettiez le contenu spécifique.",
+  III:"À travers les déclarations des autres, vous entendez facilement une demande d'action adressée à votre personne. Soit vous répondez volontiers à ces appels parce que cela vous fait plaisir de faire quelque chose pour les autres, soit vous devez souvent vous défendre contre des demandes apparemment non justifiées.",
+  IV:"Vous avez développé une oreille fine pour ce que votre vis-à-vis pense de vous. Vous acquérez une bonne intuition pour les liens relationnels enfouis dans la communication, mais cela comporte le danger de douter de vous-même constamment."
+};
+const ANS={};
+const wrap=document.getElementById('cItems');
+SIT.forEach((sit,i)=>{
+  const d=document.createElement('div');d.className='sit';
+  d.innerHTML='<div class="snum">Situation '+(i+1)+' / 12</div><div class="stxt">'+sit[0]+'</div>'+
+    sit[1].map((o,j)=>'<button class="opt" data-s="'+i+'" data-v="'+j+'"><b>'+String.fromCharCode(97+j)+')</b> '+o+'</button>').join('');
+  wrap.appendChild(d);
+  d.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    ANS[i]=+b.dataset.v;
+    d.querySelectorAll('.opt').forEach(x=>x.classList.toggle('on',x===b));
+    d.classList.add('filled');cProg();
+  });
+});
+function cProg(){
+  const n=Object.keys(ANS).length;
+  document.getElementById('cProg').textContent=n+' / 12 répondus';
+  document.getElementById('cFill').style.width=(n/12*100)+'%';
+  document.getElementById('cGo').disabled=n<12;
+}
+let EXPORT="";
+document.getElementById('cGo').onclick=()=>{
+  const sc={I:0,II:0,III:0,IV:0};
+  for(let s=0;s<12;s++){
+    for(const k in GRID) if(GRID[k][s]===ANS[s]) sc[k]++;
+  }
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('cRes').style.display='block';
+  const ears=document.getElementById('ears');ears.innerHTML='';
+  ['I','II','III','IV'].forEach(k=>{
+    const d=document.createElement('div');d.className='ear e'+(['I','II','III','IV'].indexOf(k)+1);
+    d.innerHTML='<div class="en">'+sc[k]+'/12</div><div class="el">'+EMOJIS[k]+' Oreille '+k+' — '+NAMES[k]+'</div>';
+    ears.appendChild(d);
+  });
+  const entries=Object.entries(sc).sort((a,b)=>b[1]-a[1]);
+  const dom=entries[0][0],weak=entries[3][0];
+  document.getElementById('cInterp').innerHTML=
+    '<b>Votre oreille dominante : '+EMOJIS[dom]+' '+NAMES[dom]+' ('+entries[0][1]+'/12).</b><br>'+DESCS[dom]+
+    '<br><br><b>Votre oreille la moins développée : '+EMOJIS[weak]+' '+NAMES[weak]+' ('+entries[3][1]+'/12).</b> C\'est là que se cachent vos malentendus potentiels.'+
+    '<br><br><b>Profil complet :</b> '+entries.map(e=>EMOJIS[e[0]]+' '+NAMES[e[0]]+' '+e[1]+'/12').join(' · ');
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MON PROFIL D'ECOUTE - Les 4 oreilles (Schulz von Thun)\n"+
+"Date : "+d+"\n"+
+"============================================================\n"+
+"SCORES\n"+
+"  Oreille I   - Factuelle        : "+sc.I+" / 12\n"+
+"  Oreille II  - Revelation de soi: "+sc.II+" / 12\n"+
+"  Oreille III - Appel            : "+sc.III+" / 12\n"+
+"  Oreille IV  - Relationnelle    : "+sc.IV+" / 12\n\n"+
+"OREILLE DOMINANTE : "+NAMES[dom]+" ("+entries[0][1]+"/12)\n"+
+DESCS[dom]+"\n\n"+
+"OREILLE LA MOINS DEVELOPPEE : "+NAMES[weak]+" ("+entries[3][1]+"/12)\n"+
+"C'est la que se cachent vos malentendus potentiels.\n\n"+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 7 - communication)\n"+
+"Rappel : ce profil est la matiere premiere, pas la\n"+
+"conclusion. Ce qui est attendu, c'est votre ANALYSE.\n\n"+
+"1) Quelle est votre oreille dominante ? Cela correspond-il\n"+
+"   a votre vecu ? Donnez un exemple de situation ou cette\n"+
+"   oreille vous a bien servi - et un ou elle vous a joue\n"+
+"   des tours.\n"+
+"   ..................................................................\n\n"+
+"2) Quelle oreille sous-utilisez-vous ? Quels malentendus\n"+
+"   cela a-t-il pu provoquer ?\n"+
+"   ..................................................................\n\n"+
+"3) Quelles pistes pour developper une ecoute plus equilibree ?\n"+
+"   ..................................................................\n"+
+"============================================================\n"+
+"Test : d'apres Andreas Patrzek, adapte de Schulz von Thun (1981).\n"+
+"Application : S. Bekri & B. Brahmi, 2026.\n"+
+"Developpement Personnel & Leadership 2 - Mastere";
+  document.getElementById('export').textContent=EXPORT;
+  document.querySelector('nav button[data-s=s3]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){
+  const btn=this;const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier mon résultat',1900);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();
+  function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';}document.body.removeChild(ta);}
+};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+document.getElementById('showBt').onclick=function(){const e=document.getElementById('export');const v=e.style.display==='none';e.style.display=v?'block':'none';this.textContent=v?'🙈 Masquer':'👁️ Voir le texte';};
+</script>
+</body>
+</html>

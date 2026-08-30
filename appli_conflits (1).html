@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma boussole des conflits — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E;--rose:#C0392B}
+  *{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:6px;background:#fff;padding:11px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:8px 13px;border-radius:22px;cursor:pointer;font-size:.86rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}.cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}footer b{color:var(--indigo)}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.rules b{color:var(--gold)}
+  .prog{position:sticky;top:58px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}.progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:380px;overflow:auto;line-height:1.45}
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}.testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  /* situation */
+  .sit{background:#fff;border-radius:14px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);margin-bottom:14px;border-left:6px solid #d5d9e2}
+  .sit.ok{border-left-color:var(--intra)}.sit.ko{border-left-color:var(--inter)}
+  .sit .snum{font-weight:bold;color:var(--indigo);font-size:.78rem;font-family:Calibri,Arial,sans-serif}
+  .sit .stxt{font-size:.95rem;margin:5px 0 12px;background:var(--pale);border-radius:10px;padding:12px 14px}
+  .resp{display:grid;grid-template-columns:1fr 90px;gap:8px;align-items:center;font-family:Calibri,Arial,sans-serif;font-size:.86rem;padding:8px 12px;border-radius:9px;margin-bottom:6px;background:#fafbfe;border:1.5px solid #e8eaf2}
+  .resp .rn{font-weight:bold;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem}
+  .resp input{width:70px;text-align:center;font-family:Calibri,Arial,sans-serif;font-size:.9rem;font-weight:bold;padding:6px;border:1.5px solid #d5d9e2;border-radius:8px}
+  .sit .total{text-align:right;font-family:Calibri,Arial,sans-serif;font-size:.82rem;font-weight:bold;margin-top:4px}
+  .sit .total.valid{color:var(--intra)}.sit .total.invalid{color:var(--rose)}
+  /* résultats */
+  .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  .col{border-radius:14px;padding:16px;color:#fff;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  .col .cn{font-size:2rem;font-weight:bold;line-height:1}.col .cl{font-size:.76rem;font-family:Calibri,Arial,sans-serif;opacity:.92;margin-top:4px}
+  .c1{background:var(--rose)}.c2{background:var(--violet)}.c3{background:var(--intra)}.c4{background:var(--grey)}
+  .conc{background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);text-align:center;margin-bottom:16px}
+  .conc .cn{font-size:2.8rem;font-weight:bold;color:var(--gold);line-height:1}
+  .conc .cl{font-family:Calibri,Arial,sans-serif;font-size:.88rem;color:var(--grey);margin-top:6px}
+  .interp{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.93rem;text-align:left}.interp b{color:var(--gold)}
+  /* utilité */
+  .util{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ucard{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:5px solid var(--indigo)}
+  .ucard h3{margin-top:0}.ucard p{font-size:.86rem;font-family:Calibri,Arial,sans-serif}
+  /* rubriques cadrage */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}.mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}.mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}.mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .ok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit .ko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:600px){.rub-start{flex-direction:column;text-align:center}.cols,.util{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.cols{grid-template-columns:1fr 1fr}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 2 · La Rencontre de l'Autre</div>
+  <h1>Ma boussole des conflits</h1>
+  <p>Connaître son style pour mieux traverser les désaccords</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Ma mission</button>
+  <button data-s="s1">① À quoi sert cet outil ?</button>
+  <button data-s="s2">② Le test (15 situations)</button>
+  <button data-s="s3">③ Mon profil</button>
+</nav>
+<main>
+<!-- ⓪ MISSION -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage avant de commencer.</p>
+  <div class="rubrique r-parcours"><div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe le test de style de résolution de conflit</b><span>La fiche outil du cours (onglet ②) : 15 situations, 10 points à distribuer par situation, environ 15 minutes.</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je découvre mon profil et mon potentiel de concertation</b><span>L'application calcule vos quatre scores et votre potentiel de concertation (gagnant/gagnant), que vous pouvez <b>copier</b> ou <b>imprimer</b> (onglet ③).</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon résultat — le cœur du travail</b><span>Quel style dominez-vous ? Est-ce adapté à toutes les situations ? Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Collez votre synthèse dans votre <b>portfolio de compétences</b> (Carnet de bord du chapitre 8), avec votre analyse et vos pistes.</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu"><div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu de mon analyse</span></div>
+    <div class="rub-body">
+      <p class="rub-intro">Une bonne analyse se reconnaît à quatre signes :</p>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle identifie votre style dominant</b> et explique en quoi il se vérifie dans votre vécu (un conflit récent raconté).</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle évalue votre potentiel de concertation</b> — le gagnant/gagnant — et le relie à des situations concrètes.</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle distingue les contextes.</b> Le même style n'est pas adapté partout : agressif face à un danger réel, observateur face à un conflit qui ne vous concerne pas.</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle débouche sur des pistes concrètes</b> — développer le style sous-utilisé, pas simplement « éviter les conflits ».</div></div>
+      <div class="crit crit-ko"><span class="ko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier ses scores sans analyse ni exemples.</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure"><div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions pour être à l'aise</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucun style n'est bon ou mauvais en soi.</b> La vraie valeur de cet outil est dans l'interprétation et la discussion qui en résultent.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b> Rien n'est envoyé.</p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Un score élevé en « agressif » ou « passif » n'est pas un défaut</b> — c'est une information sur votre réflexe sous pression.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée : 15 minutes pour le test, plus votre analyse.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<!-- ① UTILITÉ -->
+<section id="s1">
+  <h2>À quoi sert cet outil ?</h2>
+  <p class="lead">Comprendre ce que le test mesure — et pourquoi c'est utile — avant de le passer.</p>
+  <div class="testinfo">
+    <h3>Le test du style de résolution de conflit</h3>
+    <p>Ce test, conçu par <b>Marc Robert</b>, aide les gens à affirmer leurs réponses dans les situations quotidiennes où des conflits apparaissent. Il vise à augmenter la connaissance de soi et à trouver une raison de changer des comportements improductifs.</p>
+    <p>Les répondants peuvent comparer leurs scores et discuter des différences, des similarités, et des possibles taches d'ombres dans leur relation entre eux. L'outil peut aussi être donné à des amis et à des collègues pour être rempli à partir des perceptions qu'ils ont de nous.</p>
+    <p><b>La vraie valeur de cet outil est dans l'interprétation et la discussion qui en résultent.</b></p>
+    <div class="src"><b>Source :</b> Marc Robert. Traduction libre de <i>The 1982 Annual for Facilitators, Trainers, and Consultants</i>, J. William Pfeiffer & Leonard Goodstein (Eds.), San Diego, CA, University Associates.<br>
+    <b>Application pédagogique :</b> Sameh Bekri & Besma Brahmi, 2026.</div>
+  </div>
+  <div class="util">
+    <div class="ucard" style="border-top-color:var(--rose)"><h3 style="color:var(--rose)">Col. 1 · Agressif / confrontant</h3><p><b>(gagnant/perdant)</b> — Tendance à « prendre le taureau par les cornes » et un fort besoin de contrôler. Souvent directifs, portent des jugements sur autrui.</p></div>
+    <div class="ucard" style="border-top-color:var(--violet)"><h3 style="color:var(--violet)">Col. 2 · Sûr de soi / persuasif</h3><p>Tendance à se défendre soi-même sans être arrogant, en respectant l'interlocuteur. Favorise l'action et la collaboration, reconnaît l'apport de l'autre.</p></div>
+    <div class="ucard" style="border-top-color:var(--intra)"><h3 style="color:var(--intra)">Col. 3 · Observateur / introspectif</h3><p>Tendance à observer et examiner analytiquement les situations conflictuelles. Écoute, conseil, coopération — reconnaît l'interlocuteur tout en s'affirmant.</p></div>
+    <div class="ucard" style="border-top-color:var(--grey)"><h3 style="color:var(--grey)">Col. 4 · Passif / à l'écart</h3><p><b>(perdant/gagnant)</b> — Tendance à la passivité ou à esquiver les confrontations. Plutôt patients, prêts à dire oui à tout, répriment souvent leurs sentiments.</p></div>
+  </div>
+  <div class="interp" style="margin-top:14px"><b>Le potentiel de concertation (gagnant/gagnant)</b> = Col. 2 + Col. 3. C'est l'indicateur-clé du test : il mesure votre capacité à résoudre les conflits de manière coopérative, sans écraser l'autre ni vous effacer.</div>
+</section>
+
+<!-- ② TEST -->
+<section id="s2">
+  <h2>Le test — 15 situations</h2>
+  <p class="lead">Pour chaque situation, distribuez <b>10 points</b> entre les quatre réponses. Plus une réponse vous ressemble, plus vous lui donnez de points. Le total doit faire exactement 10.</p>
+  <div class="rules"><b>Consigne :</b> choisissez un seul cadre de référence (conflits de travail, familiaux ou sociaux) et gardez-le pour les 15 situations. La somme de chaque ligne doit être 10.</div>
+  <div class="prog"><span id="cProg">0 / 15 validés</span><div class="progbar"><div class="progfill" id="cFill"></div></div></div>
+  <div id="cItems"></div>
+  <button class="cta" id="cGo" disabled>Calculer mon profil →</button>
+</section>
+
+<!-- ③ RÉSULTAT -->
+<section id="s3">
+  <h2>Mon profil de résolution de conflit</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 15 situations de l'onglet ②.</p>
+  <div id="cRes" style="display:none">
+    <div class="cols" id="cols"></div>
+    <div class="conc"><div class="cn" id="concScore">–</div><div class="cl">Potentiel de concertation (Col.2 + Col.3)<br>sur 300 · gagnant/gagnant</div></div>
+    <div class="interp" id="cInterp"></div>
+    <div class="recall" style="margin-top:16px"><b>⚠️ Ces scores ne sont que la matière première.</b> Ce qui vous est demandé, c'est de les <b>analyser</b> — quel style utilisez-vous trop ? pas assez ? dans quels contextes ? — puis de <b>transmettre le tout dans votre portfolio</b>.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier mon résultat</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer / PDF</button>
+      <button class="cta small" id="showBt">👁️ Voir le texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+    <p class="note">Collez ce texte dans votre Carnet de bord (chapitre 8) ou imprimez-le.</p>
+  </div>
+</section>
+</main>
+<footer><b>L'Odyssée des Soft Skills</b> — Application pédagogique<br>Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>Instrument : Marc Robert, trad. de Pfeiffer & Goodstein (1982).<br>Développement Personnel & Leadership 2 · Mastère</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+const SIT=[
+"Quand quelqu'un auquel je tiens est franchement hostile à mon égard, qu'il crie, me menace ou veut à tout prix gagner contre moi, etc., j'ai tendance à :",
+"Quand quelqu'un qui m'est de peu d'importance est franchement hostile à mon égard, qu'il crie, me menace ou veut à tout prix gagner contre moi, etc., j'ai tendance à :",
+"Quand j'observe des gens dans un conflit où de la colère, des menaces, de l'hostilité, et des fortes opinions sont présentes, j'ai tendance à :",
+"Quand je sens qu'une autre personne essaie d'arriver à ses fins à mes dépens, je suis prêt à :",
+"Quand je suis pris dans une dispute interpersonnelle, mon attitude générale est de :",
+"La qualité que j'apprécie le plus lors d'un conflit est :",
+"Après une altercation sérieuse avec une personne à laquelle je tiens profondément :",
+"Quand je vois deux personnes auxquelles je tiens entrer en conflit, j'ai tendance à :",
+"Quand je vois deux personnes qui ont pour moi peu d'importance entrer en conflit, j'ai tendance à :",
+"Les réactions que je reçois de la plupart des gens sur ma manière de faire face aux conflits indiquent que :",
+"Lorsque je communique avec quelqu'un avec qui je suis sérieusement en conflit :",
+"Quand je suis pris dans un conflit désagréable :",
+"Quand quelqu'un fait quelque chose qui m'irrite (fumer là où il est interdit ou passer au devant de moi dans une file), ma façon de communiquer avec cette personne est :",
+"Quand quelqu'un fait quelque chose qui m'irrite (même contexte), ma façon de communiquer avec cette personne est :",
+"Quand quelqu'un fait quelque chose qui m'irrite (même contexte), ma façon de communiquer avec cette personne est :"
+];
+const OPTS=[
+[["répondre de manière hostile.","tenter de persuader cette personne d'abandonner ce comportement hostile.","rester et écouter le plus longtemps possible.","m'en aller."]],
+[["répondre de manière hostile.","tenter de persuader cette personne d'abandonner ce comportement hostile.","rester et écouter le plus longtemps possible.","m'en aller."]],
+[["m'en mêler et à prendre position.","me poser en médiateur.","observer ce qui se passe.","partir le plus vite possible."]],
+[["faire tout ce que je peux pour changer cette personne.","me reposer sur la persuasion et les « faits » pour que cette personne change.","m'efforcer sérieusement à changer ma façon d'être avec cette personne.","accepter la situation telle qu'elle est."]],
+[["amener l'autre personne à voir le problème tel que je le vois.","examiner notre désaccord le plus logiquement possible.","chercher à tout prix un compromis efficace.","laisser le temps passer et le problème s'arranger de lui-même."]],
+[["la force et la sureté émotionnelle.","l'intelligence.","l'amour et l'ouverture d'esprit.","la patience."]],
+[["je désire retourner la voir et lui faire entendre raison.","je veux retourner la voir et trouver une solution quelque soit le coût.","je suis très préoccupé mais n'essaie pas de renouer un contact.","je m'en détourne et n'essaie pas de renouer un contact."]],
+[["dire mon désappointement que ceci se passe.","essayer de les persuader de résoudre leurs différences.","regarder ce qui est en train de se passer.","m'en aller."]],
+[["dire mon désappointement que ceci se passe.","essayer de les persuader de résoudre leurs différences.","regarder ce qui est en train de se passer.","m'en aller."]],
+[["je m'efforce au maximum d'arriver à mes fins.","j'essaie de résoudre les différences de manière coopérative.","je suis accommodant et prend une position conciliante.","j'évite habituellement le conflit."]],
+[["j'essaie de m'imposer par mon discours.","je parle un peu plus de la situation que je n'écoute.","j'écoute attentivement réagissant aux mots et aux sentiments.","j'écoute passivement (acquiesce et m'excuse)."]],
+[["je fais de l'humour.","je dis une blague de temps en temps à propos de la situation.","je me moque de moi-même.","je me retiens de tout humour."]],
+[["d'insister qu'elle me regarde dans les yeux.","de fixer cette personne du regard et garder le contact.","de fixer cette personne du regard de façon répétitive.","d'éviter de regarder cette personne directement."]],
+[["de rester tout près et de forcer un contact physique.","d'utiliser mes mains et mon corps pour dire mon opinion.","de rester tout près sans toucher cette personne.","de me reculer et de garder mes mains dans mes poches."]],
+[["d'utiliser un langage fort et direct et de dire à cette personne d'arrêter.","d'essayer de persuader cette personne d'arrêter.","de parler gentiment et d'exprimer mon opinion.","de ne rien dire et ne rien faire."]]
+];
+const COLORS=['#C0392B','#7A5C9E','#147D74','#8A8F98'];
+const LABELS=['Col.1','Col.2','Col.3','Col.4'];
+const DATA=Array(15).fill(null).map(()=>[0,0,0,0]);
+const wrap=document.getElementById('cItems');
+SIT.forEach((txt,i)=>{
+  const d=document.createElement('div');d.className='sit';d.id='sit'+i;
+  let html='<div class="snum">Situation '+(i+1)+' / 15</div><div class="stxt">'+txt+'</div>';
+  OPTS[i][0].forEach((o,j)=>{
+    html+='<div class="resp"><div>'+o+'</div><input type="number" min="0" max="10" value="" data-s="'+i+'" data-c="'+j+'" placeholder="?"></div>';
+  });
+  html+='<div class="total" id="tot'+i+'">Total : — / 10</div>';
+  d.innerHTML=html;wrap.appendChild(d);
+});
+document.querySelectorAll('.resp input').forEach(inp=>{
+  inp.oninput=()=>{
+    const s=+inp.dataset.s;
+    const inputs=[...document.querySelectorAll('input[data-s="'+s+'"]')];
+    const vals=inputs.map(i=>+i.value||0);
+    const sum=vals.reduce((a,b)=>a+b,0);
+    const tot=document.getElementById('tot'+s);
+    tot.textContent='Total : '+sum+' / 10';
+    const sit=document.getElementById('sit'+s);
+    if(sum===10){tot.className='total valid';sit.className='sit ok';DATA[s]=vals;}
+    else{tot.className='total invalid';sit.className='sit'+(sum>10?' ko':'');DATA[s]=null;}
+    cProg();
+  };
+});
+function cProg(){
+  const n=DATA.filter(d=>d!==null).length;
+  document.getElementById('cProg').textContent=n+' / 15 validés';
+  document.getElementById('cFill').style.width=(n/15*100)+'%';
+  document.getElementById('cGo').disabled=n<15;
+}
+const SNAMES=["Agressif / confrontant","Sûr de soi / persuasif","Observateur / introspectif","Passif / à l'écart"];
+const SDESCS=[
+"AGRESSIF/CONFRONTANT (gagnant/perdant). Un score élevé indique une tendance à « prendre le taureau par les cornes » et un fort besoin de contrôler les situations et/ou les gens. Les gens de cette tendance sont souvent directifs et portent des jugements sur autrui.",
+"SÛR DE SOI/PERSUASIF. Un score élevé indique une tendance à se défendre soi-même sans être arrogant et en respectant l'interlocuteur, à favoriser l'action lors d'un conflit et à promouvoir la volonté de collaborer. Les gens de cette tendance dépendent grandement sur leur habileté à s'affirmer tout en reconnaissant l'apport de l'interlocuteur.",
+"OBSERVATEUR/INTROSPECTIF. Un score élevé indique une tendance à observer les autres et à s'examiner analytiquement lors d'une situation conflictuelle ainsi qu'un besoin d'adopter des modes de comportement d'écoute et de conseil. Les gens de cette tendance sont enclins à être coopératifs, c'est-à-dire à reconnaître la personne de l'interlocuteur tout en étant capable de s'affirmer.",
+"PASSIF/À L'ÉCART (perdant/gagnant). Un score élevé indique une tendance à la passivité ou à s'esquiver lors de situations conflictuelles de même qu'un besoin d'éviter les confrontations. Les gens de cette tendance sont plutôt patients et prêts à dire oui à tout, répriment souvent leurs sentiments."
+];
+let EXPORT="";
+document.getElementById('cGo').onclick=()=>{
+  const sc=[0,0,0,0];
+  DATA.forEach(d=>{d.forEach((v,j)=>sc[j]+=v);});
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('cRes').style.display='block';
+  const cols=document.getElementById('cols');cols.innerHTML='';
+  sc.forEach((v,j)=>{
+    const d=document.createElement('div');d.className='col c'+(j+1);
+    d.innerHTML='<div class="cn">'+v+'</div><div class="cl">'+SNAMES[j]+'<br>sur 150</div>';
+    cols.appendChild(d);
+  });
+  const conc=sc[1]+sc[2];
+  document.getElementById('concScore').textContent=conc;
+  const concLvl=conc>=111?'excellent':conc>=91?'très bon':conc>=76?'bon':'faible';
+  const dom=sc.indexOf(Math.max(...sc));
+  document.getElementById('cInterp').innerHTML=
+    '<b>Votre style dominant : '+SNAMES[dom]+' ('+sc[dom]+'/150).</b><br>'+SDESCS[dom]+
+    '<br><br><b>Votre potentiel de concertation : '+conc+'/300 — '+concLvl+'.</b><br>'+
+    (concLvl==='excellent'?'Excellent potentiel de concertation : vous combinez persuasion et observation pour résoudre les conflits de manière gagnant/gagnant.':
+     concLvl==='très bon'?'Très bon potentiel : vos styles persuasif et observateur sont solides. Cherchez encore à développer celui des deux qui est le plus faible.':
+     concLvl==='bon'?'Bon potentiel : une base de concertation existe. Identifiez lequel des deux styles (persuasif ou observateur) mérite d\'être renforcé.':
+     'Potentiel de concertation à développer : vos réflexes vont plutôt vers la confrontation ou l\'évitement. L\'objectif n\'est pas de supprimer ces styles (ils ont leur utilité) mais de muscler les colonnes 2 et 3.');
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MON STYLE DE RESOLUTION DE CONFLIT\n"+
+"Test de Marc Robert | Date : "+d+"\n"+
+"============================================================\n"+
+"SCORES PAR STYLE (sur 150)\n"+
+"  Col.1 Agressif/confrontant    : "+sc[0]+"\n"+
+"  Col.2 Sur de soi/persuasif    : "+sc[1]+"\n"+
+"  Col.3 Observateur/introspectif: "+sc[2]+"\n"+
+"  Col.4 Passif/a l'ecart        : "+sc[3]+"\n\n"+
+"STYLE DOMINANT : "+SNAMES[dom]+" ("+sc[dom]+"/150)\n\n"+
+"POTENTIEL DE CONCERTATION (Col.2+Col.3) : "+conc+" / 300\n"+
+"  Bareme : 50-75 faible | 76-90 bon | 91-110 tres bon | 111+ excellent\n"+
+"  Votre niveau : "+concLvl+"\n\n"+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 8 - conflits)\n"+
+"Rappel : ces scores sont la matiere premiere, pas la\n"+
+"conclusion. Ce qui est attendu, c'est votre ANALYSE.\n\n"+
+"1) Quel est votre style dominant ? Cela correspond-il a\n"+
+"   votre vecu ? Dans quel conflit recent l'avez-vous utilise ?\n"+
+"   ..................................................................\n\n"+
+"2) Quel est votre potentiel de concertation ? Est-il\n"+
+"   suffisant pour votre contexte professionnel ?\n"+
+"   ..................................................................\n\n"+
+"3) Quelles pistes pour developper vos colonnes 2 et 3 ?\n"+
+"   ..................................................................\n"+
+"============================================================\n"+
+"Test : Marc Robert, trad. Pfeiffer & Goodstein (1982).\n"+
+"Application : S. Bekri & B. Brahmi, 2026.\n"+
+"Developpement Personnel & Leadership 2 - Mastere";
+  document.getElementById('export').textContent=EXPORT;
+  document.querySelector('nav button[data-s=s3]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){
+  const btn=this;const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier mon résultat',1900);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();
+  function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';}document.body.removeChild(ta);}
+};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+document.getElementById('showBt').onclick=function(){const e=document.getElementById('export');const v=e.style.display==='none';e.style.display=v?'block':'none';this.textContent=v?'🙈 Masquer':'👁️ Voir le texte';};
+</script>
+</body>
+</html>

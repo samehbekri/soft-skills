@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon cerveau empathique — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E;--rose:#C0392B;--blue:#3B7DD8}
+  *{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:5px;background:#fff;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:7px 10px;border-radius:22px;cursor:pointer;font-size:.78rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:900px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}.cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}footer b{color:var(--indigo)}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:420px;overflow:auto;line-height:1.45}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.rules b{color:var(--gold)}
+  .prog{position:sticky;top:54px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}.progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  .it{background:#fff;border-radius:10px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid #d5d9e2}
+  .it.filled{border-left-color:var(--intra)}.it .n{font-weight:bold;color:var(--indigo);font-size:.74rem;font-family:Calibri,Arial,sans-serif}
+  .it .sit{font-size:.89rem;margin:3px 0 7px}
+  .lik{display:flex;gap:3px;flex-wrap:wrap}
+  .lik label{flex:1;min-width:70px;text-align:center;border:1.5px solid #d5d9e2;border-radius:7px;padding:7px 2px;font-size:.68rem;cursor:pointer;background:#fafbfe;font-family:Calibri,Arial,sans-serif;line-height:1.2}
+  .lik input{display:none}
+  .lik label:has(input:checked){background:var(--intra);color:#fff;border-color:var(--intra)}
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}.testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  .util{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ucard{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:5px solid var(--indigo)}
+  .ucard h3{margin-top:0}.ucard p{font-size:.86rem;font-family:Calibri,Arial,sans-serif}
+  /* résultat */
+  .resbox{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);text-align:center;margin-bottom:16px}
+  .resnum{font-size:3rem;font-weight:bold;line-height:1}
+  .resgauge{position:relative;height:28px;border-radius:14px;margin:14px 0 4px}
+  .rescur{position:absolute;top:-5px;width:4px;height:38px;background:var(--ink);border-radius:2px;transition:left .8s}
+  .resleg{display:flex;justify-content:space-between;font-size:.64rem;color:var(--grey);font-family:Calibri,Arial,sans-serif}
+  .interp{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.93rem;text-align:left}.interp b{color:var(--gold)}
+  /* brain type */
+  .brain{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 14px rgba(0,0,0,.08);text-align:center;margin:16px 0}
+  .brain .btype{font-size:2.4rem;font-weight:bold;line-height:1}.brain .bname{font-size:1rem;font-family:Calibri,Arial,sans-serif;margin-top:4px}
+  /* rubriques cadrage */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}.mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}.mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}.mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .cok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit .cko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:600px){.rub-start{flex-direction:column;text-align:center}.util{grid-template-columns:1fr}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 2 · La Rencontre de l'Autre</div>
+  <h1>Mon cerveau empathique</h1>
+  <p>Empathiser ou systématiser — quel est mon profil ?</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Mission</button>
+  <button data-s="s1">① Utilité</button>
+  <button data-s="s2">② Test QE (60)</button>
+  <button data-s="s3">③ Test QS (60)</button>
+  <button data-s="s4">④ Mon profil</button>
+</nav>
+<main>
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage.</p>
+  <div class="rubrique r-parcours"><div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe les deux tests</b><span>Le Quotient d'Empathie QE (onglet ②, 60 items) puis le Quotient Systématisant QS (onglet ③, 60 items). Environ 20 minutes au total.</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je découvre mon type de cerveau</b><span>L'application calcule vos deux scores, détermine votre type de cerveau (E, S, B, Extrême-E ou Extrême-S) et trace votre profil (onglet ④).</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon profil — le cœur du travail</b><span>Ce qui est évalué, c'est la <b>qualité de votre analyse</b> : vos scores correspondent-ils à votre vécu ? Quelles implications pour vos relations ?</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Copiez ou imprimez votre profil (onglet ④) et collez-le dans votre <b>portfolio</b> (Carnet de bord ch.11).</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu"><div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu</span></div>
+    <div class="rub-body">
+      <div class="crit"><span class="cok">✔</span><div><b>Confronter les scores à votre vécu</b> — situations concrètes d'empathie ou de systématisation.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Analyser votre type de cerveau</b> — ce qu'il révèle de votre mode de fonctionnement relationnel.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Identifier vos pistes de développement</b> — comment développer votre dimension la plus faible ?</div></div>
+      <div class="crit crit-ko"><span class="cko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier ses scores sans analyse.</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure"><div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucun type de cerveau n'est meilleur qu'un autre.</b> E, S et B sont des profils, pas des notes.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b></p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Un écart QE-QS surprenant est une bonne nouvelle</b> — il ouvre la discussion sur votre mode de fonctionnement.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée : ~20 min pour les deux tests + votre analyse.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<section id="s1">
+  <h2>À quoi sert cet outil ?</h2>
+  <div class="testinfo">
+    <h3>L'empathie selon Baron-Cohen</h3>
+    <p>Simon Baron-Cohen (2003) propose que le cerveau humain se situe sur un spectre entre deux dimensions : l'<b>empathie</b> (capacité à capter et répondre aux émotions d'autrui) et la <b>systématisation</b> (tendance à analyser et construire des systèmes). Les deux ne s'excluent pas — on peut être fort sur les deux (type B = Balanced).</p>
+    <p>Le QE et le QS mesurent ces deux dimensions. Leur croisement détermine votre <b>type de cerveau</b> : Type E (empathisant), Type S (systématisant), Type B (équilibré), Extrême-E ou Extrême-S.</p>
+    <div class="src"><b>QE :</b> Baron-Cohen & Wheelwright (2004). Version française : C. Besche-Richard, M. Olivier et B. Albert.<br><b>QS :</b> Baron-Cohen et al. (2003). Systemizing Quotient.<br><b>Application :</b> Sameh Bekri & Besma Brahmi, 2026.</div>
+  </div>
+  <div class="util">
+    <div class="ucard" style="border-top-color:var(--intra)"><h3 style="color:var(--intra)">🧠 Type E — Empathisant</h3><p>QE nettement > QS. Vous captez les émotions et les intentions. Force : écoute, intuition sociale. Piège : surinvestissement émotionnel.</p></div>
+    <div class="ucard" style="border-top-color:var(--blue)"><h3 style="color:var(--blue)">⚙️ Type S — Systématisant</h3><p>QS nettement > QE. Vous analysez, classez, construisez. Force : rigueur, logique. Piège : difficulté à lire les signaux émotionnels subtils.</p></div>
+    <div class="ucard" style="border-top-color:var(--gold)"><h3 style="color:var(--gold)">⚖️ Type B — Équilibré</h3><p>QE ≈ QS. Vous naviguez entre les deux registres. Force : polyvalence. Défi : approfondir chaque dimension.</p></div>
+    <div class="ucard" style="border-top-color:var(--violet)"><h3 style="color:var(--violet)">📊 Moyennes de référence</h3><p>QE : femmes ~47, hommes ~42. QS : femmes ~24, hommes ~30. Score max : 80 pour chaque test.</p></div>
+  </div>
+</section>
+
+<section id="s2">
+  <h2>Test QE — Quotient d'Empathie (60 items)</h2>
+  <p class="lead">Lisez chaque affirmation et indiquez votre degré d'accord. Répondez spontanément.</p>
+  <div class="rules"><b>Cotation :</b> seuls 40 items sur 60 sont notés (20 sont des items de contrôle). Score maximum : 80.</div>
+  <div class="prog"><span id="qeProg">0 / 60</span><div class="progbar"><div class="progfill" id="qeFill"></div></div></div>
+  <div id="qeWrap"></div>
+  <button class="cta" id="qeGo" disabled>Passer au test QS →</button>
+</section>
+
+<section id="s3">
+  <h2>Test QS — Quotient Systématisant (60 items)</h2>
+  <p class="lead">Même consigne que le QE. Indiquez votre degré d'accord pour chaque affirmation.</p>
+  <div class="rules"><b>Cotation :</b> seuls 40 items sur 60 sont notés. Score maximum : 80.</div>
+  <div class="prog"><span id="qsProg">0 / 60</span><div class="progbar"><div class="progfill" id="qsFill"></div></div></div>
+  <div id="qsWrap"></div>
+  <button class="cta" id="qsGo" disabled>Calculer mon profil →</button>
+</section>
+
+<section id="s4">
+  <h2>Mon profil empathique</h2>
+  <p class="lead" id="noRes">Complétez d'abord les deux tests (onglets ② et ③).</p>
+  <div id="cRes" style="display:none">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="resbox"><div class="resnum" id="qeScore" style="color:var(--intra)">–</div><div style="font-family:Calibri,sans-serif;font-size:.82rem;color:var(--grey)">QE — Empathie (sur 80)</div>
+        <div class="resgauge" style="background:linear-gradient(90deg,#edeff5 0%,var(--intra) 100%)"><div class="rescur" id="qeCur"></div></div>
+        <div class="resleg"><span>0</span><span>32</span><span>52</span><span>63</span><span>80</span></div></div>
+      <div class="resbox"><div class="resnum" id="qsScore" style="color:var(--blue)">–</div><div style="font-family:Calibri,sans-serif;font-size:.82rem;color:var(--grey)">QS — Systématisation (sur 80)</div>
+        <div class="resgauge" style="background:linear-gradient(90deg,#edeff5 0%,var(--blue) 100%)"><div class="rescur" id="qsCur"></div></div>
+        <div class="resleg"><span>0</span><span>19</span><span>39</span><span>50</span><span>80</span></div></div>
+    </div>
+    <div class="brain" id="brain"></div>
+    <div class="interp" id="cInterp"></div>
+    <div class="recall" style="margin-top:16px"><b>⚠️ Ces scores sont la matière première.</b> Ce qui vous est demandé : votre <b>analyse</b> + vos pistes de développement → portfolio.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer</button>
+      <button class="cta small" id="showBt">👁️ Texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+  </div>
+</section>
+</main>
+<footer><b>L'Odyssée des Soft Skills</b><br>Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>QE/QS : Baron-Cohen et al. (2003-2004). Version fr. : Besche-Richard, Olivier & Albert.</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+const QE_ITEMS=[
+"Je peux facilement deviner quand quelqu’un veut entamer une conversation.",
+"Je préfère les animaux aux êtres humains.",
+"J’essaie d’être à la mode.",
+"Je trouve difficile d’expliquer aux autres des choses que j’ai comprises facilement et que eux n’ont pas comprises du premier coup.",
+"Je rêve la plupart des nuits.",
+"J’aime prendre soin des autres.",
+"J’essaie de résoudre mes problèmes moi-même plutôt que d’en discuter avec d’autres.",
+"Je trouve difficile de savoir ce qu’il faut faire dans les relations sociales.",
+"C’est le matin que je suis le(la) plus efficace.",
+"On me dit souvent que je vais trop loin quand j’expose mon point de vue dans une discussion.",
+"Cela ne m’ennuie pas trop d’être en retard à un rendez-vous fixé à un ami.",
+"Les relations sociales sont si difficiles que j’essaie de ne pas m’en soucier.",
+"Je ne ferais jamais rien d’illégal même si ce n’est pas très grave.",
+"J’ai souvent du mal à juger si quelque chose est grossier ou familier.",
+"Dans une conversation, j’ai tendance à me centrer sur mes propres pensées plutôt que sur celles de mon interlocuteur.",
+"Je préfère les farces aux jeux de mots.",
+"Je vis au jour le jour.",
+"Quand j’étais enfant, j’aimais couper des vers de terre pour voir ce qui se passe.",
+"Je détecte rapidement si quelqu’un dit une chose qui en signifie une autre.",
+"J’ai de solides convictions sur la moralité.",
+"Je ne comprends pas comment des choses vexent tant certaines personnes.",
+"Il est pour moi facile de me mettre à la place de quelqu’un d’autre.",
+"Je pense que les bonnes manières sont la meilleure chose que des parents peuvent apprendre à leurs enfants.",
+"J’aime agir sur un coup de tête.",
+"Je prédis assez bien le ressenti des autres.",
+"Dans un groupe, je repère facilement quand quelqu’un se sent gêné ou mal à l’aise.",
+"Si j’offense quelqu’un en parlant, j’estime que c’est son problème et pas le mien.",
+"Si quelqu’un me demandait mon avis sur sa coupe de cheveux, je répondrais honnêtement même si elle ne me plaît pas.",
+"Je ne comprends pas toujours pourquoi une personne peut être offensée par une remarque.",
+"On me dit souvent que je suis imprévisible.",
+"En groupe, j’aime être le centre d’intérêt.",
+"Voir quelqu’un pleurer ne me touche pas vraiment.",
+"J’adore parler politique.",
+"Je ne mâche pas mes mots, ce qui est souvent pris pour de la grossièreté même si ce n’est pas mon intention.",
+"En général, je comprends facilement les situations sociales.",
+"On me dit généralement que je comprends bien les sentiments et les pensées des autres.",
+"Quand je discute avec quelqu’un, j’essaie de parler de ses expériences plutôt que des miennes.",
+"Ça me bouleverse de voir un animal souffrant.",
+"Je suis capable de prendre des décisions sans être influencé(e) par les sentiments des autres.",
+"Je ne peux pas me détendre sans avoir fait tout ce que j’avais planifié pour la journée.",
+"Je remarque facilement si quelqu’un est intéressé ou ennuyé par ce que je dis.",
+"Lorsque je regarde le journal télévisé, je suis triste de voir des personnes qui souffrent.",
+"Mes amis me parlent généralement de leurs problèmes car ils disent que je suis très compréhensif(ve).",
+"Je peux sentir quand je dérange les autres, même s’ils ne me le disent pas.",
+"Je commence souvent de nouveaux passe-temps qui m’ennuient vite et je passe à autre chose.",
+"Des fois, on me dit que j’exagère quand je charrie les gens.",
+"Je serais bien trop anxieux(se) de monter sur un manège de montagnes russes.",
+"On me dit souvent que je suis insensible même si je ne vois pas toujours pourquoi.",
+"Si je vois qu’il y a un nouveau venu dans un groupe de personnes, je crois que c’est à elles d’essayer de l’intégrer.",
+"D’habitude, je ne m’implique pas émotionnellement lorsque je regarde un film.",
+"J’aime être très organisé(e) dans ma vie de tous les jours, et je fais souvent des listes de ce que j’ai à faire.",
+"Je peux me mettre à l’écoute du ressenti des autres rapidement et intuitivement.",
+"Je n’aime pas prendre de risques.",
+"Je peux facilement comprendre ce que quelqu’un veut dire.",
+"Je peux deviner si quelqu’un masque ses émotions.",
+"Je pèse toujours le pour et le contre avant de prendre une décision.",
+"Je n’essaie pas de déchiffrer de façon consciente les règles en jeu dans les situations sociales.",
+"Je suis bon(ne) pour prédire ce que quelqu’un va faire.",
+"J’ai tendance à m’impliquer émotionnellement dans les problèmes de mes amis.",
+"Habituellement, je comprends le point de vue des autres même si je ne le partage pas."
+];
+const QS_ITEMS=[
+"Lorsque j\'écoute un morceau de musique, je remarque toujours la façon dont il est structuré.",
+"J\'adhère aux superstitions courantes.",
+"Je prends souvent des résolutions, mais j\'ai du mal à m\'en tenir à elles.",
+"Je préfère lire la non-fiction que la fiction.",
+"Si j\'achetais une voiture, je voudrais obtenir des informations spécifiques sur sa cylindrée.",
+"Quand je regarde une peinture, je ne pense généralement pas à la technique utilisée pour la réaliser.",
+"S\'il y avait un problème avec le câblage électrique de ma maison, je serais en mesure de le réparer moi-même.",
+"Quand j\'ai un rêve, j\'ai du mal à me souvenir de détails précis sur le rêve le lendemain.",
+"Quand je regarde un film, je préfère être avec un groupe d\'amis plutôt que seul.",
+"Je souhaite en savoir plus sur les différentes religions.",
+"Je lis rarement des articles ou des pages Web sur les nouvelles technologies.",
+"Je n\'aime pas les jeux qui impliquent un haut degré de stratégie.",
+"Je suis fasciné par le fonctionnement des machines.",
+"Je tiens à écouter les informations chaque matin.",
+"En mathématiques, je suis intrigué par les règles et les schémas régissant les nombres.",
+"Je ne veux pas rester en contact avec de vieux amis.",
+"Lorsque je raconte une histoire, je laisse souvent de côté des détails et je donne juste l\'essentiel de ce qui s\'est passé.",
+"J\'ai du mal à comprendre les manuels d\'instructions pour assembler les appareils.",
+"Quand je regarde un animal, j\'aime connaître l\'espèce précise à laquelle il appartient.",
+"Si j\'achetais un ordinateur, je voudrais connaître les détails exacts sur la capacité de son disque dur et la vitesse de son processeur.",
+"J\'aime participer au sport.",
+"J\'essaie d\'éviter de faire des tâches ménagères si je le peux.",
+"Quand je cuisine, je ne pense pas exactement à la manière dont les différentes méthodes et ingrédients contribuent au produit final.",
+"J\'ai du mal à lire et à comprendre les cartes.",
+"Si j\'avais une collection (par exemple CD, pièces de monnaie, timbres), elle serait très organisée.",
+"Quand je regarde un meuble, je ne remarque pas les détails de sa construction.",
+"L\'idée de s\'engager dans des activités de \"prise de risques\" me plaît.",
+"Lorsque j\'apprends des événements historiques, je ne me concentre pas sur les dates exactes.",
+"Lorsque je lis le journal, je suis attiré par des tableaux d\'informations, tels que les scores des ligues de football ou les indices boursiers.",
+"Quand j\'apprends une langue, je suis intriguée par ses règles grammaticales.",
+"J\'ai du mal à apprendre mon chemin dans une nouvelle ville.",
+"Je n\'ai pas tendance à regarder des documentaires scientifiques à la télévision ou à lire des articles sur la science et la nature.",
+"Si j\'achetais une chaîne stéréo, je voudrais connaître ses caractéristiques techniques précises.",
+"Je trouve facile de comprendre exactement comment fonctionnent les cotes dans les paris.",
+"Je ne suis pas très méticuleux quand je fais du bricolage",
+"Je trouve facile de poursuivre une conversation avec quelqu\'un que je viens de rencontrer.",
+"Quand je regarde un bâtiment, je suis curieux de savoir comment il a été construit.",
+"Lors d\'une élection, je ne suis pas intéressé par les résultats pour chaque circonscription.",
+"Lorsque je prête de l\'argent à quelqu\'un, je m\'attends à ce qu\'il me rembourse exactement ce qu\'il me doit.",
+"J\'ai du mal à comprendre les informations que la banque m\'envoie sur les différents systèmes d\'investissement et d\'épargne.",
+"Lorsque je voyage en train, je me demande souvent exactement comment les réseaux ferroviaires sont coordonnés.",
+"Lorsque j\'achète un nouvel appareil, je ne lis pas très attentivement le mode d\'emploi.",
+"Si j\'achetais un appareil photo, je ne regarderais pas attentivement la qualité de l\'objectif.",
+"Quand je lis quelque chose, je remarque toujours si c\'est grammaticalement correct.",
+"Lorsque j\'entends les prévisions météorologiques, je ne suis pas très intéressé par les modèles météorologiques.",
+"​​Je me demande souvent ce que ce serait d\'être quelqu\'un d\'autre.",
+"J\'ai du mal à faire deux choses à la fois.",
+"Quand je regarde une montagne, je pense à la précision avec laquelle elle a été formée.",
+"Je peux facilement visualiser le lien entre les autoroutes de ma région.",
+"Lorsque je suis dans un restaurant, j\'ai souvent du mal à décider quoi commander.",
+"Quand je suis dans un avion, je ne pense pas à l\'aérodynamique.",
+"J\'oublie souvent les détails précis des conversations que j\'ai eues.",
+"Lorsque je me promène à la campagne, je suis curieux de savoir en quoi les différents types d\'arbres diffèrent.",
+"Après avoir rencontré quelqu\'un une ou deux fois, j\'ai du mal à me rappeler précisément à quoi il ressemble.",
+"Je souhaite connaître le chemin emprunté par une rivière depuis sa source jusqu\'à la mer.",
+"Je ne lis pas très attentivement les documents juridiques.",
+"Je ne souhaite pas comprendre le fonctionnement de la communication sans fil.",
+"Je suis curieux de connaître la vie sur d\'autres planètes.",
+"Lorsque je voyage, j\'aime apprendre des détails spécifiques sur la culture du lieu que je visite.",
+"Je me fiche de connaître le nom des plantes que je vois."
+];
+const QE_POS=[1,6,19,22,25,26,35,36,37,38,41,42,43,44,52,54,55,57,58,59,60];
+const QE_INV=[4,8,10,11,12,14,15,18,21,27,28,29,32,34,39,46,48,49,50];
+const QS_POS=[1,4,5,7,13,15,19,20,25,29,30,33,34,37,41,44,48,49,53,55];
+const QS_INV=[6,11,12,18,23,24,26,28,31,32,35,38,40,42,43,45,51,56,57,60];
+const LIK_QE=[["Tout à fait d'accord",3],["Plutôt d'accord",2],["Plutôt pas d'accord",1],["Pas du tout d'accord",0]];
+const LIK_QS=[["Tout à fait d'accord",3],["Légèrement d'accord",2],["Légèrement en désaccord",1],["Fortement en désaccord",0]];
+function buildTest(items,wrap,prefix,lik,progId,fillId,goId){
+  const w=document.getElementById(wrap),ans={};
+  items.forEach((txt,i)=>{
+    const d=document.createElement('div');d.className='it';
+    d.innerHTML='<div class="n">'+(i+1)+' / 60</div><div class="sit">'+txt+'</div>'+
+     '<div class="lik">'+lik.map((o,j)=>'<label><input type="radio" name="'+prefix+i+'" value="'+j+'"><span>'+o[0]+'</span></label>').join('')+'</div>';
+    w.appendChild(d);
+    d.addEventListener('change',()=>{d.classList.add('filled');ans[i]=+document.querySelector('input[name='+prefix+i+']:checked').value;upd();});
+  });
+  function upd(){
+    const n=Object.keys(ans).length;
+    document.getElementById(progId).textContent=n+' / 60';
+    document.getElementById(fillId).style.width=(n/60*100)+'%';
+    document.getElementById(goId).disabled=n<60;
+  }
+  return ans;
+}
+const qeAns=buildTest(QE_ITEMS,'qeWrap','qe',LIK_QE,'qeProg','qeFill','qeGo');
+const qsAns=buildTest(QS_ITEMS,'qsWrap','qs',LIK_QS,'qsProg','qsFill','qsGo');
+document.getElementById('qeGo').onclick=()=>{document.querySelector('nav button[data-s=s3]').click();window.scrollTo({top:0,behavior:'smooth'});};
+function calcScore(ans,pos,inv){
+  let s=0;
+  pos.forEach(n=>{const v=ans[n-1];if(v===3)s+=2;else if(v===2)s+=1;});
+  inv.forEach(n=>{const v=ans[n-1];if(v===0)s+=2;else if(v===1)s+=1;});
+  return s;
+}
+function interpQE(s){
+  if(s>=64)return["très élevée","Vous avez une très grande capacité à comprendre ce que les autres ressentent et à réagir de manière appropriée."];
+  if(s>=53)return["supérieure","Vous avez une capacité supérieure à la moyenne pour comprendre ce que les autres ressentent et répondre de manière appropriée."];
+  if(s>=33)return["moyenne","Vous avez une capacité moyenne à comprendre ce que les autres ressentent et à réagir de manière appropriée. Vous savez comment traiter les gens avec soin et sensibilité."];
+  return["inférieure","Vous avez une capacité inférieure à la moyenne de comprendre ce que les autres ressentent et de réagir de manière appropriée."];
+}
+function interpQS(s){
+  if(s>=51)return["très élevée","Vous avez une très grande capacité d'analyse et d'exploration d'un système."];
+  if(s>=40)return["supérieure","Vous avez une capacité supérieure à la moyenne pour analyser et explorer un système."];
+  if(s>=20)return["moyenne","Vous avez une capacité moyenne d'analyse et d'exploration d'un système."];
+  return["inférieure","Vous avez une capacité inférieure à la moyenne pour analyser et explorer un système."];
+}
+function brainType(qe,qs){
+  const d=qe-qs;
+  if(d>30)return{t:"Extrême-E",n:"Cerveau hyper-empathisant",c:"var(--intra)",desc:"Empathie très nettement dominante. Intuition sociale très développée, avec un risque de surinvestissement émotionnel."};
+  if(d>10)return{t:"Type E",n:"Cerveau empathisant",c:"var(--intra)",desc:"L'empathie domine la systématisation. Vous captez naturellement les émotions, les intentions et les dynamiques relationnelles."};
+  if(d>=-10)return{t:"Type B",n:"Cerveau équilibré (Balanced)",c:"var(--gold)",desc:"Empathie et systématisation en équilibre. Vous naviguez entre les deux registres avec une polyvalence intéressante."};
+  if(d>=-30)return{t:"Type S",n:"Cerveau systématisant",c:"var(--blue)",desc:"La systématisation domine l'empathie. Vous analysez, classez et construisez avec rigueur. Les signaux émotionnels subtils demandent plus d'effort conscient."};
+  return{t:"Extrême-S",n:"Cerveau hyper-systématisant",c:"var(--blue)",desc:"Systématisation très nettement dominante. Grande capacité analytique, avec un besoin de travailler activement la lecture émotionnelle."};
+}
+let EXPORT="";
+document.getElementById('qsGo').onclick=()=>{
+  const qe=calcScore(qeAns,QE_POS,QE_INV);
+  const qs=calcScore(qsAns,QS_POS,QS_INV);
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('cRes').style.display='block';
+  document.getElementById('qeScore').textContent=qe;
+  document.getElementById('qsScore').textContent=qs;
+  setTimeout(()=>{document.getElementById('qeCur').style.left='calc('+(qe/80*100)+'% - 2px)';document.getElementById('qsCur').style.left='calc('+(qs/80*100)+'% - 2px)';},60);
+  const iqe=interpQE(qe),iqs=interpQS(qs),bt=brainType(qe,qs);
+  document.getElementById('brain').innerHTML='<div class="btype" style="color:'+bt.c+'">'+bt.t+'</div><div class="bname">'+bt.n+'</div><div style="font-family:Calibri,sans-serif;font-size:.88rem;margin-top:10px;text-align:left">'+bt.desc+'</div>';
+  document.getElementById('cInterp').innerHTML=
+   '<b>QE = '+qe+'/80 — empathie '+iqe[0]+'.</b> '+iqe[1]+
+   '<br><br><b>QS = '+qs+'/80 — systématisation '+iqs[0]+'.</b> '+iqs[1]+
+   '<br><br><b>Type de cerveau : '+bt.t+'</b> (écart QE−QS = '+(qe-qs)+').'+
+   '<br>Moyennes de référence : QE femmes ~47, hommes ~42 | QS femmes ~24, hommes ~30.';
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MON PROFIL EMPATHIQUE\n"+
+"Tests QE & QS (Baron-Cohen) | Date : "+d+"\n"+
+"============================================================\n"+
+"QUOTIENT D'EMPATHIE (QE)      : "+qe+" / 80  ("+iqe[0]+")\n"+
+"  Bareme : 0-32 inferieur | 33-52 moyen | 53-63 superieur | 64-80 tres eleve\n"+
+"  Moyennes : femmes ~47, hommes ~42\n\n"+
+"QUOTIENT SYSTEMATISANT (QS)   : "+qs+" / 80  ("+iqs[0]+")\n"+
+"  Bareme : 0-19 inferieur | 20-39 moyen | 40-50 superieur | 51-80 tres eleve\n"+
+"  Moyennes : femmes ~24, hommes ~30\n\n"+
+"TYPE DE CERVEAU               : "+bt.t+"\n"+
+"  "+bt.n+"\n"+
+"  Ecart QE-QS = "+(qe-qs)+"\n"+
+"  "+bt.desc+"\n\n"+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 11 - fiche 7)\n"+
+"1) Ce profil correspond-il a votre vecu ? Exemples ?\n"+
+"   ..................................................................\n"+
+"2) Quelles implications pour vos relations ?\n"+
+"   ..................................................................\n"+
+"3) Pistes de developpement ?\n"+
+"   ..................................................................\n"+
+"============================================================\n"+
+"QE : Baron-Cohen & Wheelwright (2004). Version fr. : Besche-Richard et al.\n"+
+"QS : Baron-Cohen et al. (2003).\n"+
+"Application : S. Bekri & B. Brahmi, 2026.";
+  document.getElementById('export').textContent=EXPORT;
+  document.querySelector('nav button[data-s=s4]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){const btn=this;const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier',1900);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';}document.body.removeChild(ta);}};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+document.getElementById('showBt').onclick=function(){const e=document.getElementById('export');const v=e.style.display==='none';e.style.display=v?'block':'none';this.textContent=v?'🙈 Masquer':'👁️ Texte';};
+</script>
+</body>
+</html>

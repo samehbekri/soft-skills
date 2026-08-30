@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma marque — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E}
+  *{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:5px;background:#fff;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:7px 11px;border-radius:22px;cursor:pointer;font-size:.82rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}footer b{color:var(--indigo)}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:420px;overflow:auto;line-height:1.45}
+  /* utilité */
+  .util{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ucard{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:5px solid var(--indigo)}
+  .ucard h3{margin-top:0}.ucard p{font-size:.86rem;font-family:Calibri,Arial,sans-serif}
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}.testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  /* SWOT */
+  .swot{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .sq{background:#fff;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);overflow:hidden}
+  .sq h3{color:#fff;padding:9px 12px;font-size:.92rem;margin:0}.sq .sub{font-size:.74rem;opacity:.9;font-weight:normal;font-family:Calibri,Arial,sans-serif}
+  .q1 h3{background:var(--intra)}.q2 h3{background:var(--inter)}.q3 h3{background:var(--indigo)}.q4 h3{background:var(--violet)}
+  .sq .in{padding:11px 13px}.sq input{width:100%;font-family:Calibri,Arial,sans-serif;font-size:.85rem;padding:7px 9px;border:1.5px solid #d5d9e2;border-radius:7px;margin-bottom:6px}
+  .cross{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;margin-top:14px;font-size:.9rem;display:none}.cross b{color:var(--gold)}.cross ul{margin:8px 0 0 18px;font-family:Calibri,Arial,sans-serif;font-size:.87rem}
+  /* pitch */
+  .pb{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:11px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:6px solid var(--indigo)}
+  .pb label{font-weight:bold;font-size:.92rem;display:block;margin-bottom:2px}
+  .pb .sub{font-size:.8rem;color:var(--grey);font-style:italic;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .pb textarea{width:100%;min-height:52px;font-family:Calibri,Arial,sans-serif;font-size:.88rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px;resize:vertical}
+  .pitchout{background:var(--pale);border-radius:12px;padding:16px 18px;font-size:1rem;margin-top:12px;display:none}
+  .chrono{text-align:center;margin-top:14px}.chrononum{font-size:3.2rem;font-weight:bold;color:var(--inter);line-height:1}
+  /* jeu preuve */
+  .q{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:12px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .q .phrase{font-size:.96rem;margin-bottom:9px;background:var(--pale);border-radius:12px;padding:11px 14px}
+  .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .btns button{flex:1;min-width:130px;font-family:Calibri,Arial,sans-serif;font-size:.8rem;font-weight:bold;padding:10px 6px;border-radius:9px;border:2px solid;cursor:pointer;background:#fff}
+  .ok{border-color:var(--intra);color:var(--intra)}.ko{border-color:var(--inter);color:var(--inter)}
+  .q.done .btns button{pointer-events:none;opacity:.45}.q.done .btns button.pick{opacity:1}
+  .q.good .btns button.pick{background:var(--intra);color:#fff;border-color:var(--intra)}
+  .q.bad .btns button.pick{background:#C0392B;color:#fff;border-color:#C0392B}
+  .fb{display:none;font-size:.84rem;font-family:Calibri,Arial,sans-serif;background:var(--pale);border-radius:8px;padding:9px 11px;margin-top:9px}.q.done .fb{display:block}
+  .score{text-align:center;font-size:1.05rem;margin-top:14px;display:none}
+  /* audit */
+  .chkitem{background:#fff;border-radius:11px;padding:12px 15px;margin-bottom:9px;box-shadow:0 3px 10px rgba(0,0,0,.08);display:flex;gap:11px;align-items:flex-start;cursor:pointer}
+  .chkitem input{margin-top:4px;width:17px;height:17px;accent-color:var(--intra)}
+  .chkitem .txt{font-size:.9rem}.chkitem .why{font-size:.79rem;color:var(--grey);font-style:italic;font-family:Calibri,Arial,sans-serif}
+  .chkscore{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;margin-top:12px;font-size:.92rem;text-align:center}
+  /* canvas */
+  .canvas{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .cbox{background:#fff;border-radius:12px;padding:14px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:4px solid var(--indigo)}
+  .cbox.wide{grid-column:span 3}.cbox.mid{grid-column:span 2}
+  .cbox h4{font-size:.88rem;color:var(--indigo);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .cbox h4 span{font-size:1.1rem}
+  .cbox textarea{width:100%;min-height:48px;font-family:Calibri,Arial,sans-serif;font-size:.85rem;padding:8px 10px;border:1.5px solid #d5d9e2;border-radius:8px;resize:vertical}
+  .cbox .hint{font-size:.76rem;color:var(--grey);font-style:italic;font-family:Calibri,Arial,sans-serif;margin-bottom:4px}
+  /* rubriques cadrage */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}.mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}.mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}.mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .cok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit .cko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:600px){.rub-start{flex-direction:column;text-align:center}.swot,.util,.canvas{grid-template-columns:1fr}.cbox.wide,.cbox.mid{grid-column:span 1}}
+  @media print{nav,.cta,.btnrow,header p,.rub-start,.chrono{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 3 · Le Rayonnement</div>
+  <h1>Ma marque</h1>
+  <p>Faire connaître ce que je vaux — sans trahir qui je suis</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Mission</button>
+  <button data-s="s1">① Utilité</button>
+  <button data-s="s2">② Mon SWOT</button>
+  <button data-s="s3">③ Mon pitch 40 s</button>
+  <button data-s="s4">④ Adjectif ou preuve ?</button>
+  <button data-s="s5">⑤ Audit présence</button>
+  <button data-s="s6">⑥ Mon Canvas</button>
+  <button data-s="s7">⑦ Ma synthèse</button>
+</nav>
+<main>
+<!-- ⓪ MISSION -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage.</p>
+  <div class="rubrique r-parcours"><div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je dresse mon diagnostic</b><span>SWOT personnel (onglet ②), audit de présence (onglet ⑤), et le jeu « Adjectif ou preuve ? » pour muscler mes formulations (onglet ④).</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je construis mes outils</b><span>Mon pitch en 40 secondes chronométrées (onglet ③) et mon Personal Branding Canvas — une page qui résume toute ma marque (onglet ⑥).</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mon positionnement — le cœur du travail</b><span>Quel écart entre l'image que je projette et celle que je souhaite ? Ce qui est évalué, c'est la <b>qualité de votre analyse</b>, pas la beauté de votre CV.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Copiez ou imprimez votre synthèse (onglet ⑦) et collez-la dans votre <b>portfolio</b> (Carnet de bord ch.13), avec votre plan de développement du self-marketing.</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu"><div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu de mon analyse</span></div>
+    <div class="rub-body">
+      <p class="rub-intro">Votre analyse doit répondre aux 6 questions de la fiche 4. Une bonne analyse :</p>
+      <div class="crit"><span class="cok">✔</span><div><b>Répond aux quatre questions du self-marketing :</b> Qui suis-je ? Quoi (ma valeur ajoutée) ? À qui (ma cible) ? Comment (mes canaux) ?</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Utilise des preuves, pas des adjectifs.</b> « J'ai fiabilisé un reporting de 40 pages » vs « je suis rigoureux ».</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Analyse l'écart image projetée / image souhaitée</b> — avec des exemples concrets.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Débouche sur un plan de développement</b> — un support à refondre et une action de réseau cette semaine.</div></div>
+      <div class="crit crit-ko"><span class="cko">✘</span><div><b>Ce qui ne suffit pas :</b> un SWOT vide ou un pitch non testé. Le self-marketing se pratique, il ne se décrète pas.</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure"><div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions pour être à l'aise</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">PAS DE L'ESBROUFE</span><p><b>Le self-marketing n'est pas se vendre.</b> C'est rendre lisible ce que vous êtes réellement — la promesse tient parce qu'elle est vraie (congruence, ch.4).</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b> Rien n'est envoyé.</p></div>
+      <div class="ras-item"><span class="ras-tag">PROGRESSIF</span><p><b>Votre marque se construit par itérations.</b> Commencez par un seul support (CV ou LinkedIn), pas les dix en même temps.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée totale : ~30 min pour l'ensemble.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<!-- ① UTILITÉ -->
+<section id="s1">
+  <h2>À quoi sert le self-marketing ?</h2>
+  <p class="lead">Comprendre pourquoi cette compétence change la donne — et pourquoi elle n'a rien à voir avec l'arrogance.</p>
+  <div class="testinfo">
+    <h3>Le personal branding en bref</h3>
+    <p>Le concept est popularisé par <b>Tom Peters</b> dans son article fondateur « <i>The Brand Called You</i> » (Fast Company, 1997) : chaque professionnel est une marque, qu'il le veuille ou non. La question n'est pas « faut-il se marketer ? » — c'est « est-ce que je pilote mon image ou est-ce que je la subis ? »</p>
+    <p>Le self-marketing consiste à appliquer à soi-même la démarche marketing : connaître son « produit » (talents, compétences, valeur ajoutée), identifier son « marché » (employeurs, secteurs, réseaux visés), et construire une communication cohérente qui rend cette valeur visible et mémorable.</p>
+    <div class="src"><b>Source :</b> Peters, T. (1997). « The Brand Called You ». <i>Fast Company</i>. / Granovetter, M. (1973). « The Strength of Weak Ties ». <i>American Journal of Sociology</i>.<br>
+    <b>Application pédagogique :</b> Sameh Bekri & Besma Brahmi, 2026.</div>
+  </div>
+  <div class="util">
+    <div class="ucard" style="border-top-color:var(--inter)"><h3 style="color:var(--inter)">📊 Les chiffres qui parlent</h3><p>Une part importante des recrutements passe par le réseau. Les recruteurs consultent massivement les profils en ligne. À dossier équivalent, c'est le candidat <b>visible et mémorable</b> qui décroche l'entretien.</p></div>
+    <div class="ucard" style="border-top-color:var(--intra)"><h3 style="color:var(--intra)">🔑 La preuve plutôt que l'adjectif</h3><p>« Rigoureuse » ne prouve rien. « J'ai fiabilisé un reporting de 40 pages, zéro erreur sur six mois » prouve. <b>Un chiffre vaut dix qualificatifs.</b></p></div>
+    <div class="ucard" style="border-top-color:var(--violet)"><h3 style="color:var(--violet)">🕸️ Les liens faibles</h3><p>Granovetter (1973) a montré que les opportunités viennent surtout des <b>liens faibles</b> : anciens camarades, contacts de conférence. Votre réseau utile est plus large que vous ne le croyez.</p></div>
+    <div class="ucard" style="border-top-color:var(--gold)"><h3 style="color:var(--gold)">⚖️ Entre esbroufe et fausse modestie</h3><p>Survendre = la vérification arrive toujours. S'effacer = renoncer. La <b>justesse</b> est au milieu : dire ce que je sais faire, avec des preuves, sans gonfler ni effacer.</p></div>
+  </div>
+</section>
+
+<!-- ② SWOT -->
+<section id="s2">
+  <h2>Mon SWOT personnel</h2>
+  <p class="lead">Trois éléments par case suffisent. Interne = ce qui dépend de vous ; externe = le contexte.</p>
+  <div class="swot">
+    <div class="sq q1"><h3>FORCES<div class="sub">interne · positif</div></h3><div class="in"><input data-k="S" placeholder="Force 1…"><input data-k="S" placeholder="Force 2…"><input data-k="S" placeholder="Force 3…"></div></div>
+    <div class="sq q2"><h3>FAIBLESSES<div class="sub">interne · négatif</div></h3><div class="in"><input data-k="W" placeholder="Faiblesse 1…"><input data-k="W" placeholder="Faiblesse 2…"><input data-k="W" placeholder="Faiblesse 3…"></div></div>
+    <div class="sq q3"><h3>OPPORTUNITÉS<div class="sub">externe · positif</div></h3><div class="in"><input data-k="O" placeholder="Opportunité 1…"><input data-k="O" placeholder="Opportunité 2…"><input data-k="O" placeholder="Opportunité 3…"></div></div>
+    <div class="sq q4"><h3>MENACES<div class="sub">externe · négatif</div></h3><div class="in"><input data-k="T" placeholder="Menace 1…"><input data-k="T" placeholder="Menace 2…"><input data-k="T" placeholder="Menace 3…"></div></div>
+  </div>
+  <button class="cta" id="crossGo">Croiser mon SWOT →</button>
+  <div class="cross" id="cross"></div>
+</section>
+
+<!-- ③ PITCH -->
+<section id="s3">
+  <h2>Mon pitch en 40 secondes</h2>
+  <p class="lead">Quatre blocs, une phrase chacun. Puis testez au chronomètre.</p>
+  <div class="pb"><label>1 · QUI ? — identité</label><div class="sub">Prénom, nom, formation, positionnement.</div><textarea id="p0"></textarea></div>
+  <div class="pb" style="border-left-color:var(--violet)"><label>2 · QUOI ? — ma preuve</label><div class="sub">Une réalisation chiffrée, pas un adjectif.</div><textarea id="p1"></textarea></div>
+  <div class="pb" style="border-left-color:var(--inter)"><label>3 · À QUI ? — ma cible</label><div class="sub">Ce qui vous intéresse, du point de vue de l'interlocuteur.</div><textarea id="p2"></textarea></div>
+  <div class="pb" style="border-left-color:var(--gold)"><label>4 · ET MAINTENANT ? — mon appel</label><div class="sub">Une ouverture concrète.</div><textarea id="p3"></textarea></div>
+  <button class="cta" id="pitchGo">Composer mon pitch →</button>
+  <div class="pitchout" id="pitchout"></div>
+  <div class="chrono" id="chrono" style="display:none"><div class="chrononum" id="cnum">40</div><button class="cta small" id="chronoGo">▶ Lire à voix haute (40 s)</button><p class="note" id="cmsg" style="min-height:34px"></p></div>
+</section>
+
+<!-- ④ ADJECTIF OU PREUVE -->
+<section id="s4">
+  <h2>Adjectif ou preuve ?</h2>
+  <p class="lead">Le réflexe qui change tout dans un CV, un entretien ou un pitch.</p>
+  <div id="items"></div>
+  <p class="score" id="score"></p>
+</section>
+
+<!-- ⑤ AUDIT -->
+<section id="s5">
+  <h2>L'audit de ma présence</h2>
+  <p class="lead">Cochez ce qui est vrai aujourd'hui. Ce qui reste décoché = votre plan d'action.</p>
+  <div id="chks"></div>
+  <div class="chkscore" id="chkscore"></div>
+</section>
+
+<!-- ⑥ PERSONAL BRANDING CANVAS -->
+<section id="s6">
+  <h2>Mon Personal Branding Canvas</h2>
+  <p class="lead">Votre marque sur une page : remplissez les neuf cases, imprimez, et vous avez votre carte de route stratégique.</p>
+  <div class="canvas">
+    <div class="cbox wide" style="border-top-color:var(--gold)"><h4><span>⭐</span> Ma proposition de valeur unique</h4><div class="hint">En une phrase : qu'est-ce que j'apporte que les autres n'apportent pas ?</div><textarea id="cv0" placeholder="ex. : Je fiabilise les données financières des PME en croissance avec rigueur et pédagogie."></textarea></div>
+    <div class="cbox"><h4><span>🧬</span> Mon identité</h4><div class="hint">Qui suis-je ? Mes valeurs, ma personnalité.</div><textarea id="cv1"></textarea></div>
+    <div class="cbox"><h4><span>💎</span> Mes talents</h4><div class="hint">Ce que je fais bien — avec preuves.</div><textarea id="cv2"></textarea></div>
+    <div class="cbox"><h4><span>🎯</span> Ma cible</h4><div class="hint">Secteurs, entreprises, communautés.</div><textarea id="cv3"></textarea></div>
+    <div class="cbox"><h4><span>📢</span> Mes canaux</h4><div class="hint">CV, LinkedIn, portfolio, réseau…</div><textarea id="cv4"></textarea></div>
+    <div class="cbox"><h4><span>🏆</span> Mes preuves</h4><div class="hint">3 réalisations chiffrées.</div><textarea id="cv5"></textarea></div>
+    <div class="cbox"><h4><span>🤝</span> Mon réseau</h4><div class="hint">Liens forts + liens faibles à activer.</div><textarea id="cv6"></textarea></div>
+    <div class="cbox mid"><h4><span>🪞</span> Image projetée vs souhaitée</h4><div class="hint">Ce que les gens perçoivent de moi vs ce que je voudrais qu'ils perçoivent.</div><textarea id="cv7"></textarea></div>
+    <div class="cbox"><h4><span>🚀</span> Mon premier pas</h4><div class="hint">L'action n°1 cette semaine.</div><textarea id="cv8"></textarea></div>
+  </div>
+  <button class="cta small" onclick="window.print()">🖨️ Imprimer mon Canvas</button>
+</section>
+
+<!-- ⑦ SYNTHÈSE -->
+<section id="s7">
+  <h2>Ma synthèse — à reporter dans le portfolio</h2>
+  <div class="recall"><b>⚠️ Rappel : ces outils ne sont que la matière première.</b> Ce qui vous est demandé, c'est de les <b>analyser</b> — écart image projetée/souhaitée, forces à mettre en avant, supports à refondre — puis de <b>transmettre le tout dans votre portfolio</b> avec votre plan.</div>
+  <button class="cta" id="genSyn">Générer ma synthèse →</button>
+  <div id="synRes" style="display:none">
+    <div class="export" id="export"></div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier ma synthèse</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer / PDF</button>
+    </div>
+    <p class="note">Collez ce texte dans votre Carnet de bord (chapitre 13) ou imprimez-le.</p>
+  </div>
+</section>
+</main>
+<footer><b>L'Odyssée des Soft Skills</b> — Application pédagogique<br>Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>Self-marketing : d'après Tom Peters (1997) et Mark Granovetter (1973).<br>Développement Personnel & Leadership 2 · Mastère</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+// SWOT
+document.getElementById('crossGo').onclick=()=>{
+  const get=k=>[...document.querySelectorAll('input[data-k='+k+']')].map(i=>i.value.trim()).filter(Boolean);
+  const S=get('S'),W=get('W'),O=get('O'),T=get('T');const c=document.getElementById('cross');
+  if(!S.length||!O.length){c.style.display='block';c.innerHTML='<b>Complétez au moins une force et une opportunité.</b>';return;}
+  c.style.display='block';
+  c.innerHTML='<b>Les quatre croisements stratégiques :</b><ul>'+
+   '<li><b>Forces × Opportunités (attaquer) :</b> comment «&nbsp;'+S[0]+'&nbsp;» peut-elle servir «&nbsp;'+O[0]+'&nbsp;» ? Axe prioritaire de votre self-marketing.</li>'+
+   (W.length?'<li><b>Faiblesses × Opportunités (renforcer) :</b> «&nbsp;'+W[0]+'&nbsp;» vous empêche-t-elle de saisir «&nbsp;'+O[0]+'&nbsp;» ? Chantier de formation prioritaire.</li>':'')+
+   (T.length?'<li><b>Forces × Menaces (défendre) :</b> comment «&nbsp;'+S[0]+'&nbsp;» vous protège-t-elle de «&nbsp;'+T[0]+'&nbsp;» ? Argument différenciant.</li>':'')+
+   (W.length&&T.length?'<li><b>Faiblesses × Menaces (surveiller) :</b> «&nbsp;'+W[0]+'&nbsp;» + «&nbsp;'+T[0]+'&nbsp;» = zone de risque.</li>':'')+'</ul>';
+};
+// pitch
+document.getElementById('pitchGo').onclick=()=>{
+  const p=[0,1,2,3].map(i=>document.getElementById('p'+i).value.trim());const out=document.getElementById('pitchout');
+  if(p.some(x=>!x)){out.style.display='block';out.innerHTML='<b>Il manque un bloc.</b>';return;}
+  out.style.display='block';out.innerHTML='<b>🎤 Mon pitch :</b><br><br>'+p.join(' ');
+  document.getElementById('chrono').style.display='block';
+};
+document.getElementById('chronoGo').onclick=function(){
+  this.disabled=true;let n=40;const num=document.getElementById('cnum'),msg=document.getElementById('cmsg');
+  msg.textContent='Lisez à voix haute, voix posée…';num.textContent=n;
+  const iv=setInterval(()=>{n--;num.textContent=n;
+    if(n===20)msg.textContent='Mi-parcours : vous devriez être au bloc 3.';
+    if(n<=0){clearInterval(iv);num.textContent='✓';msg.textContent='Terminé. Débordé ? Coupez un adjectif, gardez la preuve.';this.disabled=false;this.textContent='▶ Recommencer';}
+  },1000);
+};
+// adjectif ou preuve
+const ITEMS=[
+ ["« Je suis quelqu'un de très rigoureux. »",false,"Adjectif pur. Version preuve : « j'ai tenu un reporting de 40 pages, zéro erreur sur six mois »."],
+ ["« J'ai réduit de 30 % le temps de clôture mensuelle en automatisant deux tableaux. »",true,"Preuve : action + chiffre + résultat."],
+ ["« J'ai un excellent relationnel. »",false,"Adjectif. Version preuve : « j'ai animé les réunions hebdo d'une équipe de 6 pendant un an »."],
+ ["« J'ai encadré 4 étudiants sur leur projet tutoré, tous validés avec mention. »",true,"Preuve : rôle, volume, résultat."],
+ ["« Je suis passionné par la finance. »",false,"Déclaration d'intention. Version preuve : « j'ai suivi une certification Y par curiosité »."],
+ ["« Je maîtrise parfaitement Excel. »",false,"Version preuve : « j'ai construit un modèle de trésorerie à 12 mois avec macros »."],
+ ["« Bénévole depuis 3 ans, j'ai organisé 12 événements réunissant 400 participants. »",true,"Preuve : durée, volume, impact."],
+ ["« Je suis très motivé et dynamique. »",false,"Le duo le plus écrit de tous les CV — donc le moins distinctif."]
+];
+const wrap=document.getElementById('items');let done=0,good=0;
+ITEMS.forEach((it,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="phrase">'+(i+1)+'. '+it[0]+'</div><div class="btns"><button class="ok" data-v="1">PREUVE</button><button class="ko" data-v="0">ADJECTIF</button></div><div class="fb"></div>';
+  wrap.appendChild(d);
+  d.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(d.classList.contains('done'))return;d.classList.add('done');b.classList.add('pick');
+    const ok=(b.dataset.v==='1')===it[1];d.classList.add(ok?'good':'bad');
+    d.querySelector('.fb').innerHTML=(ok?'✔ Exact — ':'✘ Pas tout à fait — ')+it[2];
+    done++;if(ok)good++;
+    if(done===ITEMS.length){const s=document.getElementById('score');s.style.display='block';s.innerHTML='<b>'+good+' / '+ITEMS.length+'</b> — '+(good>=6?'le réflexe est acquis : relisez votre CV avec cette grille.':'traquez les adjectifs dans votre CV — vous serez surpris.');}
+  });
+});
+// audit
+const CHK=[
+ ["Je me suis cherché(e) dans un moteur de recherche, en navigation privée, ces trois derniers mois.","On ne pilote pas ce qu'on n'a pas regardé."],
+ ["Ma photo de profil professionnelle est nette, récente et cohérente avec le secteur visé.","Premier signal perçu — avant même votre titre."],
+ ["Mon titre LinkedIn dit ce que je sais faire, pas seulement « étudiant en… ».","Un titre-compétence est cherché ; un titre-statut ne l'est pas."],
+ ["Mon CV, mon LinkedIn et mon pitch racontent la même histoire, avec les mêmes mots-clés.","La cohérence fait une marque."],
+ ["Chaque expérience de mon CV comporte au moins un chiffre ou un résultat.","La preuve plutôt que l'adjectif."],
+ ["Mes publications publiques ne me desserviraient pas auprès d'un recruteur.","Votre marque inclut ce que vous n'avez pas choisi de publier."],
+ ["J'ai contacté au moins une personne de mon réseau ce mois-ci sans rien lui demander.","Le réseau se cultive avant d'être utile."],
+ ["Je peux citer trois personnes qui décriraient correctement ce que je sais faire.","Si personne ne sait le raconter, votre marque n'existe pas encore."]
+];
+const chks=document.getElementById('chks');
+CHK.forEach(c=>{const d=document.createElement('label');d.className='chkitem';
+  d.innerHTML='<input type="checkbox"><div><div class="txt">'+c[0]+'</div><div class="why">'+c[1]+'</div></div>';chks.appendChild(d);});
+function updChk(){const n=document.querySelectorAll('.chkitem input:checked').length;
+  document.getElementById('chkscore').innerHTML='<b>'+n+' / '+CHK.length+'</b> — '+
+   (n>=7?'marque solide — entretenez et contribuez.':n>=4?'bonnes bases — traitez UN élément décoché cette semaine.':'chantier ouvert — commencez par vous chercher vous-même.');}
+document.querySelectorAll('.chkitem input').forEach(i=>i.onchange=updChk);updChk();
+
+// SYNTHÈSE / EXPORT
+let EXPORT="";
+document.getElementById('genSyn').onclick=()=>{
+  const g=id=>(document.getElementById(id)||{}).value?.trim()||'';
+  const get=k=>[...document.querySelectorAll('input[data-k='+k+']')].map(i=>i.value.trim()).filter(Boolean);
+  const S=get('S'),W=get('W'),O=get('O'),T=get('T');
+  const pitch=[0,1,2,3].map(i=>g('p'+i)).filter(Boolean).join(' ');
+  const auditN=document.querySelectorAll('.chkitem input:checked').length;
+  const canvas=[0,1,2,3,4,5,6,7,8].map(i=>g('cv'+i));
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MON SELF-MARKETING - synthese\n"+
+"Date : "+d+"\n"+
+"============================================================\n\n"+
+"MON SWOT PERSONNEL\n"+
+"  Forces      : "+(S.join(', ')||'(non rempli)')+"\n"+
+"  Faiblesses  : "+(W.join(', ')||'(non rempli)')+"\n"+
+"  Opportunites: "+(O.join(', ')||'(non rempli)')+"\n"+
+"  Menaces     : "+(T.join(', ')||'(non rempli)')+"\n\n"+
+"MON PITCH (40 secondes)\n"+
+"  "+(pitch||'(non compose)')+"\n\n"+
+"ADJECTIF OU PREUVE : "+good+"/"+ITEMS.length+" bonnes reponses\n\n"+
+"AUDIT DE PRESENCE : "+auditN+"/"+CHK.length+" items coches\n\n"+
+"MON PERSONAL BRANDING CANVAS\n"+
+"  Proposition de valeur : "+(canvas[0]||'...')+"\n"+
+"  Identite    : "+(canvas[1]||'...')+"\n"+
+"  Talents     : "+(canvas[2]||'...')+"\n"+
+"  Cible       : "+(canvas[3]||'...')+"\n"+
+"  Canaux      : "+(canvas[4]||'...')+"\n"+
+"  Preuves     : "+(canvas[5]||'...')+"\n"+
+"  Reseau      : "+(canvas[6]||'...')+"\n"+
+"  Image ecart : "+(canvas[7]||'...')+"\n"+
+"  Premier pas : "+(canvas[8]||'...')+"\n\n"+
+"============================================================\n"+
+"A REPORTER DANS MON PORTFOLIO (chapitre 13 - fiche 4)\n"+
+"Rappel : ces outils sont la matiere premiere. Ce qui est\n"+
+"attendu : votre ANALYSE + votre plan de developpement.\n\n"+
+"Mon plan de developpement du self-marketing :\n"+
+"  Support a refondre : ..........................................\n"+
+"  Action reseau      : ..........................................\n"+
+"============================================================\n"+
+"Application : S. Bekri & B. Brahmi, 2026.\n"+
+"Developpement Personnel & Leadership 2 - Mastere";
+  document.getElementById('export').textContent=EXPORT;
+  document.getElementById('synRes').style.display='block';
+  document.getElementById('synRes').scrollIntoView({behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){const btn=this;const ok=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier ma synthèse',1900);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(EXPORT).then(ok).catch(fb);}else fb();function fb(){const ta=document.createElement('textarea');ta.value=EXPORT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){document.getElementById('export').style.display='block';}document.body.removeChild(ta);}};
+document.getElementById('printBt').onclick=()=>{document.getElementById('export').style.display='block';setTimeout(()=>window.print(),120);};
+</script>
+</body>
+</html>

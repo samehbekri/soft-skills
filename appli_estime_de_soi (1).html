@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma valeur — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}
+  header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:6px;background:#fff;padding:11px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:8px 13px;border-radius:22px;cursor:pointer;font-size:.86rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}
+  h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}
+  .cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}
+  .rules b{color:var(--gold)}
+  .prog{position:sticky;top:58px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}
+  .progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  /* cartes */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .card{perspective:900px;height:215px;cursor:pointer}
+  .face{position:absolute;inset:0;border-radius:12px;padding:18px;backface-visibility:hidden;transition:transform .6s;display:flex;flex-direction:column;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .front{background:#fff;border-top:6px solid var(--indigo);text-align:center}
+  .front b{font-size:1.1rem;color:var(--indigo)}
+  .front span{color:var(--grey);font-size:.84rem;margin-top:8px}
+  .back{background:var(--pale);transform:rotateY(180deg);font-size:.85rem}
+  .card.flip .front{transform:rotateY(180deg)} .card.flip .back{transform:rotateY(0)}
+  /* items likert */
+  .it{background:#fff;border-radius:12px;padding:14px 16px;margin-bottom:11px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:5px solid #d5d9e2}
+  .it.filled{border-left-color:var(--intra)}
+  .it .sit{font-size:.94rem;margin-bottom:9px}
+  .it .n{font-weight:bold;color:var(--indigo);font-size:.8rem;font-family:Calibri,Arial,sans-serif}
+  .lik{display:flex;gap:5px;flex-wrap:wrap}
+  .lik label{flex:1;min-width:104px;text-align:center;border:1.5px solid #d5d9e2;border-radius:8px;padding:8px 4px;font-size:.76rem;cursor:pointer;background:#fafbfe;font-family:Calibri,Arial,sans-serif}
+  .lik input{display:none}
+  .lik label:has(input:checked){background:var(--intra);color:#fff;border-color:var(--intra)}
+  /* vrai faux */
+  .vf{display:grid;grid-template-columns:1fr 88px 88px;gap:7px;align-items:center;background:#fff;border-radius:10px;padding:10px 13px;margin-bottom:7px;box-shadow:0 2px 7px rgba(0,0,0,.07);border-left:5px solid #d5d9e2}
+  .vf.filled{border-left-color:var(--intra)}
+  .vf .q{font-size:.89rem}
+  .vf .q i{color:var(--grey);font-size:.76rem;font-family:Calibri,Arial,sans-serif;font-style:normal}
+  .vf button{font-family:Calibri,Arial,sans-serif;font-size:.8rem;font-weight:bold;padding:8px 4px;border-radius:8px;border:1.5px solid #d5d9e2;background:#fafbfe;cursor:pointer;color:var(--grey)}
+  .vf button.on{background:var(--intra);color:#fff;border-color:var(--intra)}
+  /* résultats */
+  .rosbox{background:#fff;border-radius:12px;padding:20px;box-shadow:0 3px 10px rgba(0,0,0,.08);text-align:center}
+  .rosnum{font-size:3.4rem;font-weight:bold;color:var(--intra);line-height:1}
+  .rosscale{position:relative;height:34px;background:linear-gradient(90deg,#C0392B 0%,#E67E22 25%,#F1C40F 45%,#7DBE6E 65%,#147D74 100%);border-radius:17px;margin:16px 0 4px}
+  .roscur{position:absolute;top:-6px;width:5px;height:46px;background:var(--ink);border-radius:3px;transition:left .8s}
+  .rosleg{display:flex;justify-content:space-between;font-size:.68rem;color:var(--grey);font-family:Calibri,Arial,sans-serif}
+  .interp{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;margin-top:14px;font-size:.93rem}
+  .interp b{color:var(--gold)}
+  .quadwrap{background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .doms{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+  .dom{border-radius:11px;padding:12px;text-align:center;color:#fff}
+  .dom .n{font-size:1.7rem;font-weight:bold;line-height:1}
+  .dom .l{font-size:.78rem;opacity:.92;font-family:Calibri,Arial,sans-serif}
+  .d1{background:var(--violet)}.d2{background:var(--inter)}.d3{background:var(--intra)}.d4{background:var(--indigo)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:340px;overflow:auto;line-height:1.45}
+  .warn{background:var(--inter-l);border:1.5px solid var(--inter);border-radius:12px;padding:13px 15px;font-size:.88rem;margin-bottom:14px;font-family:Calibri,Arial,sans-serif}
+  .simwrap{background:#fff;border-radius:12px;padding:22px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .sl{margin-bottom:18px}
+  .sl label{display:flex;justify-content:space-between;font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:4px}
+  .sl label b{color:var(--indigo)}
+  input[type=range]{width:100%;accent-color:var(--gold)}
+  .gapviz{position:relative;height:56px;background:#edeff5;border-radius:10px;margin:14px 0;overflow:hidden}
+  .marker{position:absolute;top:0;bottom:0;width:5px;border-radius:3px;transition:left .4s}
+  .m1{background:var(--intra)} .m2{background:var(--indigo)}
+  .gapband{position:absolute;top:18px;height:20px;background:rgba(154,123,30,.35);transition:all .4s;border-radius:4px}
+  .gaplbl{display:flex;justify-content:space-between;font-size:.72rem;color:var(--grey);font-family:Calibri,Arial,sans-serif}
+  /* cadrage / mission */
+  .mission{display:grid;gap:10px;margin-bottom:18px}
+  .mstep{display:grid;grid-template-columns:44px 1fr;gap:13px;align-items:start;background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:5px solid var(--indigo)}
+  .mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra)}
+  .mnum{width:34px;height:34px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}
+  .mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.98rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}
+  .mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.87rem;font-family:Calibri,Arial,sans-serif}
+  .attendu{background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-bottom:16px}
+  .crit{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:7px 0;border-bottom:1px dotted #dde0e8}
+  .crit:last-child{border-bottom:none;margin-top:6px;background:var(--inter-l);border-radius:8px;padding:10px 11px}
+  .crit .ok{color:var(--intra);font-weight:bold;font-size:1.05rem;text-align:center}
+  .crit .ko{color:var(--inter);font-weight:bold;font-size:1.05rem;text-align:center}
+  .rassure{background:var(--intra-l);border:1.5px solid var(--intra);border-radius:12px;padding:15px 17px;font-size:.88rem;font-family:Calibri,Arial,sans-serif}
+  .rassure b{color:var(--intra);display:block;margin-bottom:6px;font-size:.95rem}
+  .rassure p{margin-bottom:7px}
+  .rassure p:last-child{margin-bottom:0}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}
+  .recall b{color:var(--gold)}
+  /* ===== RUBRIQUES DE CADRAGE ===== */
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}
+  .rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px;color:var(--ink)}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px;margin-bottom:0}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}
+  .mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}
+  .mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}
+  .mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .ok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(20,125,116,.3)}
+  .crit .ko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;box-shadow:0 2px 5px rgba(201,106,31,.3)}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:520px){.rub-start{flex-direction:column;text-align:center}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.simwrap,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 1 · Le Voyage intérieur</div>
+  <h1>Ma valeur</h1>
+  <p>L'estime de soi : « suis-je valable ? »</p>
+</header>
+
+<nav>
+  <button class="on" data-s="s0">🎯 Ma mission</button>
+  <button data-s="s1">① Découvrir</button>
+  <button data-s="s2">② Test de Rosenberg</button>
+  <button data-s="s3">③ Le quadrilatère</button>
+  <button data-s="s4">④ Ma synthèse</button>
+  <button data-s="s5">⑤ Soi perçu / idéal</button>
+</nav>
+
+<main>
+<!-- ⓪ CADRAGE -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage avant de commencer : il vous dit ce qui est attendu de vous, et surtout ce qui ne l'est pas.</p>
+
+  <!-- RUBRIQUE 1 · LE PARCOURS -->
+  <div class="rubrique r-parcours">
+    <div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body">
+      <div class="mission">
+        <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe les deux fiches outils</b>
+          <span>L'échelle de Rosenberg (onglet ②, 10 items, ~10 min) puis le quadrilatère de l'estime de soi (onglet ③, 48 affirmations, ~15 min). Répondez spontanément — aucune réponse n'est juste ou fausse.</span></div></div>
+        <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je récupère mes résultats</b>
+          <span>L'application calcule vos scores, trace votre quadrilatère et génère une synthèse (onglet ④), que vous pouvez <b>copier</b> ou <b>imprimer</b>.</span></div></div>
+        <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE mes résultats — le cœur du travail</b>
+          <span>Un score n'est pas une conclusion : c'est un point de départ. Ce qui est évalué, ce n'est pas votre score, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+        <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b>
+          <span>Collez ou agrafez votre synthèse dans votre <b>portfolio de compétences</b> (Carnet de bord du chapitre 2), avec votre analyse rédigée et votre plan de développement.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RUBRIQUE 2 · CE QUI EST ATTENDU -->
+  <div class="rubrique r-attendu">
+    <div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu de mon analyse</span></div>
+    <div class="rub-body">
+      <p class="rub-intro">Votre analyse doit répondre aux quatre questions de la fiche 5. Une bonne analyse se reconnaît à quatre signes :</p>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle confronte le résultat à votre vécu.</b> « Le test me situe à 29/40, estime faible. Est-ce que je me reconnais là-dedans ? Dans quelles situations concrètes ? »</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle argumente par des exemples de votre vie.</b> Pas des généralités : des situations datées, vécues, racontées (un examen, une critique reçue, un refus que vous n'avez pas osé formuler).</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle croise les deux fiches.</b> Le score global de Rosenberg et le détail par domaine du quadrilatère ne disent pas la même chose : que révèle leur comparaison ?</div></div>
+      <div class="crit"><span class="ok">✔</span><div><b>Elle débouche sur des pistes concrètes.</b> Une piste de développement, c'est une action datée et mesurable — pas une intention (« être plus confiant » n'est pas une piste ; « tenir un journal de trois réussites chaque soir pendant un mois » en est une).</div></div>
+      <div class="crit crit-ko"><span class="ko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier son score et écrire « je suis d'accord avec le résultat ». Sans analyse ni exemples, le travail n'est pas fait.</div></div>
+    </div>
+  </div>
+
+  <!-- RUBRIQUE 3 · À SAVOIR -->
+  <div class="rubrique r-rassure">
+    <div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions pour être à l'aise</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucun score n'est bon ou mauvais</b>, et rien ici n'est noté sur la valeur du résultat. Ces instruments sont des <i>miroirs</i>, pas des jugements : le quadrilatère n'est d'ailleurs « en aucun cas un questionnaire-test de psychométrie ».</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b> Rien n'est envoyé ni enregistré ailleurs. Vous seul décidez de ce que vous transmettez dans votre portfolio.</p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Un résultat qui vous surprend est une bonne nouvelle</b> : c'est exactement ce que le module cherche à provoquer. Notez cette surprise, elle fera une excellente matière d'analyse.</p></div>
+    </div>
+  </div>
+
+  <!-- DÉMARRAGE -->
+  <div class="rub-start">
+    <div>
+      <b>Prêt(e) ?</b>
+      <span>Durée totale estimée : 25 à 30 minutes pour les deux tests, plus le temps de votre analyse rédigée.</span>
+    </div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button>
+  </div>
+</section>
+
+<!-- ① DÉCOUVRIR -->
+<section id="s1">
+  <h2>Les définitions en cartes</h2>
+  <p class="lead">Touchez chaque carte pour la retourner. Devinez avant de vérifier !</p>
+  <div class="cards">
+    <div class="card"><div class="face front"><b>Estime de soi</b><span>« être valable » — retourner</span></div>
+      <div class="face back"><p>La valeur que je m'accorde en tant que personne. Formalisée comme le rapport <b>Soi perçu / Soi idéal</b> (W. James). La nourrir développe l'auto-leadership.</p></div></div>
+    <div class="card"><div class="face front"><b>Soi perçu / Soi idéal</b><span>le rapport-clé</span></div>
+      <div class="face back"><p><b>Soi perçu</b> : ce que je pense être. <b>Soi idéal</b> : ce que je voudrais être. L'estime se soigne des deux côtés : progresser… et réviser un idéal irréaliste ou emprunté.</p></div></div>
+    <div class="card"><div class="face front"><b>Estime « sociale »</b><span>la nuance Rosenberg</span></div>
+      <div class="face back"><p>L'échelle de Rosenberg (1965) mesure l'estime de soi <b>sociale</b> : le regard d'autrui est partie prenante de la mesure — l'inter s'invite dans ce chapitre intra.</p></div></div>
+    <div class="card"><div class="face front"><b>Unidimensionnel ≠ multidimensionnel</b><span>deux approches</span></div>
+      <div class="face back"><p>Rosenberg donne <b>un seul score global</b> — il ne distingue pas les sous-dimensions. Le quadrilatère, lui, localise l'estime dans <b>quatre domaines</b> : émotionnel, social, physique, scolaire.</p></div></div>
+    <div class="card"><div class="face front"><b>Piège : la confusion</b><span>valeur ≠ performance</span></div>
+      <div class="face back"><p>Juger sa <b>valeur de personne</b> à chaque <b>performance</b>, c'est mettre son identité en jeu à chaque examen. Un échec touche mon action — jamais ma valeur.</p></div></div>
+    <div class="card"><div class="face front"><b>Piège : la façade</b><span>ego ≠ estime</span></div>
+      <div class="face back"><p>Se répéter « je suis formidable » ne construit rien sans preuves — et l'arrogance déguise souvent une estime fragile. L'estime saine est <b>réaliste</b> : forces et limites, et valable avec les deux.</p></div></div>
+  </div>
+</section>
+
+<!-- ② ROSENBERG -->
+<section id="s2">
+  <h2>L'échelle d'estime de soi de Rosenberg (RSE)</h2>
+  <p class="lead">Fiche outil 1 — 10 items, environ 10 minutes. Auto-évaluation créée par Morris Rosenberg (1965), traduction française Chambon (1992).</p>
+  <div class="rules">
+    <b>Consignes de passation :</b> vous trouverez 10 phrases qui expriment des sentiments, des opinions ou des réactions. Lisez attentivement chacune d'elles et indiquez à quel point elle est vraie pour vous. Efforcez-vous de répondre à toutes les phrases. Sachez qu'aucune réponse n'est juste : elle doit avant tout être personnelle.
+  </div>
+  <div class="prog"><span id="rProg">0 / 10 répondus</span><div class="progbar"><div class="progfill" id="rFill"></div></div></div>
+  <div id="rItems"></div>
+  <button class="cta" id="rGo" disabled>Calculer mon score →</button>
+  <div id="rRes" style="display:none">
+    <div class="rosbox">
+      <div class="rosnum" id="rScore">–</div>
+      <div style="font-family:Calibri,Arial,sans-serif;font-size:.85rem;color:var(--grey)">score sur 40 (minimum 10)</div>
+      <div class="rosscale"><div class="roscur" id="rCur" style="left:0"></div></div>
+      <div class="rosleg"><span>10</span><span>25</span><span>31</span><span>34</span><span>39</span><span>40</span></div>
+      <div class="interp" id="rInterp"></div>
+    </div>
+    <p class="note">Cotation officielle : addition des items 1, 2, 4, 6 et 7 ; cotation inversée pour les items 3, 5, 8, 9 et 10. L'interprétation est identique pour un homme ou une femme.</p>
+  </div>
+</section>
+
+<!-- ③ QUADRILATÈRE -->
+<section id="s3">
+  <h2>Le quadrilatère de l'estime de soi</h2>
+  <p class="lead">Fiche outil 2 — 48 affirmations, quatre domaines : émotionnel, social, physique et scolaire (professionnel).</p>
+  <div class="rules">
+    <b>Consigne :</b> apportez « obligatoirement » une réponse <b>Vrai</b> ou <b>Faux</b>, même si vous avez parfois des difficultés à choisir. Il s'agit d'une introspection guidée, pas d'un test de psychométrie.
+  </div>
+  <div class="prog"><span id="qProg">0 / 48 répondus</span><div class="progbar"><div class="progfill" id="qFill"></div></div></div>
+  <div id="qItems"></div>
+  <button class="cta" id="qGo" disabled>Tracer mon quadrilatère →</button>
+  <div id="qRes" style="display:none">
+    <div class="quadwrap">
+      <svg id="quadSvg" viewBox="0 0 420 420" style="width:100%;max-width:440px;display:block;margin:auto"></svg>
+      <div class="doms">
+        <div class="dom d1"><div class="n" id="dE">–</div><div class="l">ÉMOTIONNEL<br>sur 12</div></div>
+        <div class="dom d2"><div class="n" id="dS">–</div><div class="l">SOCIAL<br>sur 12</div></div>
+        <div class="dom d3"><div class="n" id="dP">–</div><div class="l">PHYSIQUE<br>sur 12</div></div>
+        <div class="dom d4"><div class="n" id="dC">–</div><div class="l">SCOLAIRE / PRO<br>sur 12</div></div>
+      </div>
+      <div class="interp" id="qInterp"></div>
+    </div>
+    <p class="note">Le sommet le plus éloigné du centre correspond au domaine où vous avez le plus d'estime de vous : c'est un point fort. Questionnaire inspiré d'items de l'échelle toulousaine de l'estime de soi (ETES) — ce n'est en aucun cas un questionnaire-test de psychométrie.</p>
+  </div>
+</section>
+
+<!-- ④ SYNTHÈSE -->
+<section id="s4">
+  <h2>Ma synthèse — à reporter dans le Carnet de bord</h2>
+  <p class="lead" id="sNo">Complétez au moins un des deux tests (onglets ② et ③) pour générer votre synthèse.</p>
+  <div id="sRes" style="display:none">
+    <div class="warn" id="sWarn" style="display:none"></div>
+    <div class="recall">
+      <b>⚠️ Rappel : les scores ci-dessous ne sont que la matière première.</b>
+      Ce qui vous est demandé, c'est de les <b>analyser</b> — les confronter à votre vécu, les argumenter par des exemples de votre vie, croiser les deux fiches — puis de <b>transmettre le tout dans votre portfolio</b> avec vos pistes de développement. Copiez ou imprimez cette synthèse, puis rédigez votre analyse dans les quatre questions qui l'accompagnent.
+    </div>
+    <div class="export" id="export"></div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier ma synthèse</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer / PDF</button>
+    </div>
+    <p class="note">Collez ce texte dans votre Carnet de bord (chapitre 2, questions 1 à 4) ou imprimez-le pour l'agrafer à votre fiche. Vos réponses restent sur votre appareil : rien n'est envoyé.</p>
+  </div>
+</section>
+
+<!-- ⑤ SIMULATEUR -->
+<section id="s5">
+  <h2>Le simulateur Soi perçu / Soi idéal</h2>
+  <p class="lead">L'estime naît de l'écart entre ce que je pense être et ce que je voudrais être. Manipulez les deux curseurs — et observez qu'on peut réduire l'écart… par les deux bouts.</p>
+  <div class="simwrap">
+    <div class="sl">
+      <label><b>Mon Soi perçu</b> — où je pense en être aujourd'hui<span id="v1">40</span></label>
+      <input type="range" id="r1" min="0" max="100" value="40">
+    </div>
+    <div class="sl">
+      <label><b>Mon Soi idéal</b> — où je voudrais être<span id="v2">85</span></label>
+      <input type="range" id="r2" min="0" max="100" value="85">
+    </div>
+    <div class="gapviz"><div class="gapband" id="band"></div><div class="marker m1" id="m1"></div><div class="marker m2" id="m2"></div></div>
+    <div class="gaplbl"><span>0</span><span>100</span></div>
+    <div class="interp"><b>Écart : <span id="gap"></span></b><br><span id="gaptxt"></span></div>
+  </div>
+  <p class="note">À méditer pour les questions 2 et 3 du Carnet de bord : votre Soi idéal est-il le vôtre… ou celui qu'on vous a prescrit ?</p>
+</section>
+</main>
+<footer>Développement Personnel &amp; Leadership 2 — Pas à pas vers le développement de mon potentiel Soft Skills · S.BEKRI / B.BRAHMI</footer>
+
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+document.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'));
+
+/* ============ ROSENBERG ============ */
+const ROS=[
+ "Je pense que je suis une personne de valeur, au moins égale à n'importe qui d'autre.",
+ "Je pense que je possède un certain nombre de belles qualités.",
+ "Tout bien considéré, je suis porté(e) à me considérer comme un(e) raté(e).",
+ "Je suis capable de faire les choses aussi bien que la majorité des gens.",
+ "Je sens peu de raisons d'être fier(ère) de moi.",
+ "J'ai une attitude positive vis-à-vis de moi-même.",
+ "Dans l'ensemble, je suis satisfait(e) de moi.",
+ "J'aimerais avoir plus de respect pour moi-même.",
+ "Parfois je me sens vraiment inutile.",
+ "Il m'arrive de penser que je suis un(e) bon(ne) à rien."
+];
+const REVERSE=[3,5,8,9,10];   // items à cotation inversée
+const LIK=["1 · Tout à fait en désaccord","2 · Plutôt en désaccord","3 · Plutôt en accord","4 · Tout à fait en accord"];
+const rItems=document.getElementById('rItems');
+ROS.forEach((txt,i)=>{
+  const d=document.createElement('div');d.className='it';
+  d.innerHTML='<div class="n">Item '+(i+1)+' / 10'+(REVERSE.includes(i+1)?' ':'')+'</div><div class="sit">'+txt+'</div>'+
+   '<div class="lik">'+LIK.map((o,v)=>'<label><input type="radio" name="r'+i+'" value="'+(v+1)+'"><span>'+o+'</span></label>').join('')+'</div>';
+  rItems.appendChild(d);
+  d.addEventListener('change',()=>{d.classList.add('filled');rProg();});
+});
+function rAnswered(){return ROS.filter((_,i)=>document.querySelector('input[name=r'+i+']:checked')).length;}
+function rProg(){
+  const n=rAnswered();
+  document.getElementById('rProg').textContent=n+' / 10 répondus';
+  document.getElementById('rFill').style.width=(n/10*100)+'%';
+  document.getElementById('rGo').disabled=n<10;
+}
+let ROS_SCORE=null,ROS_TXT="";
+function rosInterp(s){
+  if(s<25)return["très faible","Un score inférieur à 25 indique une estime de soi très faible. Un travail dans ce domaine semble souhaitable."];
+  if(s<31)return["faible","Un score entre 25 et 31 indique une estime de soi faible. Un travail dans ce domaine serait bénéfique."];
+  if(s<34)return["dans la moyenne","Un score entre 31 et 34 indique une estime de soi dans la moyenne."];
+  if(s<=39)return["forte","Un score compris entre 34 et 39 indique une estime de soi forte."];
+  return["très forte","Un score supérieur à 39 indique une estime de soi très forte."];
+}
+document.getElementById('rGo').onclick=()=>{
+  let s=0;
+  ROS.forEach((_,i)=>{
+    const v=+document.querySelector('input[name=r'+i+']:checked').value;
+    s+= REVERSE.includes(i+1) ? (5-v) : v;   // inversion : 1↔4, 2↔3
+  });
+  ROS_SCORE=s;
+  document.getElementById('rScore').textContent=s;
+  document.getElementById('rRes').style.display='block';
+  const pct=((s-10)/30)*100;
+  setTimeout(()=>{document.getElementById('rCur').style.left='calc('+pct+'% - 2px)';},60);
+  const it=rosInterp(s);ROS_TXT=it[0];
+  document.getElementById('rInterp').innerHTML='<b>Estime de soi '+it[0]+'.</b> '+it[1];
+  buildExport();
+  document.getElementById('rRes').scrollIntoView({behavior:'smooth',block:'nearest'});
+};
+
+/* ============ QUADRILATÈRE ============ */
+const QUAD=[
+ "Je me mets facilement en colère","Quand je discute avec les autres, en général j'ai l'impression qu'ils me comprennent",
+ "Je me décourage facilement quand je ne comprends pas ou que je ne sais pas faire quelque chose",
+ "Je pense que les autres me trouvent plutôt bien physiquement","Je me sens bien dans ma peau",
+ "J'ai l'impression que les autres doutent de moi","Je me sens maladroit(e) et je ne sais pas quoi faire de mes mains",
+ "Je pense que la majorité de mes partenaires professionnels sont satisfaits de moi",
+ "Je me trouve agité(e), tendu(e), stressé(e)","Je suis fidèle dans mes amitiés",
+ "J'ai du mal à m'organiser dans mon travail","Je suis plutôt satisfait(e) de mon physique",
+ "Je suis rarement intimidé(e)","Je suis souvent anxieux(se)",
+ "Je pense que je dors suffisamment pour être efficace dans mes activités quotidiennes",
+ "Je ne travaille pas suffisamment","En général, j'ai confiance en moi",
+ "Je tiens compte des compliments et des critiques que les autres me font",
+ "Pour avoir l'illusion de me sentir mieux, je consomme des excitants","Je comprends assez vite",
+ "J'aime être interrogé(e) en classe","Je me trouve trop gros(se) ou trop maigre",
+ "En général, j'aime les activités collectives","Les mauvais résultats me découragent facilement",
+ "J'accorde de l'importance à ma présentation et à mon habillement","J'ai une bonne opinion de moi-même",
+ "Je pense que les autres s'ennuient avec moi","J'ai confiance en moi quand je commence une nouvelle activité sportive",
+ "Le plus souvent, je réfléchis avant d'agir","Je me dispute souvent avec les autres",
+ "En classe, quand je ne comprends pas, je n'ose pas le dire","Je passe facilement du rire aux larmes, ou réciproquement",
+ "Je suis gêné(e) quand on me regarde pratiquer un sport","Je retiens bien ce que j'apprends",
+ "Je suis plutôt optimiste","Je me sens mieux quand je suis seul(e)",
+ "J'ai tendance à me faire trop de souci pour ma santé","J'aime participer activement à un travail en petit groupe",
+ "J'ai l'impression de faire les choses moins bien que les autres",
+ "J'aime qu'on me remarque et qu'on reconnaisse ma valeur dans un groupe",
+ "Je manque de méthode dans mon travail","Je pense que j'ai un physique peu attirant",
+ "Je pense avoir de l'influence sur les autres","Je perds facilement mes moyens quand on me fait des reproches",
+ "Je préfère prendre peu d'initiatives dans un groupe","Je suis content(e) de la façon dont mon corps se développe",
+ "Dans un groupe, il m'arrive d'éprouver un sentiment d'isolement","Je suis satisfait(e) de mes résultats scolaires"
+];
+/* grilles officielles : n° d'item → réponse qui vaut une croix */
+const GRID={
+ E:{name:"Émotionnel",color:"#7A5C9E",items:{1:'F',5:'V',9:'F',13:'V',14:'F',17:'V',26:'V',29:'V',32:'F',35:'V',39:'F',44:'F'}},
+ S:{name:"Social",color:"#C96A1F",items:{2:'V',6:'F',10:'V',18:'V',23:'V',27:'F',30:'F',36:'F',40:'V',43:'V',45:'F',47:'F'}},
+ P:{name:"Physique",color:"#147D74",items:{4:'V',7:'F',12:'V',15:'V',19:'F',22:'F',25:'V',28:'V',33:'F',37:'F',42:'F',46:'V'}},
+ C:{name:"Scolaire / professionnel",color:"#2C3E63",items:{3:'F',8:'V',11:'F',16:'F',20:'V',21:'V',24:'F',31:'F',34:'V',38:'V',41:'F',48:'V'}}
+};
+const ANS={};
+const qItems=document.getElementById('qItems');
+QUAD.forEach((txt,i)=>{
+  const n=i+1;
+  const d=document.createElement('div');d.className='vf';d.id='vf'+n;
+  d.innerHTML='<div class="q"><i>'+n+'.</i> '+txt+'</div>'+
+   '<button data-v="V">VRAI</button><button data-v="F">FAUX</button>';
+  qItems.appendChild(d);
+  d.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    ANS[n]=b.dataset.v;
+    d.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+    d.classList.add('filled');qProg();
+  });
+});
+function qProg(){
+  const n=Object.keys(ANS).length;
+  document.getElementById('qProg').textContent=n+' / 48 répondus';
+  document.getElementById('qFill').style.width=(n/48*100)+'%';
+  document.getElementById('qGo').disabled=n<48;
+}
+let QUAD_SCORES=null;
+function drawQuad(sc){
+  const S=420,c=S/2,R=170;                     // centre, rayon max (12 croix)
+  const pts=[
+    [c, c-(sc.E/12)*R],                        // haut  = émotionnel
+    [c+(sc.S/12)*R, c],                        // droite = social
+    [c, c+(sc.P/12)*R],                        // bas   = physique
+    [c-(sc.C/12)*R, c]                         // gauche = scolaire
+  ];
+  let g='';
+  // grille circulaire
+  for(let k=3;k<=12;k+=3){
+    const r=(k/12)*R;
+    g+=`<polygon points="${c},${c-r} ${c+r},${c} ${c},${c+r} ${c-r},${c}" fill="none" stroke="#dfe3ec" stroke-width="1"/>`;
+    g+=`<text x="${c+4}" y="${c-r+11}" font-size="9" fill="#9aa0ab" font-family="Calibri,sans-serif">${k}</text>`;
+  }
+  // axes
+  g+=`<line x1="${c}" y1="${c-R}" x2="${c}" y2="${c+R}" stroke="#b9bec7" stroke-width="1.5"/>`;
+  g+=`<line x1="${c-R}" y1="${c}" x2="${c+R}" y2="${c}" stroke="#b9bec7" stroke-width="1.5"/>`;
+  // polygone
+  g+=`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="rgba(154,123,30,.28)" stroke="#9A7B1E" stroke-width="2.5"/>`;
+  // points + étiquettes
+  const lbl=[[GRID.E,pts[0],c,26,'middle'],[GRID.S,pts[1],S-8,c-6,'end'],
+             [GRID.P,pts[2],c,S-10,'middle'],[GRID.C,pts[3],10,c-6,'start']];
+  lbl.forEach(([d,p,tx,ty,anch])=>{
+    g+=`<circle cx="${p[0]}" cy="${p[1]}" r="6" fill="${d.color}" stroke="#fff" stroke-width="2"/>`;
+    g+=`<text x="${tx}" y="${ty}" font-size="12" font-weight="bold" fill="${d.color}" text-anchor="${anch}" font-family="Calibri,sans-serif">${d.name.split(' ')[0].toUpperCase()}</text>`;
+  });
+  document.getElementById('quadSvg').innerHTML=g;
+}
+document.getElementById('qGo').onclick=()=>{
+  const sc={};
+  for(const k in GRID){
+    let n=0;
+    for(const [q,rep] of Object.entries(GRID[k].items)) if(ANS[q]===rep) n++;
+    sc[k]=n;
+  }
+  QUAD_SCORES=sc;
+  document.getElementById('dE').textContent=sc.E;document.getElementById('dS').textContent=sc.S;
+  document.getElementById('dP').textContent=sc.P;document.getElementById('dC').textContent=sc.C;
+  document.getElementById('qRes').style.display='block';
+  drawQuad(sc);
+  const entries=Object.entries(sc).sort((a,b)=>b[1]-a[1]);
+  const fort=GRID[entries[0][0]].name,faible=GRID[entries[3][0]].name;
+  const moy=(Object.values(sc).reduce((a,b)=>a+b,0)/4).toFixed(1);
+  document.getElementById('qInterp').innerHTML=
+   '<b>Votre point fort : le domaine '+fort.toLowerCase()+' ('+entries[0][1]+'/12).</b> C\'est le sommet le plus éloigné du centre : appuyez-vous dessus. '+
+   'Votre domaine le plus fragile est le <b>'+faible.toLowerCase()+'</b> ('+entries[3][1]+'/12) — c\'est là que se situe votre piste de progression prioritaire. '+
+   'Moyenne des quatre domaines : '+moy+'/12. '+
+   (entries[0][1]-entries[3][1]>=5?'L\'écart entre vos sommets est important : votre estime est très contrastée selon les domaines — d\'où l\'intérêt de cette approche multidimensionnelle, que le score global de Rosenberg ne montre pas.':'Vos quatre sommets sont assez proches : votre estime est homogène d\'un domaine à l\'autre.');
+  buildExport();
+  document.getElementById('qRes').scrollIntoView({behavior:'smooth',block:'nearest'});
+};
+
+/* ============ SYNTHÈSE / EXPORT ============ */
+let EXPORT="";
+function buildExport(){
+  if(ROS_SCORE===null&&QUAD_SCORES===null)return;
+  document.getElementById('sNo').style.display='none';
+  document.getElementById('sRes').style.display='block';
+  const w=document.getElementById('sWarn');
+  if(ROS_SCORE===null||QUAD_SCORES===null){
+    w.style.display='block';
+    w.innerHTML='⚠️ <b>Synthèse partielle :</b> vous n\'avez complété qu\'un seul des deux tests. Complétez '+(ROS_SCORE===null?'l\'échelle de Rosenberg (onglet ②)':'le quadrilatère (onglet ③)')+' pour une synthèse complète.';
+  } else w.style.display='none';
+  const d=new Date().toLocaleDateString('fr-FR');
+  let x="MON ESTIME DE SOI - resultats des fiches outils\n"+
+        "Date de passation : "+d+"\n"+
+        "============================================================\n";
+  if(ROS_SCORE!==null){
+    const it=rosInterp(ROS_SCORE);
+    x+="FICHE OUTIL 1 - ECHELLE DE ROSENBERG (RSE)\n"+
+       "  Score global : "+ROS_SCORE+" / 40\n"+
+       "  Interpretation : estime de soi "+it[0].toUpperCase()+"\n"+
+       "  "+it[1]+"\n"+
+       "  (Bareme : <25 tres faible | 25-31 faible | 31-34 moyenne |\n"+
+       "   34-39 forte | >39 tres forte)\n\n";
+  } else x+="FICHE OUTIL 1 - ECHELLE DE ROSENBERG : non complete\n\n";
+  if(QUAD_SCORES!==null){
+    const s=QUAD_SCORES;
+    const e=Object.entries(s).sort((a,b)=>b[1]-a[1]);
+    x+="FICHE OUTIL 2 - LE QUADRILATERE DE L'ESTIME DE SOI\n"+
+       "  Domaine emotionnel          : "+s.E+" / 12\n"+
+       "  Domaine social              : "+s.S+" / 12\n"+
+       "  Domaine physique            : "+s.P+" / 12\n"+
+       "  Domaine scolaire / pro      : "+s.C+" / 12\n"+
+       "  Moyenne                     : "+(Object.values(s).reduce((a,b)=>a+b,0)/4).toFixed(1)+" / 12\n"+
+       "  > Point fort  : "+GRID[e[0][0]].name+" ("+e[0][1]+"/12)\n"+
+       "  > A travailler: "+GRID[e[3][0]].name+" ("+e[3][1]+"/12)\n\n";
+  } else x+="FICHE OUTIL 2 - LE QUADRILATERE : non complete\n\n";
+  if(ROS_SCORE!==null&&QUAD_SCORES!==null){
+    const e=Object.entries(QUAD_SCORES).sort((a,b)=>b[1]-a[1]);
+    x+="LECTURE CROISEE DES DEUX FICHES\n"+
+       "  Rosenberg donne un score GLOBAL (unidimensionnel) ; le quadrilatere\n"+
+       "  localise l'estime par DOMAINE. Confrontez-les : un score global\n"+
+       "  correct peut masquer un domaine tres fragile - ici le domaine\n"+
+       "  "+GRID[e[3][0]].name.toLowerCase()+".\n\n";
+  }
+  x+="============================================================\n"+
+     "A REPORTER DANS MON PORTFOLIO (chapitre 2 - fiche 5)\n"+
+     "Rappel : les scores ci-dessus sont la matiere premiere, pas la\n"+
+     "conclusion. Ce qui est attendu, c'est votre ANALYSE : confronter\n"+
+     "le resultat a votre vecu, l'argumenter par des exemples de votre\n"+
+     "vie, croiser les deux fiches, et deboucher sur des pistes\n"+
+     "concretes (une action datee et mesurable, pas une intention).\n\n"+
+     "1) Resultat a l'echelle de Rosenberg : en etes-vous d'accord ?\n"+
+     "   Cela correspond-il a votre objectif ? Quelles pistes d'amelioration\n"+
+     "   de votre estime de vous proposez-vous ?\n"+
+     "   ..................................................................\n"+
+     "   ..................................................................\n\n"+
+     "2) Resultat au quadrilatere : qu'est-ce que cela vous apprend sur\n"+
+     "   votre estime de vous ? En etes-vous d'accord ? Cela correspond-il\n"+
+     "   a ce que vous voulez en matiere de self-esteem ? Quels problemes\n"+
+     "   d'estime rencontrez-vous ? Argumentez par des exemples de votre vie.\n"+
+     "   Quelles pistes pour nourrir votre self-esteem ?\n"+
+     "   ..................................................................\n"+
+     "   ..................................................................\n\n"+
+     "3) Votre difficulte actuelle est-elle de l'ordre de l'estime de soi\n"+
+     "   (etre valable) ? Decrivez des experiences a l'appui.\n"+
+     "   ..................................................................\n\n"+
+     "4) Qu'avez-vous besoin de travailler pour avancer ?\n"+
+     "   (Pistes de developpement en Self-Esteem)\n"+
+     "   ..................................................................\n"+
+     "============================================================\n"+
+     "Fiche outil 1 : echelle d'estime de soi de M. Rosenberg (1965),\n"+
+     "trad. fr. Chambon (1992). Fiche outil 2 : quadrilatere de l'estime\n"+
+     "de soi, inspire d'items de l'echelle toulousaine (ETES).\n"+
+     "Developpement Personnel & Leadership 2 - S.BEKRI / B.BRAHMI";
+  EXPORT=x;
+  document.getElementById('export').textContent=x;
+}
+document.getElementById('copyBt').onclick=function(){
+  const btn=this;
+  const done=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier ma synthèse',1900);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(EXPORT).then(done).catch(fb);
+  } else fb();
+  function fb(){
+    const ta=document.createElement('textarea');ta.value=EXPORT;
+    ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);
+    ta.select();try{document.execCommand('copy');done();}catch(e){btn.textContent='Sélectionnez le texte ci-dessus';}
+    document.body.removeChild(ta);
+  }
+};
+document.getElementById('printBt').onclick=()=>window.print();
+
+/* ============ SIMULATEUR ============ */
+const r1=document.getElementById('r1'),r2=document.getElementById('r2');
+function sim(){
+  let a=+r1.value,b=+r2.value;
+  document.getElementById('v1').textContent=a;document.getElementById('v2').textContent=b;
+  document.getElementById('m1').style.left='calc('+a+'% - 2px)';
+  document.getElementById('m2').style.left='calc('+b+'% - 2px)';
+  const lo=Math.min(a,b),hi=Math.max(a,b),band=document.getElementById('band');
+  band.style.left=lo+'%';band.style.width=(hi-lo)+'%';
+  const g=b-a;
+  document.getElementById('gap').textContent=(g>=0?g:0)+' points';
+  document.getElementById('gaptxt').textContent=
+   b<a?"Votre idéal est… derrière vous ? Curieux réglage : soit vous le sous-estimez, soit vous êtes déjà au-delà de vos rêves — dans les deux cas, il est temps de vous en fixer un nouveau, à vous.":
+   g<=15?"Écart stimulant : votre idéal est à portée d'efforts — c'est la zone où l'estime respire. Continuez à avancer, et rehaussez l'idéal quand vous l'atteignez.":
+   g<=40?"Écart exigeant mais tenable : découpez le chemin en étapes (le chapitre Confiance vous donnera l'escalier). Et vérifiez que cet idéal est bien le vôtre.":
+   "Écart écrasant : un idéal aussi lointain érode l'estime au quotidien. Deux leviers : avancer d'un cran… et surtout réviser l'idéal — est-il réaliste ? est-il vraiment le vôtre, ou emprunté (famille, réseaux, comparaisons) ?";
+}
+r1.oninput=sim;r2.oninput=sim;sim();
+</script>
+</body>
+</html>
