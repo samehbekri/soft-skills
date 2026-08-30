@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma main ouverte — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}
+  header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:8px;background:#fff;padding:11px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:9px 17px;border-radius:22px;cursor:pointer;font-size:.93rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:860px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .scan{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:11px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .scan .top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+  .scan .name{font-size:.92rem}
+  .scan .val{font-weight:bold;font-size:1.02rem;color:var(--intra)}
+  .scan input[type=range]{width:100%;accent-color:var(--intra)}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta.small{font-size:.85rem;padding:9px 20px;margin:12px auto}
+  .prof{background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-top:16px}
+  .prow{display:grid;grid-template-columns:230px 1fr 34px;gap:8px;align-items:center;margin-bottom:7px;font-size:.8rem;font-family:Calibri,Arial,sans-serif}
+  .ptrack{background:#edeff5;border-radius:6px;height:14px;overflow:hidden}
+  .pfill{height:100%;border-radius:6px;background:var(--intra);transition:width .8s}
+  .weak{outline:2.5px solid #C0392B;outline-offset:2px;border-radius:6px}
+  .verdict{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;margin-top:14px;font-size:.93rem}
+  .verdict b{color:var(--gold)}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px}
+  /* tri */
+  .item{background:#fff;border-radius:11px;padding:14px 16px;margin-bottom:11px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .item p{margin-bottom:9px;font-size:.95rem}
+  .btns{display:flex;gap:7px;flex-wrap:wrap}
+  .btns button{flex:1;min-width:105px;font-family:Calibri,Arial,sans-serif;font-size:.8rem;font-weight:bold;padding:9px 6px;border-radius:9px;border:2px solid;cursor:pointer;background:#fff}
+  .b1{border-color:var(--intra);color:var(--intra)} .b2{border-color:var(--gold);color:var(--gold)} .b3{border-color:var(--inter);color:var(--inter)}
+  .item.done .btns button{pointer-events:none;opacity:.45}
+  .item.done .btns button.pick{opacity:1}
+  .item.good .btns button.pick{background:var(--intra);color:#fff;border-color:var(--intra)}
+  .item.bad .btns button.pick{background:#C0392B;color:#fff;border-color:#C0392B}
+  .fb{display:none;font-size:.84rem;font-family:Calibri,Arial,sans-serif;background:var(--pale);border-radius:8px;padding:9px 11px;margin-top:9px}
+  .item.done .fb{display:block}
+  .score{text-align:center;font-size:1.05rem;margin-top:14px;display:none}
+  /* rituel */
+  .rit{background:#fff;border-radius:12px;padding:20px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .rit label{font-weight:bold;font-size:.95rem;display:block;margin:12px 0 4px;color:var(--indigo)}
+  .rit textarea{width:100%;min-height:56px;font-family:Calibri,Arial,sans-serif;font-size:.9rem;padding:9px 11px;border:1.5px solid #d5d9e2;border-radius:8px;resize:vertical}
+  @media print{nav,.cta,header p{display:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 1 · Le Voyage intérieur</div>
+  <h1>Ma main ouverte</h1>
+  <p>Desserrer la main sur ce qui ne dépend pas de moi</p>
+</header>
+
+<nav>
+  <button class="on" data-s="s1">① Mes 9 dimensions</button>
+  <button data-s="s2">② Le tri des 3 cercles</button>
+  <button data-s="s3">③ Mon rituel du soir</button>
+</nav>
+
+<main>
+<!-- ① 9 DIMENSIONS -->
+<section id="s1" class="on">
+  <h2>Les neuf dimensions de mon lâcher-prise</h2>
+  <p class="lead">Les neuf questions de votre fiche, en curseurs : de 1 (très difficile pour moi) à 5 (naturel pour moi). Répondez en pensant à des situations vécues.</p>
+  <div id="dims"></div>
+  <button class="cta" id="dimGo">Voir mon profil →</button>
+  <div id="profwrap" style="display:none">
+    <div class="prof" id="prof"></div>
+    <div class="verdict" id="dimVerdict"></div>
+    <p class="note">Reportez ce profil dans votre Carnet de bord : chaque curseur correspond à une question de la fiche (1 à 9) — développez-y par écrit, avec des exemples, les dimensions les plus crispées. Elles nourriront votre plan (question 10).</p>
+  </div>
+</section>
+
+<!-- ② TRI -->
+<section id="s2">
+  <h2>Le tri des trois cercles</h2>
+  <p class="lead">Pour chaque situation, décidez : est-ce que je la <b>contrôle</b>, est-ce que je l'<b>influence</b>, ou est-ce que je la <b>lâche</b> ?</p>
+  <div id="items"></div>
+  <p class="score" id="score"></p>
+</section>
+
+<!-- ③ RITUEL -->
+<section id="s3">
+  <h2>Mon rituel du soir</h2>
+  <p class="lead">Trois lignes chaque soir suffisent à entraîner la main à s'ouvrir. Remplissez, imprimez — ou recopiez le principe dans un carnet.</p>
+  <div class="rit">
+    <label>🖐 Ce que j'ai lâché aujourd'hui</label>
+    <textarea placeholder="Une rumination interrompue, un contrôle délégué, un imprévu accueilli…"></textarea>
+    <label>✊ Ce que j'aurais pu lâcher (et que je lâcherai demain)</label>
+    <textarea placeholder="La prise qui s'est resserrée aujourd'hui…"></textarea>
+    <label>✨ Trois gratitudes du jour, même minuscules</label>
+    <textarea placeholder="1. …   2. …   3. …"></textarea>
+    <button class="cta small" onclick="window.print()">Imprimer / enregistrer mon rituel</button>
+  </div>
+  <p class="note">Ce rituel travaille directement les questions 1 (ruminations), 8 (repos) et 9 (gratitude) de votre fiche — et fournit la matière de votre objectif « rituel » du Plan d'action SMART.</p>
+</section>
+</main>
+<footer>Développement Personnel &amp; Leadership 2 — Pas à pas vers le développement de mon potentiel Soft Skills · S.BEKRI / B.BRAHMI</footer>
+
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+const DIMS=[
+ "1 · Laisser aller les pensées négatives ou obsédantes",
+ "2 · Accepter les choses telles qu'elles sont, même contraires à mes attentes",
+ "3 · Pardonner aux autres et à moi-même les erreurs passées",
+ "4 · Réguler mes réactions émotionnelles face au stress",
+ "5 · Reconnaître mes limites et demander de l'aide",
+ "6 · Laisser les autres assumer leurs actions et leurs choix",
+ "7 · Accueillir les imprévus avec calme et flexibilité",
+ "8 · Apprécier le calme sans culpabilité productive",
+ "9 · Trouver joie et gratitude dans les petites choses"
+];
+const dims=document.getElementById('dims');
+DIMS.forEach((n,i)=>{
+  const d=document.createElement('div');d.className='scan';
+  d.innerHTML='<div class="top"><span class="name">'+n+'</span><span class="val" id="dv'+i+'">3</span></div>'+
+   '<input type="range" min="1" max="5" value="3" id="dr'+i+'">';
+  dims.appendChild(d);
+});
+DIMS.forEach((_,i)=>{document.getElementById('dr'+i).oninput=e=>{document.getElementById('dv'+i).textContent=e.target.value;};});
+document.getElementById('dimGo').onclick=()=>{
+  const vals=DIMS.map((_,i)=>+document.getElementById('dr'+i).value);
+  const sorted=[...vals].sort((a,b)=>a-b);
+  const weakSet=new Set();
+  vals.forEach((v,i)=>{if(v<=sorted[1]&&weakSet.size<2)weakSet.add(i)});
+  const prof=document.getElementById('prof');prof.innerHTML='';
+  DIMS.forEach((n,i)=>{
+    const r=document.createElement('div');r.className='prow';
+    r.innerHTML='<div>'+n.split('·')[1].trim()+'</div><div class="ptrack'+(weakSet.has(i)?' weak':'')+'"><div class="pfill" style="width:0"></div></div><b>'+vals[i]+'/5</b>';
+    prof.appendChild(r);
+    setTimeout(()=>{r.querySelector('.pfill').style.width=(vals[i]/5*100)+'%';},80);
+  });
+  const avg=(vals.reduce((a,b)=>a+b,0)/9).toFixed(1);
+  const weakNames=[...weakSet].map(i=>DIMS[i].split('·')[1].trim().toLowerCase());
+  document.getElementById('dimVerdict').innerHTML='<b>Moyenne : '+avg+'/5.</b> Vos deux prises les plus crispées (encadrées en rouge) : <b>'+weakNames.join('</b> et <b>')+'</b>. Ce sont vos priorités pour la question 10 de la fiche — et la première nourrira votre objectif « relâcher » du Plan d\'action.';
+  document.getElementById('profwrap').style.display='block';
+};
+// tri
+const ITEMS=[
+ ["La note que le jury m'a attribuée le mois dernier",3,"Le passé et la décision d'autrui : deux incontrôlables réunis. On lâche — et on garde l'apprentissage."],
+ ["Le nombre d'heures que je consacre à ma préparation cette semaine",1,"Pleinement dans mes mains : mes choix, mon agenda, mes actions. J'agis."],
+ ["La décision finale du recruteur après mon entretien",3,"Je peux influencer pendant l'entretien — mais une fois sorti, la décision ne m'appartient plus. Je lâche."],
+ ["L'impression que je laisse pendant l'entretien",2,"J'influence : préparation, posture, écoute… sans contrôler la perception de l'autre. Je fais ma part."],
+ ["L'humeur de mon binôme ce matin",3,"Les émotions d'autrui ne m'appartiennent pas. Je peux en tenir compte — pas les piloter. Je lâche (et je reste bienveillant)."],
+ ["La motivation de mon équipe sur le projet",2,"J'influence par mon énergie, ma reconnaissance, mon exemple — mais chacun reste maître de son engagement."],
+ ["Ma réponse à un message désagréable reçu ce soir",1,"L'événement ne dépend pas de moi ; ma réponse, entièrement. Les six secondes du chapitre IE s'en souviennent."],
+ ["Une grève des transports le jour de ma soutenance",3,"Incontrôlable — mais mon plan B (partir plus tôt, itinéraire alternatif) est dans le cercle 1. Je lâche l'événement, je contrôle ma parade."],
+ ["Ce que mes camarades pensent de ma présentation",3,"L'opinion d'autrui est le grand classique de la calebasse. Je soigne mon travail (cercle 1)… et je lâche leur jugement."]
+];
+const wrap=document.getElementById('items');let done=0,good=0;
+ITEMS.forEach((it,i)=>{
+  const d=document.createElement('div');d.className='item';
+  d.innerHTML='<p>'+(i+1)+'. '+it[0]+'</p>'+
+   '<div class="btns"><button class="b1" data-v="1">JE CONTRÔLE</button><button class="b2" data-v="2">J\'INFLUENCE</button><button class="b3" data-v="3">JE LÂCHE</button></div>'+
+   '<div class="fb"></div>';
+  wrap.appendChild(d);
+  d.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    if(d.classList.contains('done'))return;
+    d.classList.add('done');b.classList.add('pick');
+    const ok=+b.dataset.v===it[1];
+    d.classList.add(ok?'good':'bad');
+    d.querySelector('.fb').innerHTML=(ok?'✔ Exact — ':'✘ Pas tout à fait — ')+it[2];
+    done++;if(ok)good++;
+    if(done===ITEMS.length){
+      const s=document.getElementById('score');s.style.display='block';
+      s.innerHTML='<b>'+good+' / '+ITEMS.length+'</b> — '+(good>=7?'le tri des cercles est acquis : appliquez-le à vos vraies contrariétés.':'relisez les corrections : la frontière contrôle / influence / lâcher est le geste de base du chapitre.');
+    }
+  });
+});
+</script>
+</body>
+</html>
