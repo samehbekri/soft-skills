@@ -10,27 +10,23 @@
   body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
   header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
   header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
-  header h1{font-size:1.65rem;margin:.3em 0 .1em}
-  header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
-  nav{display:flex;justify-content:center;gap:8px;background:#fff;padding:11px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
-  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:9px 15px;border-radius:22px;cursor:pointer;font-size:.9rem}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:5px;background:#fff;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:7px 11px;border-radius:22px;cursor:pointer;font-size:.82rem}
   nav button.on{background:var(--indigo);color:#fff}
   main{max-width:880px;margin:24px auto;padding:0 15px}
   section{display:none}section.on{display:block;animation:fade .3s}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  h2{color:var(--indigo);margin-bottom:.4em}
-  h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  h2{color:var(--indigo);margin-bottom:.4em}h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
   .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
   .tag{display:inline-block;font-size:.68rem;font-weight:bold;color:#fff;padding:2px 9px;border-radius:3px}
-  .tag.f{background:var(--inter)} .tag.r{background:var(--intra)}
+  .tag.f{background:var(--inter)}.tag.r{background:var(--intra)}
   .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
-  .cta:disabled{background:#c9c9c9;cursor:not-allowed}
-  .cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}.cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
   .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
   .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
-  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px}
-  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}
-  .rules b{color:var(--gold)}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}footer b{color:var(--indigo)}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.rules b{color:var(--gold)}
   .rules ul{margin:6px 0 0 18px}
   .it{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:5px solid #d5d9e2}
   .it.filled{border-left-color:var(--intra)}
@@ -38,158 +34,190 @@
   .it .sit{font-size:.94rem;margin:4px 0 10px}
   .opt{display:grid;grid-template-columns:26px 1fr 40px;gap:9px;align-items:center;font-family:Calibri,Arial,sans-serif;font-size:.86rem;padding:8px 10px;border-radius:8px;margin-bottom:5px;background:#fafbfe;border:1.5px solid #eceef4;transition:all .2s;cursor:pointer}
   .opt .lt{font-weight:bold;text-align:center;border-radius:6px;color:#fff;padding:3px 0}
-  .opt.a .lt{background:var(--indigo)} .opt.b .lt{background:var(--violet)}
+  .opt.a .lt{background:var(--indigo)}.opt.b .lt{background:var(--violet)}
   .opt .pts{font-weight:bold;text-align:center;font-size:.95rem;color:var(--grey)}
-  .opt.win{background:var(--intra-l);border-color:var(--intra)}
-  .opt.win .pts{color:var(--intra)}
-  .slid{margin-top:9px}
-  .slid input{width:100%;accent-color:var(--gold)}
+  .opt.win{background:var(--intra-l);border-color:var(--intra)}.opt.win .pts{color:var(--intra)}
+  .slid{margin-top:9px}.slid input{width:100%;accent-color:var(--gold)}
   .slid .hint{display:flex;justify-content:space-between;font-size:.72rem;color:var(--grey);font-family:Calibri,Arial,sans-serif}
-  .prog{position:sticky;top:58px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
-  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}
-  .progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
-  .scores{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-  .sc{border-radius:12px;padding:15px;text-align:center;color:#fff}
-  .sc.f{background:var(--inter)} .sc.r{background:var(--intra)}
-  .sc .n{font-size:2.3rem;font-weight:bold;line-height:1}
-  .sc .l{font-size:.8rem;opacity:.92;font-family:Calibri,Arial,sans-serif;margin-top:4px}
-  .winwrap{background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
-  .axtop{text-align:center;font-family:Calibri,Arial,sans-serif;font-size:.78rem;color:var(--inter);font-weight:bold;margin-bottom:4px}
-  .winrow{display:grid;grid-template-columns:24px 1fr;gap:6px}
-  .axleft{writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;font-family:Calibri,Arial,sans-serif;font-size:.78rem;color:var(--intra);font-weight:bold}
-  .win{position:relative;width:100%;aspect-ratio:1.1;border:3px solid var(--indigo);border-radius:8px;overflow:hidden}
-  .pane{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6px;transition:all .7s ease;font-family:Calibri,Arial,sans-serif;overflow:hidden}
-  .pane b{font-size:clamp(.55rem,2.1vw,.9rem)}
-  .pane small{font-size:clamp(.46rem,1.5vw,.68rem);opacity:.85;font-style:italic}
-  .p1{background:#DFF0E6;color:var(--intra);left:0;top:0}
-  .p2{background:var(--inter-l);color:var(--inter);top:0;right:0}
-  .p3{background:var(--intra-l);color:var(--intra);left:0;bottom:0}
-  .p4{background:#E8E6F0;color:var(--indigo);right:0;bottom:0}
-  .quads{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-  .qd{border-radius:11px;padding:12px 14px;font-size:.85rem;font-family:Calibri,Arial,sans-serif;border:1.5px solid}
-  .qd b{display:block;margin-bottom:3px;font-size:.9rem}
-  .qd1{border-color:var(--intra);background:#F2FAF6}.qd2{border-color:var(--inter);background:var(--inter-l)}
-  .qd3{border-color:#6aa39d;background:var(--intra-l)}.qd4{border-color:var(--indigo);background:#F0EFF6}
-  .verdict{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.93rem}
-  .verdict b{color:var(--gold)}
-  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.79rem;white-space:pre-wrap;max-height:320px;overflow:auto;line-height:1.45}
-  .explore{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-top:16px}
-  .explore .sl{margin-bottom:12px}
-  .explore label{display:flex;justify-content:space-between;font-size:.85rem;font-family:Calibri,Arial,sans-serif;margin-bottom:4px}
-  .explore input[type=range]{width:100%;accent-color:var(--gold)}
-  .adjgrid{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-  .adj{font-family:Calibri,Arial,sans-serif;font-size:.85rem;border:1.5px solid #d5d9e2;border-radius:18px;padding:7px 14px;cursor:pointer;background:#fff;user-select:none}
-  .adj.me{background:var(--intra);border-color:var(--intra);color:#fff}
-  .adj.others{background:var(--inter);border-color:var(--inter);color:#fff}
-  .adj.both{background:var(--indigo);border-color:var(--indigo);color:#fff}
-  .howto{background:var(--pale);border-radius:10px;padding:12px 14px;font-size:.85rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px}
-  .zones{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-  .zcard{background:#fff;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);overflow:hidden}
-  .zcard h4{padding:8px;color:#fff;font-size:.88rem;text-align:center}
-  .z1 h4{background:var(--intra)} .z2 h4{background:var(--inter)} .z3 h4{background:#6aa39d} .z4 h4{background:var(--indigo)}
-  .zcard ul{list-style:none;padding:10px 14px;min-height:64px;font-size:.84rem;font-family:Calibri,Arial,sans-serif}
-  .zcard li{padding:3px 0;border-bottom:1px dotted #dde0e8}
-  .zcard .hint{color:var(--grey);font-style:italic}
-  @media(max-width:600px){.quads,.zones,.scores{grid-template-columns:1fr}}
-  @media print{nav,.cta,.btnrow,header p,.prog,.explore{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+  .prog{position:sticky;top:54px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}.progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  .win-wrap{position:relative;width:100%;max-width:420px;margin:20px auto;aspect-ratio:1}
+  .pane{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;transition:all .7s;text-align:center;font-family:Calibri,Arial,sans-serif;font-size:.78rem;overflow:hidden;color:#fff}
+  .p1{background:var(--intra)}.p2{background:var(--inter)}.p3{background:var(--violet)}.p4{background:var(--grey)}
+  .pane b{font-size:1.3rem;line-height:1}.pane small{opacity:.85;font-size:.7rem}
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .lg{background:#fff;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .lg h4{font-size:.85rem;display:flex;align-items:center;gap:6px;margin-bottom:4px}
+  .lg h4 span{width:14px;height:14px;border-radius:4px;display:inline-block}
+  .lg p{font-size:.8rem;font-family:Calibri,Arial,sans-serif;color:var(--grey);margin:0}
+  .verdict{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.93rem}.verdict b{color:var(--gold)}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:400px;overflow:auto;line-height:1.45}
+  .adj{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:7px;margin-top:12px}
+  .adj span{background:#fff;border:1.5px solid #d5d9e2;border-radius:8px;padding:7px 8px;font-family:Calibri,sans-serif;font-size:.84rem;text-align:center;cursor:pointer;transition:all .15s}
+  .adj span.on{background:var(--intra);color:#fff;border-color:var(--intra)}
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}.testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  .util{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ucard{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:5px solid var(--indigo)}
+  .ucard h3{margin-top:0}.ucard p{font-size:.86rem;font-family:Calibri,Arial,sans-serif}
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}.mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}.mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}.mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .cok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit .cko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:600px){.rub-start{flex-direction:column;text-align:center}.util,.legend{grid-template-columns:1fr}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
 </style>
 </head>
 <body>
 <header>
-  <div class="kicker">L'Odyssée des Soft Skills · Escale 1 · Le Voyage intérieur</div>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 1 · Le Voyage Intérieur</div>
   <h1>Ma fenêtre vivante</h1>
-  <p>Les autres détiennent une partie de la connaissance de moi</p>
+  <p>Ce que je montre, ce que je cache, ce que j'ignore — la Fenêtre de Johari</p>
 </header>
-
 <nav>
-  <button class="on" data-s="s1">① Le questionnaire</button>
-  <button data-s="s2">② Ma fenêtre</button>
-  <button data-s="s3">③ Les adjectifs</button>
+  <button class="on" data-s="s0">🎯 Mission</button>
+  <button data-s="s1">① Utilité</button>
+  <button data-s="s2">② Le questionnaire</button>
+  <button data-s="s3">③ Ma fenêtre</button>
+  <button data-s="s4">④ Les adjectifs</button>
 </nav>
-
 <main>
-<section id="s1" class="on">
-  <h2>Le questionnaire de la fenêtre de Johari</h2>
-  <p class="lead">Fiche outil 1 du cours, en version interactive. Vingt situations, deux réactions possibles : répartissez 5 points entre A et B selon ce qui vous ressemble le plus.</p>
-  <div class="rules">
-    <b>Règle de cotation :</b> le total des points entre A et B est toujours de 5.
-    <ul>
-      <li>A me correspond parfaitement → A = 5 et B = 0</li>
-      <li>A me correspond davantage que B → A = 4 ou 3 et B = 1 ou 2</li>
-      <li>B me correspond davantage que A → A = 1 ou 2 et B = 4 ou 3</li>
-      <li>B me correspond parfaitement → A = 0 et B = 5</li>
-    </ul>
-    <b>Astuce :</b> touchez directement le bloc A ou le bloc B pour lui attribuer d'un coup les 5 points, ou utilisez le curseur pour nuancer.
+<!-- MISSION -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage.</p>
+  <div class="rubrique r-parcours"><div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe le questionnaire de Johari</b><span>20 situations interpersonnelles (onglet ②), ~15 min. Le questionnaire mesure deux leviers : la sollicitation de feedback et la révélation de soi.</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je découvre ma fenêtre</b><span>L'application trace votre fenêtre à quatre zones (onglet ③) et identifie votre profil (Arène ouverte, Interviewer, Émetteur ou Carapace), que vous pouvez <b>copier</b> ou <b>imprimer</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE ma fenêtre — le cœur du travail</b><span>Quelle zone domine ? Quel levier est le moins activé ? Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Collez votre synthèse dans votre <b>portfolio</b> (Carnet de bord ch.1), avec votre analyse et vos pistes.</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu"><div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu</span></div>
+    <div class="rub-body">
+      <div class="crit"><span class="cok">✔</span><div><b>Identifier votre zone dominante</b> et expliquer en quoi cela correspond (ou non) à votre vécu relationnel.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Nommer votre levier le plus faible</b> (sollicitation de feedback ou révélation de soi) avec un exemple concret.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Proposer des actions</b> pour élargir votre zone publique — une action de dévoilement et une action de feedback cette semaine.</div></div>
+      <div class="crit crit-ko"><span class="cko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier ses scores et écrire « ma zone publique est grande ».</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure"><div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucune zone n'est bonne ou mauvaise en soi.</b> L'objectif est d'élargir la zone publique, pas de la maximiser à tout prix.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b></p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Une grande zone cachée ou une grande zone aveugle est une information précieuse</b> — elle pointe exactement le levier à activer.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée : ~15 min pour le questionnaire + votre analyse.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<!-- UTILITÉ -->
+<section id="s1">
+  <h2>À quoi sert la Fenêtre de Johari ?</h2>
+  <div class="testinfo">
+    <h3>Le modèle de Johari en bref</h3>
+    <p>La Fenêtre de Johari est un modèle d'analyse de la communication interpersonnelle créé par les psychologues américains <b>Joseph Luft</b> et <b>Harrington Ingham</b> en 1955 (le nom « Johari » est la contraction de leurs prénoms : Jo + Harry).</p>
+    <p>Le modèle repose sur une idée simple et puissante : dans toute relation, il existe quatre zones déterminées par le croisement de deux dimensions — <b>ce que je connais de moi</b> et <b>ce que les autres connaissent de moi</b>. L'objectif du développement personnel est d'<b>élargir la zone publique</b> (le « grand jour ») en activant deux leviers : le dévoilement (partager ce que je sais mais cache) et la sollicitation de feedback (découvrir ce que les autres voient et que j'ignore).</p>
+    <div class="src"><b>Source :</b> Luft, J. & Ingham, H. (1955). <i>The Johari window: a graphic model of interpersonal awareness</i>. Proceedings of the western training laboratory in group development, UCLA.<br>
+    Questionnaire adapté par A. Fartassi (PenserChanger.com).<br>
+    <b>Application :</b> Sameh Bekri & Besma Brahmi, 2026.</div>
+  </div>
+  <div class="util">
+    <div class="ucard" style="border-top-color:var(--intra)"><h3 style="color:var(--intra)">🟢 Zone publique (Grand jour)</h3><p>Ce que je sais de moi ET que les autres voient aussi. C'est le terrain de la confiance : plus il est large, moins il y a de malentendus. <b>Objectif : l'élargir.</b></p></div>
+    <div class="ucard" style="border-top-color:var(--inter)"><h3 style="color:var(--inter)">🟠 Zone aveugle</h3><p>Ce que les autres perçoivent et que j'ignore. Tics, impact de mon ton, impression que je laisse. <b>Levier : solliciter du feedback.</b></p></div>
+    <div class="ucard" style="border-top-color:var(--violet)"><h3 style="color:var(--violet)">🟣 Zone cachée (Façade)</h3><p>Ce que je sais de moi mais que je ne montre pas. Doutes, émotions, vulnérabilités. <b>Levier : le dévoilement à bon escient.</b></p></div>
+    <div class="ucard" style="border-top-color:var(--grey)"><h3 style="color:var(--grey)">⚫ Zone inconnue</h3><p>Ce qui échappe à tous — talents cachés, ressorts inconscients. <b>Elle se découvre par l'expérience</b> : situations nouvelles, défis, premières fois.</p></div>
+  </div>
+  <p class="note">La Fenêtre de Johari est la fondation de toute l'Odyssée : se connaître, c'est d'abord savoir ce que l'on montre, ce que l'on cache, et ce que l'on ignore de soi.</p>
+</section>
+
+<!-- QUESTIONNAIRE -->
+<section id="s2">
+  <h2>Le questionnaire — 20 situations</h2>
+  <p class="lead">Pour chaque situation, répartissez 5 points entre les réponses A et B. Plus vous vous reconnaissez dans une réponse, plus vous lui donnez de points.</p>
+  <div class="rules"><b>Consigne :</b> le curseur distribue 5 points entre A et B. Cliquez directement sur A ou B pour donner tous les points à cette réponse. Chaque situation mesure votre tendance à <span class="tag f">solliciter du feedback</span> ou à <span class="tag r">vous dévoiler</span>.
   </div>
   <div class="prog"><span id="progtxt">0 / 20 répondus</span><div class="progbar"><div class="progfill" id="progfill"></div></div></div>
   <div id="items"></div>
   <button class="cta" id="go" disabled>Tracer ma fenêtre →</button>
-  <p class="note">Questionnaire de la fiche outil 1, adapté par A. Fartassi (PenserChanger.com) d'après Joseph Luft et Harry Ingham, « The Johari window, a graphic model of interpersonal awareness » (1955).</p>
 </section>
 
-<section id="s2">
-  <h2>Ma fenêtre de Johari</h2>
-  <p class="lead" id="noRes">Complétez d'abord les 20 situations de l'onglet ①.</p>
-  <div id="res" style="display:none">
-    <div class="scores">
-      <div class="sc f"><div class="n" id="scF">–</div><div class="l">SOLLICITATION DE RETOURS (sur 50)<br>ce que je demande aux autres</div></div>
-      <div class="sc r"><div class="n" id="scR">–</div><div class="l">RÉVÉLATION SUR SOI (sur 50)<br>ce que je livre de moi</div></div>
-    </div>
-    <div class="winwrap">
-      <div class="axtop">Sollicitation de retours →</div>
-      <div class="winrow">
-        <div class="axleft">Révélation sur soi →</div>
-        <div class="win" id="win">
-          <div class="pane p1"><b>1 · ZONE PUBLIQUE</b><small>le grand jour</small></div>
-          <div class="pane p2"><b>2 · ZONE AVEUGLE</b><small>vu par les autres, pas par moi</small></div>
-          <div class="pane p3"><b>3 · ZONE CACHÉE</b><small>ma face cachée</small></div>
-          <div class="pane p4"><b>4 · ZONE INCONNUE</b><small>potentiels à révéler</small></div>
-        </div>
-      </div>
-      <div class="quads">
-        <div class="qd qd1"><b>1 · Zone publique — <span id="v1"></span> %</b><span id="c1"></span></div>
-        <div class="qd qd2"><b>2 · Zone aveugle — <span id="v2"></span> %</b><span id="c2"></span></div>
-        <div class="qd qd3"><b>3 · Zone cachée — <span id="v3"></span> %</b><span id="c3"></span></div>
-        <div class="qd qd4"><b>4 · Zone inconnue — <span id="v4"></span> %</b><span id="c4"></span></div>
-      </div>
-      <div class="verdict" id="verdict"></div>
-      <div class="btnrow">
-        <button class="cta small" id="copyBt">📋 Copier mon résultat</button>
-        <button class="cta small" id="printBt">🖨️ Imprimer / PDF</button>
-        <button class="cta small" id="showBt">👁️ Voir le texte</button>
-      </div>
-      <div class="export" id="export" style="display:none"></div>
-      <p class="note">Collez ce texte dans votre Carnet de bord (chapitre 1, questions 1 à 3) ou imprimez-le pour l'agrafer à votre fiche. Vos réponses restent sur votre appareil : rien n'est envoyé.</p>
-    </div>
-    <div class="explore">
-      <h3>Et si je changeais ? — le simulateur</h3>
-      <p class="note" style="margin-top:0">Déplacez les curseurs pour voir l'effet de vos deux leviers : les cloisons bougent, la zone publique s'agrandit. C'est exactement ce que votre plan d'action va produire.</p>
-      <div class="sl"><label><b><span class="tag f">LEVIER 1</span> Je sollicite du feedback</b><span id="ex1"></span></label><input type="range" id="r1" min="0" max="50"></div>
-      <div class="sl"><label><b><span class="tag r">LEVIER 2</span> Je me dévoile</b><span id="ex2"></span></label><input type="range" id="r2" min="0" max="50"></div>
-      <button class="cta small" id="resetBt" style="margin:4px auto 0">↺ Revenir à mes scores réels</button>
-    </div>
-  </div>
-</section>
-
+<!-- MA FENÊTRE -->
 <section id="s3">
-  <h2>L'exercice des adjectifs</h2>
-  <p class="lead">L'exercice historique de Johari : comparez ce que vous voyez de vous… et ce que les autres voient.</p>
-  <div class="howto">
-    <b>Mode d'emploi :</b> ① Touchez une fois les adjectifs qui, selon <u>vous</u>, vous décrivent (→ <span class="tag r">MOI</span>). ② Demandez à 2-3 proches leurs choix, puis touchez une deuxième fois ceux qu'<u>ils</u> ont cités (→ <span class="tag f">EUX</span>, ou <b>LES DEUX</b> s'ils figuraient déjà dans votre liste). ③ Générez vos zones. (Un 4ᵉ toucher remet à zéro.)
+  <h2>Ma Fenêtre de Johari</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 20 situations de l'onglet ②.</p>
+  <div id="res" style="display:none">
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:14px">
+      <div style="text-align:center;font-family:Calibri,sans-serif"><b style="color:var(--inter)">Sollicitation de feedback</b><br><span id="scF" style="font-size:2rem;font-weight:bold;color:var(--inter)">–</span><span style="color:var(--grey)"> / 50</span></div>
+      <div style="text-align:center;font-family:Calibri,sans-serif"><b style="color:var(--intra)">Révélation de soi</b><br><span id="scR" style="font-size:2rem;font-weight:bold;color:var(--intra)">–</span><span style="color:var(--grey)"> / 50</span></div>
+    </div>
+    <div class="win-wrap" id="win">
+      <div class="pane p1"><b id="v1">–</b>%<br><small>Zone publique</small></div>
+      <div class="pane p2"><b id="v2">–</b>%<br><small>Zone aveugle</small></div>
+      <div class="pane p3"><b id="v3">–</b>%<br><small>Zone cachée</small></div>
+      <div class="pane p4"><b id="v4">–</b>%<br><small>Zone inconnue</small></div>
+    </div>
+    <div class="legend">
+      <div class="lg"><h4><span style="background:var(--intra)"></span> Zone publique</h4><p id="c1"></p></div>
+      <div class="lg"><h4><span style="background:var(--inter)"></span> Zone aveugle</h4><p id="c2"></p></div>
+      <div class="lg"><h4><span style="background:var(--violet)"></span> Zone cachée</h4><p id="c3"></p></div>
+      <div class="lg"><h4><span style="background:var(--grey)"></span> Zone inconnue</h4><p id="c4"></p></div>
+    </div>
+    <div class="verdict" id="verdict"></div>
+    <h3>Ajustez vos leviers</h3>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px"><label style="font-family:Calibri,sans-serif;font-size:.85rem;color:var(--inter);font-weight:bold">Sollicitation de feedback <span id="ex1">–</span></label><br><input type="range" min="0" max="50" id="r1" style="width:100%;accent-color:var(--inter)"></div>
+      <div style="flex:1;min-width:200px"><label style="font-family:Calibri,sans-serif;font-size:.85rem;color:var(--intra);font-weight:bold">Révélation de soi <span id="ex2">–</span></label><br><input type="range" min="0" max="50" id="r2" style="width:100%;accent-color:var(--intra)"></div>
+    </div>
+    <p class="note">Déplacez les curseurs pour voir en temps réel comment votre fenêtre changerait si vous activiez davantage un levier.</p>
+    <div class="recall" style="margin-top:16px"><b>⚠️ Cette fenêtre est la matière première.</b> Analysez-la : quelle zone domine ? quel levier est le moins activé ? puis transmettez dans votre portfolio.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer</button>
+      <button class="cta small" id="showBt">👁️ Texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
   </div>
-  <div class="adjgrid" id="adjgrid"></div>
-  <button class="cta" id="gen">Générer mes zones →</button>
-  <div class="zones" id="zones" style="display:none">
-    <div class="zcard z1"><h4>1 · Zone publique (moi + eux)</h4><ul id="z1"></ul></div>
-    <div class="zcard z2"><h4>2 · Zone aveugle (eux seulement)</h4><ul id="z2"></ul></div>
-    <div class="zcard z3"><h4>3 · Zone cachée (moi seulement)</h4><ul id="z3"></ul></div>
-    <div class="zcard z4"><h4>4 · Zone inconnue (personne… encore)</h4><ul id="z4"></ul></div>
-  </div>
-  <p class="note" id="zonenote" style="display:none">Ces adjectifs donnent un contenu concret à vos quadrants : la zone aveugle est votre trésor de feedback, la zone cachée votre réserve de dévoilement. Reportez-les dans le cadre « Tracez ici votre fenêtre » du Laboratoire.</p>
+</section>
+
+<!-- ADJECTIFS -->
+<section id="s4">
+  <h2>Les adjectifs de Johari</h2>
+  <p class="lead">Choisissez 5 à 10 adjectifs qui vous décrivent le mieux. Puis demandez à un proche de faire le même exercice — sans voir vos choix. La comparaison révèle vos zones.</p>
+  <div class="adj" id="adj"></div>
+  <p class="note">Les adjectifs que vous choisissez ET que votre proche choisit = zone publique. Ceux que seul votre proche choisit = zone aveugle. Ceux que vous seul choisissez = zone cachée. Ceux que personne ne choisit = zone inconnue.</p>
 </section>
 </main>
-<footer>Développement Personnel &amp; Leadership 2 — Pas à pas vers le développement de mon potentiel Soft Skills · S.BEKRI / B.BRAHMI</footer>
-
+<footer><b>L'Odyssée des Soft Skills</b> — Application pédagogique<br>Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>Fenêtre de Johari : Joseph Luft & Harrington Ingham (1955).</footer>
 <script>
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
@@ -370,10 +398,10 @@ document.getElementById('go').onclick=()=>{
 "   - Levier FEEDBACK (reduire ma zone aveugle)   : ...................\n"+
 "============================================================\n"+
 "Questionnaire adapte par A. Fartassi (PenserChanger.com) d'apres\n"+
-"Luft & Ingham (1955). Developpement Personnel & Leadership 2 -\n"+
+"Luft & Ingham (1955). "+
 "S.BEKRI / B.BRAHMI";
   document.getElementById('export').textContent=EXPORT;
-  document.querySelector('nav button[data-s=s2]').click();
+  document.querySelector('nav button[data-s=s4]').click();
   window.scrollTo({top:0,behavior:'smooth'});
 };
 document.getElementById('copyBt').onclick=function(){
@@ -434,5 +462,4 @@ document.getElementById('gen').onclick=()=>{
   document.getElementById('zonenote').style.display='block';
 };
 </script>
-</body>
-</html>
+</body></html>
