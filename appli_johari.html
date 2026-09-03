@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conscience de soi interpersonnelle — L'Odyssée des Soft Skills</title>
+<style>
+  :root{--indigo:#2C3E63;--intra:#147D74;--intra-l:#E3F2F0;--inter:#C96A1F;--inter-l:#FBEEDF;--gold:#9A7B1E;--gold-l:#F7F1DC;--ink:#222831;--grey:#8A8F98;--pale:#EAEDF5;--violet:#7A5C9E}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:#f6f7fb;color:var(--ink);line-height:1.55}
+  header{background:var(--indigo);color:#fff;padding:24px 16px;text-align:center}
+  header .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+  header h1{font-size:1.65rem;margin:.3em 0 .1em}header p{font-style:italic;color:#e8d9a0;font-size:.93rem}
+  nav{display:flex;justify-content:center;gap:5px;background:#fff;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:0;z-index:6;flex-wrap:wrap}
+  nav button{font-family:inherit;border:2px solid var(--indigo);background:#fff;color:var(--indigo);padding:7px 11px;border-radius:22px;cursor:pointer;font-size:.82rem}
+  nav button.on{background:var(--indigo);color:#fff}
+  main{max-width:880px;margin:24px auto;padding:0 15px}
+  section{display:none}section.on{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{color:var(--indigo);margin-bottom:.4em}h3{color:var(--indigo);font-size:1rem;margin:16px 0 7px}
+  .lead{color:var(--grey);margin-bottom:1.1em;font-size:.95rem}
+  .tag{display:inline-block;font-size:.68rem;font-weight:bold;color:#fff;padding:2px 9px;border-radius:3px}
+  .tag.f{background:var(--inter)}.tag.r{background:var(--intra)}
+  .cta{display:block;margin:20px auto;background:var(--gold);color:#fff;border:none;font-family:inherit;font-size:1rem;padding:12px 28px;border-radius:26px;cursor:pointer}
+  .cta:disabled{background:#c9c9c9;cursor:not-allowed}.cta.small{font-size:.85rem;padding:9px 18px;margin:6px}
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+  .note{font-size:.78rem;color:var(--grey);font-style:italic;margin-top:12px}
+  footer{text-align:center;color:var(--grey);font-size:.72rem;padding:24px 12px;line-height:1.7}footer b{color:var(--indigo)}
+  .rules{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:.87rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.rules b{color:var(--gold)}
+  .rules ul{margin:6px 0 0 18px}
+  .it{background:#fff;border-radius:12px;padding:15px 17px;margin-bottom:12px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:5px solid #d5d9e2}
+  .it.filled{border-left-color:var(--intra)}
+  .it .num{font-weight:bold;color:var(--indigo);font-size:.82rem;font-family:Calibri,Arial,sans-serif}
+  .it .sit{font-size:.94rem;margin:4px 0 10px}
+  .opt{display:grid;grid-template-columns:26px 1fr 40px;gap:9px;align-items:center;font-family:Calibri,Arial,sans-serif;font-size:.86rem;padding:8px 10px;border-radius:8px;margin-bottom:5px;background:#fafbfe;border:1.5px solid #eceef4;transition:all .2s;cursor:pointer}
+  .opt .lt{font-weight:bold;text-align:center;border-radius:6px;color:#fff;padding:3px 0}
+  .opt.a .lt{background:var(--indigo)}.opt.b .lt{background:var(--violet)}
+  .opt .pts{font-weight:bold;text-align:center;font-size:.95rem;color:var(--grey)}
+  .opt.win{background:var(--intra-l);border-color:var(--intra)}.opt.win .pts{color:var(--intra)}
+  .slid{margin-top:9px}.slid input{width:100%;accent-color:var(--gold)}
+  .slid .hint{display:flex;justify-content:space-between;font-size:.72rem;color:var(--grey);font-family:Calibri,Arial,sans-serif}
+  .prog{position:sticky;top:54px;background:#fff;border-radius:10px;padding:9px 13px;box-shadow:0 3px 10px rgba(0,0,0,.1);font-family:Calibri,Arial,sans-serif;font-size:.83rem;margin-bottom:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .progbar{flex:1;background:#edeff5;border-radius:6px;height:9px;overflow:hidden}.progfill{height:100%;background:var(--intra);width:0;transition:width .3s}
+  .win-wrap{position:relative;width:100%;max-width:420px;margin:20px auto;aspect-ratio:1}
+  .pane{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;transition:all .7s;text-align:center;font-family:Calibri,Arial,sans-serif;font-size:.78rem;overflow:hidden;color:#fff}
+  .p1{background:var(--intra)}.p2{background:var(--inter)}.p3{background:var(--violet)}.p4{background:var(--grey)}
+  .pane b{font-size:1.3rem;line-height:1}.pane small{opacity:.85;font-size:.7rem}
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .lg{background:#fff;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .lg h4{font-size:.85rem;display:flex;align-items:center;gap:6px;margin-bottom:4px}
+  .lg h4 span{width:14px;height:14px;border-radius:4px;display:inline-block}
+  .lg p{font-size:.8rem;font-family:Calibri,Arial,sans-serif;color:var(--grey);margin:0}
+  .verdict{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:.93rem}.verdict b{color:var(--gold)}
+  .recall{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:12px;padding:13px 16px;font-size:.89rem;font-family:Calibri,Arial,sans-serif;margin-bottom:14px}.recall b{color:var(--gold)}
+  .export{background:#fff;border:1.5px dashed var(--indigo);border-radius:12px;padding:14px 16px;margin-top:14px;font-family:'Courier New',monospace;font-size:.78rem;white-space:pre-wrap;max-height:400px;overflow:auto;line-height:1.45}
+  .adj{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:7px;margin-top:12px}
+  .adj span{background:#fff;border:1.5px solid #d5d9e2;border-radius:8px;padding:7px 8px;font-family:Calibri,sans-serif;font-size:.84rem;text-align:center;cursor:pointer;transition:all .15s}
+  .adj span.on{background:var(--intra);color:#fff;border-color:var(--intra)}
+  .testinfo{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;border-top:5px solid var(--intra)}
+  .testinfo h3{margin-top:0;color:var(--intra)}.testinfo p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin-bottom:6px}
+  .testinfo .src{font-size:.76rem;color:var(--grey);font-style:italic;margin-top:10px;border-top:1px solid #eceef4;padding-top:8px}
+  .util{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ucard{background:#fff;border-radius:12px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-top:5px solid var(--indigo)}
+  .ucard h3{margin-top:0}.ucard p{font-size:.86rem;font-family:Calibri,Arial,sans-serif}
+  .rubrique{border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.09)}
+  .rub-head{display:flex;align-items:center;gap:10px;padding:13px 18px;color:#fff;font-weight:bold;font-size:1.02rem}
+  .rub-ico{font-size:1.25rem}.rub-titre{letter-spacing:.02em}
+  .rub-body{padding:16px 18px;background:#fff}
+  .rub-intro{font-size:.9rem;font-family:Calibri,Arial,sans-serif;margin-bottom:10px}
+  .r-parcours .rub-head{background:linear-gradient(135deg,var(--indigo),#3B5080)}
+  .r-attendu .rub-head{background:linear-gradient(135deg,var(--gold),#B8941F)}
+  .r-rassure .rub-head{background:linear-gradient(135deg,var(--intra),#1A9B8F)}
+  .mission{display:grid;gap:10px}
+  .mstep{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:start;background:#f8f9fd;border-radius:12px;padding:14px 16px;border-left:5px solid var(--indigo);transition:transform .15s}
+  .mstep:hover{transform:translateX(4px)}.mstep:nth-child(3){border-left-color:var(--gold);background:#FFFDF6}
+  .mstep:nth-child(4){border-left-color:var(--intra);background:var(--intra-l)}
+  .mnum{width:36px;height:36px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+  .mstep:nth-child(3) .mnum{background:var(--gold)}.mstep:nth-child(4) .mnum{background:var(--intra)}
+  .mtxt b{display:block;font-size:.96rem;color:var(--indigo);margin-bottom:3px}
+  .mstep:nth-child(3) .mtxt b{color:var(--gold)}.mstep:nth-child(4) .mtxt b{color:var(--intra)}
+  .mtxt span{font-size:.86rem;font-family:Calibri,Arial,sans-serif;color:#444}
+  .crit{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.87rem;font-family:Calibri,Arial,sans-serif;padding:9px 0;border-bottom:1px solid #f0f1f5}
+  .crit:last-child:not(.crit-ko){border-bottom:none}
+  .crit .cok{color:#fff;background:var(--intra);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit .cko{color:#fff;background:var(--inter);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold}
+  .crit-ko{border-bottom:none;margin-top:8px;background:var(--inter-l);border-radius:10px;padding:12px 13px !important;border-left:4px solid var(--inter)}
+  .ras-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid #e8f4f2}
+  .ras-item:last-child{border-bottom:none}
+  .ras-tag{font-size:.62rem;font-weight:bold;letter-spacing:.08em;color:#fff;background:var(--intra);padding:4px 9px;border-radius:4px;white-space:nowrap;margin-top:2px;font-family:Calibri,Arial,sans-serif}
+  .ras-item p{font-size:.88rem;font-family:Calibri,Arial,sans-serif;margin:0}
+  .rub-start{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--pale),#E3E8F6);border-radius:14px;padding:18px 22px;margin-top:10px}
+  .rub-start b{display:block;font-size:1.05rem;color:var(--indigo);margin-bottom:2px}
+  .rub-start span{font-size:.84rem;font-family:Calibri,Arial,sans-serif;color:var(--grey)}
+  @media(max-width:600px){.rub-start{flex-direction:column;text-align:center}.util,.legend{grid-template-columns:1fr}}
+  @media print{nav,.cta,.btnrow,header p,.prog,.rub-start{display:none}body{background:#fff}.export{max-height:none;overflow:visible;border-style:solid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">L'Odyssée des Soft Skills · Escale 1 · Le Voyage Intérieur</div>
+  <h1>Ma fenêtre vivante</h1>
+  <p class="lead" style="color:#e8d9a0;margin:0;font-size:.78rem;opacity:.85">Conscience de soi interpersonnelle</p>
+  <p>Ce que je montre, ce que je cache, ce que j'ignore — la Fenêtre de Johari</p>
+</header>
+<nav>
+  <button class="on" data-s="s0">🎯 Mission</button>
+  <button data-s="s1">① Utilité</button>
+  <button data-s="s2">② Le questionnaire</button>
+  <button data-s="s3">③ Ma fenêtre</button>
+  <button data-s="s4">④ Les adjectifs</button>
+</nav>
+<main>
+<!-- MISSION -->
+<section id="s0" class="on">
+  <h2>Ma mission dans cette application</h2>
+  <p class="lead">Prenez deux minutes pour lire ce cadrage.</p>
+  <div class="rubrique r-parcours"><div class="rub-head"><span class="rub-ico">🧭</span><span class="rub-titre">Mon parcours en 4 étapes</span></div>
+    <div class="rub-body"><div class="mission">
+      <div class="mstep"><div class="mnum">1</div><div class="mtxt"><b>Je passe le questionnaire de Johari</b><span>20 situations interpersonnelles (onglet ②), ~15 min. Le questionnaire mesure deux leviers : la sollicitation de feedback et la révélation de soi.</span></div></div>
+      <div class="mstep"><div class="mnum">2</div><div class="mtxt"><b>Je découvre ma fenêtre</b><span>L'application trace votre fenêtre à quatre zones (onglet ③) et identifie votre profil (Arène ouverte, Interviewer, Émetteur ou Carapace), que vous pouvez <b>copier</b> ou <b>imprimer</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">3</div><div class="mtxt"><b>J'ANALYSE ma fenêtre — le cœur du travail</b><span>Quelle zone domine ? Quel levier est le moins activé ? Ce qui est évalué, c'est la <b>qualité de votre analyse</b>.</span></div></div>
+      <div class="mstep"><div class="mnum">4</div><div class="mtxt"><b>Je transmets le tout dans mon portfolio</b><span>Collez votre synthèse dans votre <b>portfolio</b> (Carnet de bord ch.1), avec votre analyse et vos pistes.</span></div></div>
+    </div></div>
+  </div>
+  <div class="rubrique r-attendu"><div class="rub-head"><span class="rub-ico">🎯</span><span class="rub-titre">Ce qui est attendu</span></div>
+    <div class="rub-body">
+      <div class="crit"><span class="cok">✔</span><div><b>Identifier votre zone dominante</b> et expliquer en quoi cela correspond (ou non) à votre vécu relationnel.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Nommer votre levier le plus faible</b> (sollicitation de feedback ou révélation de soi) avec un exemple concret.</div></div>
+      <div class="crit"><span class="cok">✔</span><div><b>Proposer des actions</b> pour élargir votre zone publique — une action de dévoilement et une action de feedback cette semaine.</div></div>
+      <div class="crit crit-ko"><span class="cko">✘</span><div><b>Ce qui ne suffit pas :</b> recopier ses scores et écrire « ma zone publique est grande ».</div></div>
+    </div>
+  </div>
+  <div class="rubrique r-rassure"><div class="rub-head"><span class="rub-ico">🌱</span><span class="rub-titre">Trois précisions</span></div>
+    <div class="rub-body">
+      <div class="ras-item"><span class="ras-tag">SANS NOTE</span><p><b>Aucune zone n'est bonne ou mauvaise en soi.</b> L'objectif est d'élargir la zone publique, pas de la maximiser à tout prix.</p></div>
+      <div class="ras-item"><span class="ras-tag">CONFIDENTIEL</span><p><b>Vos réponses restent sur votre appareil.</b></p></div>
+      <div class="ras-item"><span class="ras-tag">BONNE MATIÈRE</span><p><b>Une grande zone cachée ou une grande zone aveugle est une information précieuse</b> — elle pointe exactement le levier à activer.</p></div>
+    </div>
+  </div>
+  <div class="rub-start"><div><b>Prêt(e) ?</b><span>Durée : ~15 min pour le questionnaire + votre analyse.</span></div>
+    <button class="cta" style="margin:0" onclick="document.querySelector('nav button[data-s=s1]').click();window.scrollTo({top:0,behavior:'smooth'})">Je commence →</button></div>
+</section>
+
+<!-- UTILITÉ -->
+<section id="s1">
+  <h2>À quoi sert la Fenêtre de Johari ?</h2>
+  <div class="testinfo">
+    <h3>Le modèle de Johari en bref</h3>
+    <p>La Fenêtre de Johari est un modèle d'analyse de la communication interpersonnelle créé par les psychologues américains <b>Joseph Luft</b> et <b>Harrington Ingham</b> en 1955 (le nom « Johari » est la contraction de leurs prénoms : Jo + Harry).</p>
+    <p>Le modèle repose sur une idée simple et puissante : dans toute relation, il existe quatre zones déterminées par le croisement de deux dimensions — <b>ce que je connais de moi</b> et <b>ce que les autres connaissent de moi</b>. L'objectif du développement personnel est d'<b>élargir la zone publique</b> (le « grand jour ») en activant deux leviers : le dévoilement (partager ce que je sais mais cache) et la sollicitation de feedback (découvrir ce que les autres voient et que j'ignore).</p>
+    <div class="src"><b>Source :</b> Luft, J. & Ingham, H. (1955). <i>The Johari window: a graphic model of interpersonal awareness</i>. Proceedings of the western training laboratory in group development, UCLA.<br>
+    Questionnaire adapté par A. Fartassi (PenserChanger.com).<br>
+    <b>Application :</b> Sameh Bekri & Besma Brahmi, 2026.</div>
+  </div>
+  <div class="util">
+    <div class="ucard" style="border-top-color:var(--intra)"><h3 style="color:var(--intra)">🟢 Zone publique (Grand jour)</h3><p>Ce que je sais de moi ET que les autres voient aussi. C'est le terrain de la confiance : plus il est large, moins il y a de malentendus. <b>Objectif : l'élargir.</b></p></div>
+    <div class="ucard" style="border-top-color:var(--inter)"><h3 style="color:var(--inter)">🟠 Zone aveugle</h3><p>Ce que les autres perçoivent et que j'ignore. Tics, impact de mon ton, impression que je laisse. <b>Levier : solliciter du feedback.</b></p></div>
+    <div class="ucard" style="border-top-color:var(--violet)"><h3 style="color:var(--violet)">🟣 Zone cachée (Façade)</h3><p>Ce que je sais de moi mais que je ne montre pas. Doutes, émotions, vulnérabilités. <b>Levier : le dévoilement à bon escient.</b></p></div>
+    <div class="ucard" style="border-top-color:var(--grey)"><h3 style="color:var(--grey)">⚫ Zone inconnue</h3><p>Ce qui échappe à tous — talents cachés, ressorts inconscients. <b>Elle se découvre par l'expérience</b> : situations nouvelles, défis, premières fois.</p></div>
+  </div>
+  <p class="note">La Fenêtre de Johari est la fondation de toute l'Odyssée : se connaître, c'est d'abord savoir ce que l'on montre, ce que l'on cache, et ce que l'on ignore de soi.</p>
+</section>
+
+<!-- QUESTIONNAIRE -->
+<section id="s2">
+  <h2>Le questionnaire — 20 situations</h2>
+  <p class="lead">Pour chaque situation, répartissez 5 points entre les réponses A et B. Plus vous vous reconnaissez dans une réponse, plus vous lui donnez de points.</p>
+  <div class="rules"><b>Consigne :</b> le curseur distribue 5 points entre A et B. Cliquez directement sur A ou B pour donner tous les points à cette réponse. Chaque situation mesure votre tendance à <span class="tag f">solliciter du feedback</span> ou à <span class="tag r">vous dévoiler</span>.
+  </div>
+  <div class="prog"><span id="progtxt">0 / 20 répondus</span><div class="progbar"><div class="progfill" id="progfill"></div></div></div>
+  <div id="items"></div>
+  <button class="cta" id="go" disabled>Tracer ma fenêtre →</button>
+</section>
+
+<!-- MA FENÊTRE -->
+<section id="s3">
+  <h2>Ma Fenêtre de Johari</h2>
+  <p class="lead" id="noRes">Complétez d'abord les 20 situations de l'onglet ②.</p>
+  <div id="res" style="display:none">
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:14px">
+      <div style="text-align:center;font-family:Calibri,sans-serif"><b style="color:var(--inter)">Sollicitation de feedback</b><br><span id="scF" style="font-size:2rem;font-weight:bold;color:var(--inter)">–</span><span style="color:var(--grey)"> / 50</span></div>
+      <div style="text-align:center;font-family:Calibri,sans-serif"><b style="color:var(--intra)">Révélation de soi</b><br><span id="scR" style="font-size:2rem;font-weight:bold;color:var(--intra)">–</span><span style="color:var(--grey)"> / 50</span></div>
+    </div>
+    <div class="win-wrap" id="win">
+      <div class="pane p1"><b id="v1">–</b>%<br><small>Zone publique</small></div>
+      <div class="pane p2"><b id="v2">–</b>%<br><small>Zone aveugle</small></div>
+      <div class="pane p3"><b id="v3">–</b>%<br><small>Zone cachée</small></div>
+      <div class="pane p4"><b id="v4">–</b>%<br><small>Zone inconnue</small></div>
+    </div>
+    <div class="legend">
+      <div class="lg"><h4><span style="background:var(--intra)"></span> Zone publique</h4><p id="c1"></p></div>
+      <div class="lg"><h4><span style="background:var(--inter)"></span> Zone aveugle</h4><p id="c2"></p></div>
+      <div class="lg"><h4><span style="background:var(--violet)"></span> Zone cachée</h4><p id="c3"></p></div>
+      <div class="lg"><h4><span style="background:var(--grey)"></span> Zone inconnue</h4><p id="c4"></p></div>
+    </div>
+    <div class="verdict" id="verdict"></div>
+    <h3>Ajustez vos leviers</h3>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px"><label style="font-family:Calibri,sans-serif;font-size:.85rem;color:var(--inter);font-weight:bold">Sollicitation de feedback <span id="ex1">–</span></label><br><input type="range" min="0" max="50" id="r1" style="width:100%;accent-color:var(--inter)"></div>
+      <div style="flex:1;min-width:200px"><label style="font-family:Calibri,sans-serif;font-size:.85rem;color:var(--intra);font-weight:bold">Révélation de soi <span id="ex2">–</span></label><br><input type="range" min="0" max="50" id="r2" style="width:100%;accent-color:var(--intra)"></div>
+    </div>
+    <p class="note">Déplacez les curseurs pour voir en temps réel comment votre fenêtre changerait si vous activiez davantage un levier.</p>
+    <div class="recall" style="margin-top:16px"><b>⚠️ Cette fenêtre est la matière première.</b> Analysez-la : quelle zone domine ? quel levier est le moins activé ? puis transmettez dans votre portfolio.</div>
+    <div class="btnrow">
+      <button class="cta small" id="copyBt">📋 Copier</button>
+      <button class="cta small" id="printBt">🖨️ Imprimer</button>
+      <button class="cta small" id="showBt">👁️ Texte</button>
+    </div>
+    <div class="export" id="export" style="display:none"></div>
+  </div>
+</section>
+
+<!-- ADJECTIFS -->
+<section id="s4">
+  <h2>Les adjectifs de Johari</h2>
+  <p class="lead">Choisissez 5 à 10 adjectifs qui vous décrivent le mieux. Puis demandez à un proche de faire le même exercice — sans voir vos choix. La comparaison révèle vos zones.</p>
+  <div class="adj" id="adj"></div>
+  <p class="note">Les adjectifs que vous choisissez ET que votre proche choisit = zone publique. Ceux que seul votre proche choisit = zone aveugle. Ceux que vous seul choisissez = zone cachée. Ceux que personne ne choisit = zone inconnue.</p>
+</section>
+</main>
+<footer><b>L'Odyssée des Soft Skills</b> — Application pédagogique<br>Conception : <b>Sameh Bekri</b> & <b>Besma Brahmi</b>, 2026<br>Fenêtre de Johari : Joseph Luft & Harrington Ingham (1955).</footer>
+<script>
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('main section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById(b.dataset.s).classList.add('on');
+});
+const Q=[
+ {s:"Un(e) ami(e) est en conflit avec une connaissance commune ; je pense qu'il est important qu'ils se réconcilient.",
+  a:"Je dis à mon ami que je me sens en partie responsable de son ressentiment, et je lui fais savoir que notre connaissance commune en souffre aussi.",
+  b:"Je ne m'implique pas : je risquerais de ne plus m'entendre avec l'un ou l'autre si je prends part au conflit.",score:{R:'A'}},
+ {s:"Après une dispute animée, je réalise qu'un(e) ami(e) est mal à l'aise en ma présence depuis ce jour-là.",
+  a:"Je n'aborde pas le sujet : en reparler ne ferait qu'empirer les choses.",
+  b:"Je lui parle de son attitude actuelle et lui demande ce qu'il/elle ressent sur notre relation depuis ce jour.",score:{F:'B'}},
+ {s:"Un(e) ami(e) m'évite et se montre distant(e).",
+  a:"Je lui parle de son comportement et lui demande ce qui le/la motive à agir ainsi.",
+  b:"Je fais pareil et je réduis nos échanges au minimum, puisque c'est ce qu'il/elle semble souhaiter.",score:{F:'A'}},
+ {s:"Pendant une discussion à trois, l'un de mes amis dévoile par inadvertance un problème personnel concernant l'autre, qui n'en savait rien.",
+  a:"Je change vite de sujet et je fais signe à l'autre d'en faire autant.",
+  b:"J'explique brièvement la situation à l'ami concerné, en suggérant qu'on en reparlera plus tard.",score:{R:'B'}},
+ {s:"Un(e) ami(e) me dit que j'ai eu en public un comportement qui pourrait me desservir à l'avenir.",
+  a:"Je lui demande de me décrire ce qu'il/elle a observé, et ce que je pourrais changer.",
+  b:"Je lui reproche de me critiquer et je lui explique pourquoi j'ai agi ainsi.",score:{F:'A'}},
+ {s:"Un(e) ami(e) veut être embauché(e) dans mon entreprise ; je le/la crois insuffisamment qualifié(e), et mon patron le/la prend à l'essai.",
+  a:"Je garde mes réticences pour moi et je les laisse gérer cela entre eux.",
+  b:"Je fais part de mes réticences à mon ami et à mon patron, puis je les laisse décider.",score:{R:'B'}},
+ {s:"Je ressens qu'un(e) ami(e) est injuste envers moi et envers ses autres amis, mais personne n'a jamais abordé le sujet.",
+  a:"Je demande aux autres comment ils perçoivent la situation, pour voir s'ils ressentent la même injustice.",
+  b:"Je ne demande rien et j'attends qu'ils abordent eux-mêmes le sujet en ma présence.",score:{F:'A'}},
+ {s:"Préoccupé(e) par des problèmes personnels, je m'entends dire par un(e) ami(e) que je me suis énervé(e) contre lui/elle pour des détails.",
+  a:"Je lui dis que je suis préoccupé(e) par quelque chose et que je serai probablement à cran quelque temps.",
+  b:"J'écoute ses reproches mais je ne cherche pas à m'expliquer.",score:{F:'B'}},
+ {s:"J'ai entendu circuler une vilaine rumeur sur un(e) ami(e), qui le/la blesserait ; il/elle me demande si je suis au courant.",
+  a:"Je dis que je ne sais rien, et que de toute façon personne ne croirait une rumeur pareille.",
+  b:"Je lui dis exactement ce que j'ai entendu, quand, et de qui.",score:{R:'B'}},
+ {s:"Un(e) ami(e) pointe du doigt un conflit que j'ai avec quelqu'un d'autre et souhaite que nous nous entendions.",
+  a:"Je trouve sa remarque déplacée et je lui dis que je ne souhaite pas en parler.",
+  b:"Je lui dis ouvertement que ce conflit me pèse et je lui demande conseil pour le résoudre.",score:{F:'B'}},
+ {s:"Ma relation avec un(e) ami(e) s'est détériorée à force de disputes sur un sujet important pour nous deux.",
+  a:"Je fais attention à ne plus aborder ce sujet, pour ne pas abîmer davantage la relation.",
+  b:"Je lui explique que ce problème nuit à notre relation et que nous devons en discuter jusqu'à le résoudre.",score:{R:'B'}},
+ {s:"En pleine conversation sur SES problèmes, un(e) ami(e) suggère soudain qu'on parle aussi des miens.",
+  a:"Je reste évasif(ve) et je change de sujet pour éviter de parler de moi.",
+  b:"Je le/la remercie de m'offrir l'occasion d'entendre ce qu'il/elle ressent à mon sujet, et je l'encourage à développer.",score:{F:'B'}},
+ {s:"Un(e) ami(e) me confie son animosité envers un(e) autre ami(e) qui se comporte mal avec les autres — et je suis d'accord avec lui/elle.",
+  a:"Je l'écoute et je partage mes propres sentiments, pour qu'il/elle sache que je suis de son côté.",
+  b:"Je l'écoute mais je n'exprime ni mes sentiments négatifs ni mon opinion : il/elle pourrait les répéter.",score:{R:'A'}},
+ {s:"Je pense qu'une vilaine rumeur circule sur moi, et je soupçonne un(e) ami(e) de l'avoir entendue.",
+  a:"J'évite d'en parler et je lui laisse l'occasion d'aborder le sujet s'il/elle le souhaite.",
+  b:"Je prends le risque de le/la mettre mal à l'aise en lui demandant s'il/elle a entendu parler de cette rumeur.",score:{F:'B'}},
+ {s:"En société, je remarque qu'un(e) ami(e) fait des choses qui pourraient abîmer ses relations avec les autres.",
+  a:"Je prends le risque de passer pour un rabat-joie et je lui dis ce que j'observe et ce que j'en pense.",
+  b:"Je garde mon opinion pour moi plutôt que de passer pour quelqu'un qui se mêle des affaires des autres.",score:{R:'A'}},
+ {s:"Pendant une discussion à trois, l'un(e) mentionne par inadvertance un problème personnel qui me concerne… et dont j'ignorais tout.",
+  a:"Je les presse de me dire ce qu'ils m'ont caché et ce qu'ils en pensent.",
+  b:"Je les laisse m'en parler ou non, et je les laisse changer de sujet s'ils le souhaitent.",score:{F:'A'}},
+ {s:"Un(e) ami(e) semble préoccupé(e) et se met à faire des reproches pour des détails, à moi comme à d'autres.",
+  a:"Je redouble de tact et de gentillesse quelque temps, en supposant qu'il/elle traverse une difficulté sans rapport avec moi.",
+  b:"Je tente de lui en parler, en lui expliquant comment son comportement affecte aussi les autres.",score:{R:'B'}},
+ {s:"Certaines habitudes d'un(e) ami(e) m'agacent au point que je n'apprécie plus sa compagnie.",
+  a:"Je ne lui dis rien directement, mais je lui fais sentir en l'ignorant quand ses manies deviennent flagrantes.",
+  b:"Je lui révèle ce que je ressens et je clarifie les choses, pour que notre amitié reste agréable.",score:{R:'B'}},
+ {s:"Je dois évoquer un comportement social avec un(e) ami(e) très sensible.",
+  a:"J'évite de parler de ses travers et de ses défauts pour ne pas le/la blesser.",
+  b:"Je me concentre sur ses travers et défauts, pour qu'il/elle puisse améliorer sa manière de communiquer.",score:{R:'B'}},
+ {s:"L'attitude d'un(e) ami(e) envers moi devient plutôt négative, et je vais recevoir une promotion importante.",
+  a:"Je discute de mes lacunes avec lui/elle pour comprendre sur quoi je pourrais m'améliorer.",
+  b:"J'essaie de comprendre seul(e) mes propres lacunes pour progresser.",score:{F:'A'}}
+];
+const items=document.getElementById('items');
+Q.forEach((q,i)=>{
+  const d=document.createElement('div');d.className='it';
+  d.innerHTML='<div class="num">Situation '+(i+1)+' / 20</div><div class="sit">'+q.s+'</div>'+
+   '<div class="opt a" id="oa'+i+'"><span class="lt">A</span><span>'+q.a+'</span><span class="pts" id="pa'+i+'">–</span></div>'+
+   '<div class="opt b" id="ob'+i+'"><span class="lt">B</span><span>'+q.b+'</span><span class="pts" id="pb'+i+'">–</span></div>'+
+   '<div class="slid"><input type="range" min="0" max="5" step="1" value="0" id="sl'+i+'">'+
+   '<div class="hint"><span>← 5 points à B</span><span>5 points à A →</span></div></div>';
+  items.appendChild(d);
+  const sl=d.querySelector('#sl'+i);sl.dataset.set='0';
+  const mark=()=>{
+    sl.dataset.set='1';
+    const A=+sl.value,B=5-A;
+    document.getElementById('pa'+i).textContent=A;
+    document.getElementById('pb'+i).textContent=B;
+    document.getElementById('oa'+i).classList.toggle('win',A>B);
+    document.getElementById('ob'+i).classList.toggle('win',B>A);
+    d.classList.add('filled');updProg();
+  };
+  sl.addEventListener('input',mark);
+  sl.addEventListener('pointerup',mark);
+  sl.addEventListener('keyup',mark);
+  document.getElementById('oa'+i).addEventListener('click',()=>{sl.value=5;mark();});
+  document.getElementById('ob'+i).addEventListener('click',()=>{sl.value=0;mark();});
+});
+function answered(){return [...document.querySelectorAll('.slid input')].filter(s=>s.dataset.set==='1').length;}
+function updProg(){
+  const n=answered();
+  document.getElementById('progtxt').textContent=n+' / 20 répondus';
+  document.getElementById('progfill').style.width=(n/20*100)+'%';
+  document.getElementById('go').disabled=n<20;
+}
+updProg();
+let SF=0,SR=0,EXPORT="";
+function computeScores(){
+  let f=0,r=0;
+  Q.forEach((q,i)=>{
+    const A=+document.getElementById('sl'+i).value,B=5-A;
+    if(q.score.F)f+=(q.score.F==='A'?A:B);
+    if(q.score.R)r+=(q.score.R==='A'?A:B);
+  });
+  return [f,r];
+}
+function drawWindow(f,r){
+  const px=(f/50)*100,py=(r/50)*100,win=document.getElementById('win');
+  const p=(el,l,t,w,h)=>{el.style.left=l+'%';el.style.top=t+'%';el.style.width=w+'%';el.style.height=h+'%';};
+  p(win.querySelector('.p1'),0,0,px,py);
+  p(win.querySelector('.p2'),px,0,100-px,py);
+  p(win.querySelector('.p3'),0,py,px,100-py);
+  p(win.querySelector('.p4'),px,py,100-px,100-py);
+  const a1=Math.round(px*py/100),a2=Math.round((100-px)*py/100),a3=Math.round(px*(100-py)/100);
+  const a4=100-a1-a2-a3;
+  document.getElementById('v1').textContent=a1;document.getElementById('v2').textContent=a2;
+  document.getElementById('v3').textContent=a3;document.getElementById('v4').textContent=a4;
+  return [a1,a2,a3,a4];
+}
+const niv=x=>x>=33?'élevé':(x>=18?'moyen':'faible');
+function profil(f,r){
+  const hi=x=>x>=28;
+  if(hi(f)&&hi(r))return["ARÈNE OUVERTE (le grand jour domine)","Vos deux leviers fonctionnent : vous demandez du feedback ET vous vous dévoilez. C'est la configuration de la confiance et de l'authenticité, la plus favorable au travail en équipe. Vigilance : doser le dévoilement selon les contextes (transparence n'est pas impudeur), et continuer à solliciter les retours même quand tout va bien."];
+  if(hi(f)&&!hi(r))return["L'INTERVIEWER (zone cachée dominante)","Vous accueillez volontiers les retours des autres, mais vous vous livrez peu : les autres vous connaissent moins que vous ne les connaissez. Cela peut déséquilibrer la relation — on se confie à vous sans savoir qui vous êtes. Levier prioritaire : le dévoilement (exprimer un ressenti, partager un doute, oser dire « je ne sais pas »)."];
+  if(!hi(f)&&hi(r))return["L'ÉMETTEUR (zone aveugle dominante)","Vous vous exprimez et vous vous livrez volontiers, mais vous sollicitez peu de retours : votre zone aveugle reste vaste, et des malentendus peuvent s'installer sans que vous le sachiez. Levier prioritaire : demander et accueillir le feedback — poser des questions précises (« qu'est-ce qui t'a manqué ? ») et écouter sans se justifier."];
+  return["LA CARAPACE (zone inconnue dominante)","Vos deux leviers sont peu activés : vous montrez peu et vous demandez peu. C'est souvent une posture de protection — compréhensible, mais coûteuse : les zones d'ombre nourrissent les malentendus, et une grande part de vos potentiels reste inexplorée. Bonne nouvelle : un petit pas sur chaque levier suffit à ouvrir nettement le grand jour."];
+}
+document.getElementById('go').onclick=()=>{
+  const sc=computeScores();SF=sc[0];SR=sc[1];
+  document.getElementById('scF').textContent=SF;
+  document.getElementById('scR').textContent=SR;
+  document.getElementById('noRes').style.display='none';
+  document.getElementById('res').style.display='block';
+  const A=drawWindow(SF,SR);
+  document.getElementById('c1').textContent="Ce que je sais de moi et que les autres voient aussi. C'est le terrain de la confiance et de la fluidité relationnelle : plus il est large, moins il y a de malentendus.";
+  document.getElementById('c2').textContent="Ce que les autres perçoivent de moi et que j'ignore. Elle se réduit en sollicitant du feedback — votre score de sollicitation est "+niv(SF)+" ("+SF+"/50).";
+  document.getElementById('c3').textContent="Ce que je sais de moi mais que je ne montre pas. Elle se réduit en me dévoilant à bon escient — votre score de révélation est "+niv(SR)+" ("+SR+"/50).";
+  document.getElementById('c4').textContent="Ce qui échappe à tous : talents, ressorts, potentiels non encore révélés. Elle se découvre par l'expérience — situations nouvelles, défis, premières fois.";
+  const pr=profil(SF,SR);
+  document.getElementById('verdict').innerHTML='<b>Votre profil : '+pr[0]+'</b><br>'+pr[1];
+  document.getElementById('r1').value=SF;document.getElementById('r2').value=SR;
+  document.getElementById('ex1').textContent=SF+' / 50';
+  document.getElementById('ex2').textContent=SR+' / 50';
+  const d=new Date().toLocaleDateString('fr-FR');
+  EXPORT=
+"MA FENÊTRE DE JOHARI — résultat du questionnaire (fiche outil 1)\n"+
+"Date de passation : "+d+"\n"+
+"============================================================\n"+
+"SCORES\n"+
+"  - Sollicitation de retours : "+SF+" / 50   (niveau "+niv(SF)+")\n"+
+"  - Revelation sur soi       : "+SR+" / 50   (niveau "+niv(SR)+")\n\n"+
+"SURFACE DE MES QUATRE QUADRANTS\n"+
+"  1. Zone publique  : "+A[0]+" %\n"+
+"  2. Zone aveugle   : "+A[1]+" %\n"+
+"  3. Zone cachee    : "+A[2]+" %\n"+
+"  4. Zone inconnue  : "+A[3]+" %\n\n"+
+"MON PROFIL : "+pr[0]+"\n"+pr[1]+"\n"+
+"============================================================\n"+
+"A REPORTER DANS LE CARNET DE BORD (chapitre 1 - fiche 2)\n\n"+
+"1) Qu'est-ce que cette fenetre m'informe sur moi ?\n"+
+"   (Quelle zone domine ? quel levier est le moins active ?\n"+
+"    illustrez par des situations vecues.)\n"+
+"   ..................................................................\n"+
+"   ..................................................................\n\n"+
+"2) Que pensez-vous de votre fenetre ?\n"+
+"   (Etes-vous d'accord ? cela correspond-il a l'image que vous avez\n"+
+"    de vous ? en etes-vous satisfait ? pourquoi ?)\n"+
+"   ..................................................................\n"+
+"   ..................................................................\n\n"+
+"3) Quelles actions pour reduire les zones indesirables au profit\n"+
+"   de la zone publique ?\n"+
+"   - Levier DEVOILEMENT (reduire ma zone cachee) : ...................\n"+
+"   - Levier FEEDBACK (reduire ma zone aveugle)   : ...................\n"+
+"============================================================\n"+
+"Questionnaire adapte par A. Fartassi (PenserChanger.com) d'apres\n"+
+"Luft & Ingham (1955). "+
+"S.BEKRI / B.BRAHMI";
+  document.getElementById('export').textContent=EXPORT;
+  document.querySelector('nav button[data-s=s4]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+document.getElementById('copyBt').onclick=function(){
+  const btn=this;
+  const done=()=>{btn.textContent='✔ Copié !';setTimeout(()=>btn.textContent='📋 Copier mon résultat',1900);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(EXPORT).then(done).catch(fallback);
+  } else fallback();
+  function fallback(){
+    const ta=document.createElement('textarea');ta.value=EXPORT;
+    ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);
+    ta.select();try{document.execCommand('copy');done();}catch(e){
+      document.getElementById('export').style.display='block';
+      btn.textContent='Sélectionnez le texte ci-dessous';
+    }
+    document.body.removeChild(ta);
+  }
+};
+document.getElementById('printBt').onclick=()=>{
+  document.getElementById('export').style.display='block';
+  setTimeout(()=>window.print(),120);
+};
+document.getElementById('showBt').onclick=function(){
+  const e=document.getElementById('export');
+  const v=e.style.display==='none';
+  e.style.display=v?'block':'none';
+  this.textContent=v?'🙈 Masquer le texte':'👁️ Voir le texte';
+};
+const r1=document.getElementById('r1'),r2=document.getElementById('r2');
+function sim(){
+  const f=+r1.value,r=+r2.value;
+  document.getElementById('ex1').textContent=f+' / 50';
+  document.getElementById('ex2').textContent=r+' / 50';
+  drawWindow(f,r);
+}
+r1.oninput=sim;r2.oninput=sim;
+document.getElementById('resetBt').onclick=()=>{r1.value=SF;r2.value=SR;sim();};
+const ADJ=["à l'écoute","ambitieux·se","analytique","authentique","calme","chaleureux·se","créatif·ve","curieux·se","déterminé·e","diplomate","direct·e","discret·ète","dynamique","empathique","énergique","exigeant·e","fiable","généreux·se","impatient·e","indépendant·e","ingénieux·se","intuitif·ve","méthodique","optimiste","organisé·e","patient·e","perfectionniste","persévérant·e","prudent·e","réservé·e","rigoureux·se","sensible","sociable","spontané·e","stressé·e","têtu·e"];
+const grid=document.getElementById('adjgrid');
+const states=["","me","others","both"];
+ADJ.forEach(a=>{
+  const d=document.createElement('div');d.className='adj';d.textContent=a;d.dataset.s=0;
+  d.onclick=()=>{d.dataset.s=(+d.dataset.s+1)%4;d.className='adj '+states[+d.dataset.s];};
+  grid.appendChild(d);
+});
+document.getElementById('gen').onclick=()=>{
+  const z={1:[],2:[],3:[]};
+  document.querySelectorAll('.adj').forEach(d=>{
+    const s=+d.dataset.s;
+    if(s===3)z[1].push(d.textContent);else if(s===2)z[2].push(d.textContent);else if(s===1)z[3].push(d.textContent);
+  });
+  const fill=(id,arr,hint)=>{document.getElementById(id).innerHTML=arr.length?arr.map(x=>'<li>'+x+'</li>').join(''):'<li class="hint">'+hint+'</li>';};
+  fill('z1',z[1],"rien en commun pour l'instant — sollicitez plus de retours !");
+  fill('z2',z[2],"aucun adjectif « eux seulement » — avez-vous vraiment demandé à vos proches ?");
+  fill('z3',z[3],"aucun adjectif gardé pour vous — belle transparence, ou exercice incomplet ?");
+  document.getElementById('z4').innerHTML='<li class="hint">Par définition, cette zone est vide aujourd\'hui : elle se découvrira par l\'expérience — défis, nouveautés, premières fois.</li>';
+  document.getElementById('zones').style.display='grid';
+  document.getElementById('zonenote').style.display='block';
+};
+</script>
+</body></html>
